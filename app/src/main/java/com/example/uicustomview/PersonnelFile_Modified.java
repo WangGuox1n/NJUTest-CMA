@@ -128,7 +128,6 @@ public class PersonnelFile_Modified extends AppCompatActivity implements View.On
         Log.d("PersonnelFile_Modified","PersonnelFile");
         switch (v.getId()){
             case R.id.modified_name:
-                Toast.makeText(PersonnelFile_Modified.this, "点击了！", Toast.LENGTH_SHORT).show();
                 modified_name.setCursorVisible(true);break;
             case R.id.modified_department:
                 modified_department.setCursorVisible(true);break;
@@ -139,7 +138,6 @@ public class PersonnelFile_Modified extends AppCompatActivity implements View.On
             case R.id.modified_location:
                 modified_location.setCursorVisible(true);break;
             case R.id.title_save:
-                Log.d("PersonnelFile_Modified","PersonnelFile_Modified");
                 //Toast.makeText(PersonnelFile_Modified.this, "保存成功！", Toast.LENGTH_SHORT).show();
                 postData();
                 break;

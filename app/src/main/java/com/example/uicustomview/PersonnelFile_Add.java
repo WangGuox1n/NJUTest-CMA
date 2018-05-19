@@ -33,6 +33,13 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import java.io.File;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class PersonnelFile_Add extends AppCompatActivity implements View.OnClickListener{
 
@@ -193,8 +200,37 @@ public class PersonnelFile_Add extends AppCompatActivity implements View.OnClick
             personnelFile.setPosition(add_position.getText().toString());
             personnelFile.setId(add_id.getText().toString());
             personnelFile.setLocation(add_location.getText().toString());
-            Toast.makeText(PersonnelFile_Add.this,"保存成功！",Toast.LENGTH_SHORT).show();
+            doPost();
         }
+    }
+
+    public void doPost(){
+        String address = "http://119.23.38.100:8080/cma/StaffFile/addStaff";
+        //拿到body的构建器
+        FormBody.Builder builder = new FormBody.Builder();
+        //添加参数
+        builder.add("name", personnelFile.getName())
+                .add("department", personnelFile.getDepartment())
+                .add("position", personnelFile.getPosition())
+                .add("id", personnelFile.getId())
+                .add("location", personnelFile.getLocation())
+                .add("fileImage", personnelFile.getFileImage());
+        //拿到requestBody
+        RequestBody requestBody = builder.build();
+
+        HttpUtil.sendOkHttpWithRequestBody(address,requestBody,new okhttp3.Callback(){
+            @Override
+            public void onResponse(Call call, Response response)throws IOException {
+                String responseData = response.body().string();
+                ToastUtils.showShort(PersonnelFile_Add.this,"保存成功！");
+                ToastUtils.showShort(PersonnelFile_Add.this,responseData);
+            }
+            @Override
+            public void onFailure(Call call,IOException e){
+                ToastUtils.showShort(PersonnelFile_Add.this,"保存失败");
+            }
+        });
+
     }
 
     /**
@@ -299,7 +335,6 @@ public class PersonnelFile_Add extends AppCompatActivity implements View.OnClick
             }
         }
     }
-
 
     /**
      * 自动获取sdk权限

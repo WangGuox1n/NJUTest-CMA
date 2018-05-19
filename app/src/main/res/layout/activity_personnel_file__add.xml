@@ -13,29 +13,29 @@
         android:id="@+id/add_titlelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bar_bg"
+        android:background="@drawable/head_bg"
         >
         <Button
             android:id="@+id/add_title_back"
             android:layout_width="63dp"
             android:layout_height="35dp"
-            android:layout_gravity="top"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
 
             android:background="@drawable/button_bg"
             android:text="返回"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textColor="#626262" />
 
         <TextView
             android:id="@+id/add_title_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="人员档案管理"
+            android:text="人员档案·添加"
             android:textColor="#626262"
             android:textSize="22sp" />
 
@@ -43,11 +43,11 @@
             android:id="@+id/add_title_save"
             android:layout_width="63dp"
             android:layout_height="35dp"
-            android:layout_gravity="top"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
             android:background="@drawable/button_bg"
             android:text="保存"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textColor="#626262"
             />
     </LinearLayout>
@@ -90,6 +90,7 @@
                 android:textSize="22sp" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -128,6 +129,7 @@
                 android:textSize="22sp" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -166,6 +168,7 @@
                 android:textSize="22sp" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -204,6 +207,7 @@
                 android:textSize="22sp" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -268,6 +272,7 @@
             android:textColor="#0000ff"
             />
     </LinearLayout>
+
     <ImageView
         android:id="@+id/fileImage"
         android:layout_width="wrap_content"

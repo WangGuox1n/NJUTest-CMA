@@ -27,6 +27,10 @@ public class PersonnelFile implements Serializable {
         this.location =location;
         this.fileImage = fileImage;
     }
+
+    public String getKey() {
+        return key;
+    }
     public String getName() {
         return name;
     }
@@ -49,6 +53,10 @@ public class PersonnelFile implements Serializable {
 
     public String getFileImage() {
         return fileImage;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public void setName(String name) {
