@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/list_item"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/item_bg">
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="姓名"
+            android:textColor="#333333"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_name"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:text="部门"
+            android:textSize="18sp"
+            android:textColor="#7f7f7f"
+        />
+
+        <TextView
+            android:id="@+id/item_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_name"
+            android:layout_toRightOf="@id/item_department"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:text="职位"
+            android:textSize="18sp"
+            android:textColor="#7f7f7f"/>
+    </RelativeLayout>
+</LinearLayout>

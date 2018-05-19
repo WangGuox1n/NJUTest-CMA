@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/activity_bg"
+    android:paddingBottom="2dp">
+
+    <RelativeLayout
+        android:id="@+id/titlelayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bar_bg">
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="确认删除此档案记录？"
+            android:textColor="#626262"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/title_cancel"
+            android:layout_width="63dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_bg"
+            android:text="取消"
+            android:textColor="#626262"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/delete_comfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/delete_button1"
+            android:layout_gravity="center"
+            android:text="确认删除"
+            android:textSize="26sp"
+            android:textColor="#ffffff"
+            />
+    </LinearLayout>
+</LinearLayout>
