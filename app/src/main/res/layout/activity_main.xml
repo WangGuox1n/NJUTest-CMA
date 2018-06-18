@@ -1,63 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical"
+    android:background="@drawable/activity_bg"
+    tools:context="com.example.cma.MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/headlayout"
-        android:orientation="horizontal"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/mToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="CMA"
+        android:theme="@style/AppTheme"/>
+
+    <GridView
+        android:layout_marginTop="10dp"
+        android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/head_bg">
-        <TextView
-            android:id="@+id/title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="人员档案管理"
-            android:textColor="#626262"
-            android:textSize="24sp" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/searchViewLayout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/headlayout"
-        android:background="@drawable/search_bg">
-
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@drawable/query_bg">
-        </SearchView>
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/list_View"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/searchViewLayout">
-    </ListView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/search_bg"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/add"
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/add_bg" />
-    </LinearLayout>
-
-</RelativeLayout>
+        android:columnWidth="80dp"
+        android:gravity="center"
+        android:numColumns="4"
+        android:stretchMode="spacingWidthUniform"
+        android:listSelector="@android:color/transparent"
+        android:verticalSpacing="10dp"
+        android:layout_marginBottom="10dp"/>
+</LinearLayout>

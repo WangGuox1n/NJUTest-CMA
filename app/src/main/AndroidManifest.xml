@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.uicustomview">
+    package="com.example.cma">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,20 +21,56 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PersonnelFile_Modified" />
-        <activity android:name=".PersonnelFile_Add"></activity>
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.wgx.fileprovider"
+            android:authorities="com.example.cma.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".ui.staff_management.Staff_Entry"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".ui.staff_management.StaffManagement_Main"
+            android:allowBackup="true"
+            android:parentActivityName=".ui.staff_management.StaffManagement_Main" />
+        <activity
+            android:name=".ui.staff_management.StaffManagement_Modify"
+            android:allowBackup="true"
+            android:parentActivityName=".ui.staff_management.Staff_Entry"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.staff_management.StaffManagement_Add"
+            android:allowBackup="true"
+            android:parentActivityName=".ui.staff_management.StaffManagement_Main"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.staff_management.StaffFile_Main" />
+        <activity
+            android:name=".ui.staff_management.StaffFile_Add"
+            android:allowBackup="true"
+            android:parentActivityName=".ui.staff_management.StaffFile_Main"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.staff_management.StaffFile_Modify"
+            android:allowBackup="true"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.staff_management.StaffLeaving_Main" />
+        <activity android:name=".ui.staff_management.StaffLeaving_Add" />
+        <activity android:name=".ui.staff_management.StaffLeaving_Modify" />
+        <activity android:name=".ui.staff_management.StaffFile_Info" />
+        <activity android:name=".ui.supervision.Supervision_Main"/>
+        <activity android:name=".ui.supervision.Supervision_Info"/>
+        <activity android:name=".ui.supervision.SupervisionPlan_Main"/>
+        <activity android:name=".ui.supervision.SupervisionPlan_Info"/>
+        <activity android:name=".ui.supervision.SupervisionPlan_Add"/>
+        <activity android:name=".ui.supervision.SupervisionPlan_Modify"/>
+        <activity android:name=".ui.supervision.SupervisionRecord_Info"/>
+        <activity android:name=".ui.supervision.SupervisionRecord_Add"/>
+        <activity android:name=".ui.supervision.SupervisionRecord_Modify"/>
     </application>
+
 </manifest>
