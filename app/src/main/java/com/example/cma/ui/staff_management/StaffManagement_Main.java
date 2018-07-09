@@ -106,7 +106,7 @@ public class StaffManagement_Main extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 Intent intent=new Intent(StaffManagement_Main.this,StaffManagement_Modify.class);
+                 Intent intent=new Intent(StaffManagement_Main.this,StaffManagement_See.class);
                  StaffManagement d=(StaffManagement) listView.getItemAtPosition(i);
                  intent.putExtra("chuandi",d);
                  startActivity(intent);

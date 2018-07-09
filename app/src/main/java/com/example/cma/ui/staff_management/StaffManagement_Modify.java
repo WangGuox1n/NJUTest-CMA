@@ -185,41 +185,11 @@ public class StaffManagement_Modify extends AppCompatActivity {
         });
 
 
-        Button button=(Button)findViewById(R.id.delete_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder dialog=new AlertDialog.Builder(StaffManagement_Modify.this);
-                dialog.setTitle("确定删除此人的档案吗？");
-                dialog.setCancelable(false);
-                dialog.setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //将信息提交到数据库
-                    }
-                });
-                dialog.setNegativeButton("删除", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //从数据库删除这个人的档案 TODO
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                postDelete(staff.getId());
-                            }
-                        }).start();
 
-
-                        finish();
-                    }
-                });
-                dialog.show();
-            }
-        });
 
 
         //对 保存 按钮监听
-        toolbar.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Boolean isfull=true;
@@ -281,77 +251,12 @@ public class StaffManagement_Modify extends AppCompatActivity {
             }
         });
 
-        //对查看档案监听
-        TextView dangan_see=(TextView)findViewById(R.id.dangan_view);
-        dangan_see.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            String temp="http://119.23.38.100:8080/cma/StaffFile/getOne?id="+staff.getId();
-                            OkHttpClient client = new OkHttpClient();
-                            Request request = new Request.Builder()
-                                    // 指定访问的服务器地址，后续在这里修改
-                                    .url(temp)
-                                    .build();
-                            Response response = client.newCall(request).execute();;
-                            String responseData = response.body().string();
-                            Log.d("请求回复：",responseData);
-                            parseJSONWithGSON(responseData);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-            }
-
-
-
-        });
-
 
 
 
     }
 
 
-
-    private void  parseJSONWithGSON(String responseData){
-        // JSONArray array=new JSONArray();
-        try{
-            Log.d("responseData:",responseData);
-            JSONObject object=new JSONObject(responseData);
-            String array=object.getString("data");
-            Log.d("请求array：",array);
-            if(array.equals("null"))
-            {
-                Log.d("请求回复：","222");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(StaffManagement_Modify.this,"档案不存在",Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }else
-            {
-                Gson gson=new Gson();
-                StaffFile staffFile=gson.fromJson(array,new TypeToken<StaffFile>(){}.getType());
-                Intent intent=new Intent(StaffManagement_Modify.this,StaffFile_Info.class);
-                intent.putExtra("StaffFile",staffFile);
-                startActivity(intent);
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-    }
 
 
     //设置光标可见
@@ -388,36 +293,6 @@ public class StaffManagement_Modify extends AppCompatActivity {
     }
 
 
-    private void postDelete(long id){
-        OkHttpClient okHttpClient=new OkHttpClient();
-        RequestBody requestBody=new FormBody.Builder().add("id",Long.toString(id)).build();
-        Request request = new Request.Builder()
-                .url("http://119.23.38.100:8080/cma/StaffManagement/deleteOne")//url的地址
-                .post(requestBody)
-                .build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(StaffManagement_Modify.this, "删除失败！", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(StaffManagement_Modify.this, "删除成功！", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        });
-    }
 
 
     private void postJson(String s1,int s2,String s3,String s4,String s5,String s6,String s7,String s8,String s9,int s10){
@@ -426,7 +301,7 @@ public class StaffManagement_Modify extends AppCompatActivity {
         //创建一个请求对象
         MediaType JSON=MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody=new FormBody.Builder().add("id",Long.toString(staff.getId()))
-                 .add("name",s1)
+                .add("name",s1)
                 .add("gender",Integer.toString(s2))
                 .add("department",s3)
                 .add("position",s4)
@@ -442,8 +317,7 @@ public class StaffManagement_Modify extends AppCompatActivity {
                 .url("http://119.23.38.100:8080/cma/StaffManagement/modifyOne")//url的地址
                 .post(requestBody)
                 .build();
-        //  Log.d("Add"," Here here133");
-        //异步上传
+
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -458,8 +332,6 @@ public class StaffManagement_Modify extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
-                Log.d("androixx.cn", result);
                 Log.d("androixx.cn", "成功！！！！");
                 runOnUiThread(new Runnable() {
                     @Override

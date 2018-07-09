@@ -32,8 +32,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ui.staff_management.Staff_Entry"
-            android:parentActivityName=".MainActivity"/>
+        <!-- 人员管理 -->
+        <activity
+            android:name=".ui.staff_management.Staff_Entry"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ui.staff_management.StaffManagement_Main"
             android:allowBackup="true"
@@ -62,15 +64,101 @@
         <activity android:name=".ui.staff_management.StaffLeaving_Add" />
         <activity android:name=".ui.staff_management.StaffLeaving_Modify" />
         <activity android:name=".ui.staff_management.StaffFile_Info" />
-        <activity android:name=".ui.supervision.Supervision_Main"/>
-        <activity android:name=".ui.supervision.Supervision_Info"/>
-        <activity android:name=".ui.supervision.SupervisionPlan_Main"/>
-        <activity android:name=".ui.supervision.SupervisionPlan_Info"/>
-        <activity android:name=".ui.supervision.SupervisionPlan_Add"/>
-        <activity android:name=".ui.supervision.SupervisionPlan_Modify"/>
-        <activity android:name=".ui.supervision.SupervisionRecord_Info"/>
-        <activity android:name=".ui.supervision.SupervisionRecord_Add"/>
-        <activity android:name=".ui.supervision.SupervisionRecord_Modify"/>
+        <activity
+            android:name=".ui.staff_management.StaffManagement_See"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.staff_management.StaffAuthorization_Main" />
+        <activity
+            android:name=".ui.staff_management.StaffAuthorization_See"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.staff_management.StaffAuthorization_Modify"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.staff_management.StaffAuthorization_Add"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.staff_management.StaffTraining_main" />
+        <activity android:name=".ui.staff_management.StaffTraining_modify" />
+        <activity android:name=".ui.staff_management.StaffTraining_staff_main" />
+        <activity android:name=".ui.staff_management.StaffTraining_Add" />
+        <activity android:name=".ui.staff_management.StaffTraining_staff_modify" />
+        <activity android:name=".ui.staff_management.StaffTraining_result_main" />
+        <activity android:name=".ui.staff_management.StaffTraining_result_add" />
+        <activity android:name=".ui.staff_management.StaffQualification_Main" />
+        <activity android:name=".ui.staff_management.StaffQualification_Info" />
+        <activity android:name=".ui.staff_management.StaffQualification_Add" />
+        <activity android:name=".ui.staff_management.StaffQualification_Modify" />
+
+        <!-- 培训管理 -->
+        <activity android:name=".ui.training_management.TrainingApplication_Main" />
+        <activity android:name=".ui.training_management.TrainingApplication_Info" />
+        <activity android:name=".ui.training_management.TrainingApplication_Add" />
+        <activity android:name=".ui.training_management.TrainingApplication_Modify" />
+        <activity android:name=".ui.training_management.TrainingApplication_Approve" />
+        <activity android:name=".ui.training_management.TrainingApplication_Disapprove" />
+        <activity android:name=".ui.training_management.TrainingApplication_Entry" />
+        <activity android:name=".ui.training_management.AnnualPlan_Main" />
+        <activity android:name=".ui.training_management.AnnualPlan_Add" />
+        <activity android:name=".ui.training_management.AnnualPlan_See" />
+        <activity android:name=".ui.training_management.AnnualTrainingPlan_Main" />
+        <activity android:name=".ui.training_management.AnnualTrainingPlan_See" />
+        <activity android:name=".ui.training_management.AnnualTrainingPlan_Modify" />
+        <activity android:name=".ui.training_management.AnnualTrainingPlan_Add" />
+
+        <!-- 监督管理 -->
+        <activity android:name=".ui.supervision.Supervision_Main" />
+        <activity android:name=".ui.supervision.Supervision_Info" />
+        <activity android:name=".ui.supervision.SupervisionPlan_Main" />
+        <activity android:name=".ui.supervision.SupervisionPlan_Info" />
+        <activity android:name=".ui.supervision.SupervisionPlan_Add" />
+        <activity android:name=".ui.supervision.SupervisionPlan_Modify" />
+        <activity android:name=".ui.supervision.SupervisionRecord_Info" />
+        <activity android:name=".ui.supervision.SupervisionRecord_Add" />
+        <activity android:name=".ui.supervision.SupervisionRecord_Modify" />
+
+        <!-- 期间核查 -->
+        <activity android:name=".ui.period_check.PeriodCheck_Main" />
+        <activity
+            android:name=".ui.period_check.PeriodCheckPlan_Info"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.period_check.PeriodCheckPlan_Add"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.period_check.PeriodCheckPlan_Modify"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.period_check.PeriodCheckRecord_Info"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.period_check.PeriodCheckRecord_Add"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.period_check.PeriodCheckRecord_Modify"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
+        <!-- 设备管理 -->
+        <activity android:name=".ui.equipment_management.Equipment_Main" />
+        <activity android:name=".ui.equipment_management.Equipment_Info" />
+        <activity android:name=".ui.equipment_management.Equipment_Management_Entry" />
+        <activity android:name=".ui.equipment_management.Equipment_Add" />
+        <activity android:name=".ui.equipment_management.Equipment_Modify" />
+        <activity android:name=".ui.equipment_management.EquipmentReceive_Main" />
+        <activity android:name=".ui.equipment_management.EquipmentReceive_Add" />
+        <activity android:name=".ui.equipment_management.EquipmentReceive_Info" />
+        <activity android:name=".ui.equipment_management.EquipmentReceive_Modify" />
+        <activity android:name=".ui.equipment_management.EquipmentApplication_Main" />
+        <activity android:name=".ui.equipment_management.EquipmentApplication_Add" />
+        <activity android:name=".ui.equipment_management.EquipmentApplication_Info" />
+        <activity android:name=".ui.equipment_management.EquipmentApplication_Modify" />
+        <activity android:name=".ui.equipment_management.EquipmentUse_Main" />
+        <activity android:name=".ui.equipment_management.EquipmentUse_Add" />
+        <activity android:name=".ui.equipment_management.EquipmentUse_Modify" />
+        <activity android:name=".ui.equipment_management.EquipmentUse_Info" />
+        <activity android:name=".ui.equipment_management.EquipmentMaintenance_Main" />
+        <activity android:name=".ui.equipment_management.EquipmentMaintenance_Add" />
+        <activity android:name=".ui.equipment_management.EquipmentMaintenance_Info" />
+        <activity android:name=".ui.equipment_management.EquipmentMaintenance_Modify"></activity>
     </application>
 
 </manifest>

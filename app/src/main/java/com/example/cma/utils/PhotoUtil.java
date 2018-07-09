@@ -80,6 +80,7 @@ public class PhotoUtil implements OnPopListener{
     public boolean selectPicture(Intent intent){
         String path=null;
         Uri uri=intent.getData();
+        Log.d("Photo",uri.toString());
         //通过uri和selection(倒数第三个
         Cursor cursor= mContext.getContentResolver().query(uri,null,null,null,null);
         if(cursor!=null){
@@ -89,6 +90,7 @@ public class PhotoUtil implements OnPopListener{
             cursor.close();
         }
         if(path!=null){
+            Log.d("Photo",path);
             bitmap= BitmapFactory.decodeFile(path);
             outputImage=new File(path);//add new
             return true;
@@ -142,6 +144,10 @@ public class PhotoUtil implements OnPopListener{
 
     @Override
     public void onBtn3() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");//设置类型，我这里是任意类型，任意后缀的可以这样写。
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        mActivty.startActivityForResult(intent,3);
         Toast.makeText(mContext, "你取消了选择", Toast.LENGTH_SHORT).show();
     }
 

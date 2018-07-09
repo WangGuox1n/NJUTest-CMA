@@ -12,7 +12,7 @@ tools:context="com.example.cma.ui.staff_management.Staff_Entry">
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
-    app:title="CMA"
+    app:title="人员管理"
     android:theme="@style/AppTheme"/>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.cma.MainActivity;
 import com.example.cma.R;
 import com.example.cma.ui.supervision.Supervision_Main;
 
@@ -44,7 +45,7 @@ public class Staff_Entry extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Staff_Entry.this,Supervision_Main.class);
+                Intent intent=new Intent(Staff_Entry.this,StaffTraining_main.class);
                 startActivity(intent);
             }
         });
@@ -53,6 +54,8 @@ public class Staff_Entry extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent(Staff_Entry.this, StaffQualification_Main.class);
+                startActivity(intent);
 
             }
         });
@@ -61,7 +64,9 @@ public class Staff_Entry extends AppCompatActivity {
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                Intent intent=new Intent(Staff_Entry.this,StaffAuthorization_Main.class);
+                startActivity(intent);
+
             }
         });
 

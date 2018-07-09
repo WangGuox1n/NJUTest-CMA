@@ -39,6 +39,7 @@ import okhttp3.Response;
 
 public class SupervisionPlan_Info extends AppCompatActivity implements View.OnClickListener{
 
+    private Supervision supervision;
     private SupervisionPlan supervisionPlan;
     private SupervisionRecord supervisionRecord;
     private TextView content_text;
@@ -54,6 +55,7 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.supervision_plan_info);
         initView();
         Intent intent = getIntent();
+        supervision = (Supervision)intent.getSerializableExtra("Supervision");
         supervisionPlan = (SupervisionPlan)intent.getSerializableExtra("SupervisionPlan");
     }
 
@@ -104,16 +106,28 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.edit_button: {
-                    Intent intent = new Intent(SupervisionPlan_Info.this, SupervisionPlan_Modify.class);
-                    intent.putExtra("SupervisionPlan", supervisionPlan);
-                    startActivity(intent);
+                if(supervision.getSituation()==2){
+                    ToastUtil.showShort(SupervisionPlan_Info.this,"此监督已执行完毕，无法编辑");
+                    return;
+                }
+                Intent intent = new Intent(SupervisionPlan_Info.this, SupervisionPlan_Modify.class);
+                intent.putExtra("SupervisionPlan", supervisionPlan);
+                startActivity(intent);
             }
             break;
             case R.id.delete_button:  //点击删除，弹出弹窗
+                if(supervision.getSituation()==2){
+                    ToastUtil.showShort(SupervisionPlan_Info.this,"此监督已执行完毕，无法删除");
+                    return;
+                }
                 onDeleteComfirm();
                 break;
             case R.id.record_text: {
                 if(supervisionRecord == null){  //执行记录为空，跳转到添加页面
+                    if(supervision.getSituation()==2){
+                        ToastUtil.showShort(SupervisionPlan_Info.this,"此监督已执行完毕，无法添加监督记录");
+                        return;
+                    }
                     Intent intent = new Intent(SupervisionPlan_Info.this, SupervisionRecord_Add.class);
                     intent.putExtra("SupervisionPlan", supervisionPlan);
                     startActivity(intent);
@@ -237,7 +251,6 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
             @Override
             public void run() {
                 String address = AddressUtil.SupervisionRecord_getAll(supervisionPlan.getPlanId());
-                //String address = "http://10.0.2.2/get_data2.json";
                 HttpUtil.sendOkHttpRequest(address,new okhttp3.Callback(){
                     @Override
                     public void onResponse(Call call, Response response)throws IOException {
@@ -254,10 +267,10 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
         }).start();
     }
 
-    private void parseJSONWithGSON(String jsondata){
+    private void parseJSONWithGSON(String jsonData){
         String record = "";
         try {
-            JSONObject object = new JSONObject(jsondata);//最外层的JSONObject对象
+            JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
             record = object.getString("data");
         }catch (Exception e){
             e.printStackTrace();

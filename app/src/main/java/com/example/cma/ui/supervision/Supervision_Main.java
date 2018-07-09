@@ -7,6 +7,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,14 +47,14 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Supervision_Main extends AppCompatActivity implements SearchView.OnQueryTextListener,View.OnClickListener,AdapterView.OnItemClickListener{
+public class Supervision_Main extends AppCompatActivity implements SearchView.OnQueryTextListener,View.OnClickListener{
 
     //data
     private List<Supervision> list= new ArrayList<>();;
 
     //View
     private Toolbar toolbar;
-    private ListView listView;
+    private RecyclerView recyclerView;
     private SearchView searchView;
     private FloatingActionButton addButton;
     private SupervisionAdapter adapter;
@@ -75,10 +78,14 @@ public class Supervision_Main extends AppCompatActivity implements SearchView.On
     //初始化所有控件
     public void initView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        listView =(ListView)findViewById(R.id.list_view);
+        recyclerView =(RecyclerView) findViewById(R.id.recycler_view);
         searchView =(SearchView)findViewById(R.id.searchview);
         addButton = (FloatingActionButton)findViewById(R.id.add_button);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        //增加分割线
+        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -90,38 +97,19 @@ public class Supervision_Main extends AppCompatActivity implements SearchView.On
         searchView.setOnQueryTextListener(this);
         searchView.setSubmitButtonEnabled(false);
         //listView可筛选
-        listView.setTextFilterEnabled(true);
-        listView.setOnItemClickListener(this);
         addButton.setOnClickListener(this);
     }
 
     //监听searchView中文本的改变
     @Override
     public boolean onQueryTextChange(String newText) {
-        ListAdapter adapter=listView.getAdapter();
-        if(adapter instanceof Filterable){
-            Filter filter=((Filterable)adapter).getFilter();
-            if(newText.isEmpty()){
-                filter.filter(null);
-            }else{
-                filter.filter(newText);
-            }
-        }
+        adapter.filter(newText);
         return true;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        // TODO Auto-generated method stub
-        ListAdapter listAdapter=listView.getAdapter();
-        if(listAdapter instanceof Filterable){
-            Filter filter=((Filterable)listAdapter).getFilter();
-            if(query.isEmpty()){
-                filter.filter(null);
-            }else{
-                filter.filter(query);
-            }
-        }
+        adapter.filter(query);
         return false;
     }
 
@@ -137,13 +125,13 @@ public class Supervision_Main extends AppCompatActivity implements SearchView.On
     }
 
     //listView 的Item点击事件,跳转到编辑页面
-    @Override
+/*    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent=new Intent(Supervision_Main.this,Supervision_Info.class);
         Supervision supervision = (Supervision)listView.getItemAtPosition(position);
         intent.putExtra("Supervision", supervision);
         startActivity(intent);
-    }
+    }*/
 
     //监听返回按钮的点击事件，比如可以返回上级Activity
     @Override
@@ -201,8 +189,8 @@ public class Supervision_Main extends AppCompatActivity implements SearchView.On
             @Override
             public void run() {
                 Collections.reverse(list);
-                adapter = new SupervisionAdapter(Supervision_Main.this, R.layout.supervision_main_listitem,list);
-                listView.setAdapter(adapter);
+                adapter = new SupervisionAdapter(list);
+                recyclerView.setAdapter(adapter);
             }
         });
     }

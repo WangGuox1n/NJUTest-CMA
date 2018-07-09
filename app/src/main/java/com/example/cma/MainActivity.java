@@ -7,37 +7,24 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
-import com.example.cma.ui.staff_management.StaffFile_Main;
-import com.example.cma.ui.staff_management.StaffFile_Modify;
-import com.example.cma.ui.staff_management.StaffLeaving_Main;
-import com.example.cma.ui.staff_management.StaffManagement_Main;
+import com.example.cma.ui.equipment_management.Equipment_Management_Entry;
+import com.example.cma.ui.period_check.PeriodCheck_Main;
 import com.example.cma.ui.staff_management.Staff_Entry;
 import com.example.cma.ui.supervision.Supervision_Main;
-import com.example.cma.utils.HttpUtil;
+import com.example.cma.ui.training_management.TrainingApplication_Entry;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.FormBody;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,6 +65,19 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     }
+                    case 6: { //期间核查
+                        Intent intent=new Intent(MainActivity.this, PeriodCheck_Main.class);
+                        startActivity(intent);
+                    }
+                    break;
+                    case 8:{ //培训管理
+                        Intent intent=new Intent(MainActivity.this, TrainingApplication_Entry.class);
+                        startActivity(intent);
+                    }break;
+                    case 10:{ //人员管理
+                        Intent intent=new Intent(MainActivity.this, Equipment_Management_Entry.class);
+                        startActivity(intent);
+                    }break;
                     case 11:{ //人员管理
                         Intent intent=new Intent(MainActivity.this,Staff_Entry.class);
                         startActivity(intent);

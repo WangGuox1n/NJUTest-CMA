@@ -65,4 +65,112 @@ public class AddressUtil {
     public static String SupervisionRecord_deleteOne(){
         return "http://119.23.38.100:8080/cma/SupervisionRecord/deleteOne";
     }
+
+    public static String Equipment_getAll(){
+        return "http://119.23.38.100:8080/cma/Equipment/getAll";
+    }
+
+    public static String Equipment_getOne(Long id){
+        return "http://119.23.38.100:8080/cma/Equipment/getOne?id="+id;
+    }
+
+    public static String Equipment_addOne(){
+        return "http://119.23.38.100:8080/cma/Equipment/addOne";
+    }
+
+    public static String Equipment_modifyOne(){
+        return "http://119.23.38.100:8080/cma/Equipment/modifyOne";
+    }
+
+    public static String Equipment_deleteOne(){
+        return "http://119.23.38.100:8080/cma/Equipment/deleteOne";
+    }
+
+    public static String EquipmentReceive_getAll(){
+        return "http://119.23.38.100:8080/cma/EquipmentReceive/getAll";
+    }
+
+    public static String EquipmentReceive_getOne(Long id){
+        return "http://119.23.38.100:8080/cma/EquipmentReceive/getOne?id="+id;
+    }
+
+    public static String EquipmentReceive_addOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentReceive/addOne";
+    }
+
+    public static String EquipmentReceive_modifyOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentReceive/modifyOne";
+    }
+
+    public static String EquipmentReceive_deleteOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentReceive/deleteOne";
+    }
+
+    public static String EquipmentUse_getAll(){
+        return "http://119.23.38.100:8080/cma/EquipmentUse/getAll";
+    }
+
+    public static String EquipmentUse_getOne(Long id){
+        return "http://119.23.38.100:8080/cma/EquipmentUse/getOne?id="+id;
+    }
+
+    public static String EquipmentUse_addOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentUse/addOne";
+    }
+
+    public static String EquipmentUse_modifyOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentUse/modifyOne";
+    }
+
+    public static String EquipmentUse_deleteOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentUse/deleteOne";
+    }
+
+    public static String EquipmentUse_getAllByEquipmentId(String equipmentId){
+        return "http://119.23.38.100:8080/cma/EquipmentUse/getAllByEquipmentId?equipmentId="+equipmentId;
+    }
+
+    public static String EquipmentMaintenance_getAll(){
+        return "http://119.23.38.100:8080/cma/EquipmentMaintenance/getAll";
+    }
+
+    public static String EquipmentMaintenance_getOne(Long id){
+        return "http://119.23.38.100:8080/cma/EquipmentMaintenance/getOne?id="+id;
+    }
+
+    public static String EquipmentMaintenance_addOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentMaintenance/addOne";
+    }
+
+    public static String EquipmentMaintenance_modifyOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentMaintenance/modifyOne";
+    }
+
+    public static String EquipmentMaintenance_deleteOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentMaintenance/deleteOne";
+    }
+
+    public static String EquipmentMaintenance_getAllByEquipmentId(String equipmentId){
+        return "http://119.23.38.100:8080/cma/EquipmentMaintenance/getAllByEquipmentId?equipmentId="+equipmentId;
+    }
+
+    public static String EquipmentApplication_getAll(){
+        return "http://119.23.38.100:8080/cma/EquipmentApplication/getAll";
+    }
+
+    public static String EquipmentApplication_getOne(Long id){
+        return "http://119.23.38.100:8080/cma/EquipmentApplication/getOne?id="+id;
+    }
+
+    public static String EquipmentApplication_addOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentApplication/addOne";
+    }
+
+    public static String EquipmentApplication_modifyOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentApplication/modifyOne";
+    }
+
+    public static String EquipmentApplication_deleteOne(){
+        return "http://119.23.38.100:8080/cma/EquipmentApplication/deleteOne";
+    }
 }

@@ -123,6 +123,11 @@ public class SupervisionPlan_Main extends AppCompatActivity implements SearchVie
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.add_button:{
+                if(supervision.getSituation()==2){
+                    ToastUtil.showShort(SupervisionPlan_Main.this,"此监督已执行完毕，无法添加监督计划");
+                    return;
+                }
+
                 Intent intent=new Intent(SupervisionPlan_Main.this,SupervisionPlan_Add.class);
                 intent.putExtra("Supervision", supervision);
                 startActivity(intent);
@@ -137,6 +142,7 @@ public class SupervisionPlan_Main extends AppCompatActivity implements SearchVie
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent=new Intent(SupervisionPlan_Main.this,SupervisionPlan_Info.class);
         SupervisionPlan supervisionPlan = (SupervisionPlan)listView.getItemAtPosition(position);
+        intent.putExtra("Supervision", supervision);
         intent.putExtra("SupervisionPlan", supervisionPlan);
         startActivity(intent);
     }

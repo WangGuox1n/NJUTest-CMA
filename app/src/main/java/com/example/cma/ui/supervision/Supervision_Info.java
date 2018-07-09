@@ -28,6 +28,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -96,9 +98,10 @@ public class Supervision_Info extends AppCompatActivity implements View.OnClickL
 
         if(supervision.getSituation()==0){
             approve_layout.setVisibility(View.GONE);
-        }else{
+        }else if(supervision.getSituation()==1){
+            approveButton.setText("执行确认");
+        }else
             approve_button_layout.setVisibility(View.GONE);
-        }
     }
 
     public void setText(){
@@ -115,6 +118,26 @@ public class Supervision_Info extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    public void refreshLayout(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(supervision.getSituation()==0){
+                    approve_layout.setVisibility(View.GONE);
+                }else if(supervision.getSituation()==1){
+                    approveButton.setText("执行确认");
+                    approve_layout.setVisibility(View.VISIBLE);
+                    approver_text.setText(supervision.getApprover());
+                    approveDate_text.setText(supervision.getApproveDate());
+                    situation_text.setText(supervision.SituationToString());
+                }else {
+                    approve_button_layout.setVisibility(View.GONE);
+                    situation_text.setText(supervision.SituationToString());
+                }
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -122,10 +145,13 @@ public class Supervision_Info extends AppCompatActivity implements View.OnClickL
                 showModifyDialog();
                 break;
             case R.id.delete_button:  //点击删除，弹出弹窗
-                onDeleteComfirm();
+                onDeleteConfirm();
                 break;
             case R.id.approve_button:
-                showApproveDialog();
+                if(supervision.getSituation()==0)
+                    showApproveDialog();
+                else if(supervision.getSituation()==1)
+                    showExecuteDialog();
                 break;
             case R.id.plan_text:
                 Intent intent=new Intent(Supervision_Info.this,SupervisionPlan_Main.class);
@@ -136,7 +162,7 @@ public class Supervision_Info extends AppCompatActivity implements View.OnClickL
     }
 
     //是否确认删除的对话框
-    public void onDeleteComfirm(){
+    public void onDeleteConfirm(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(Supervision_Info.this);
         dialog.setMessage("确定删除？");
         dialog.setCancelable(false);
@@ -202,7 +228,6 @@ public class Supervision_Info extends AppCompatActivity implements View.OnClickL
         editDialog.setTitle("监督·批准");
         editDialog.setView(dialogView);
         editDialog.setCancelable(false);
-        //final AlertDialog editDialog = builder.create();
         dialog_approver_text = (EditText)  dialogView.findViewById(R.id.dialog_approver_text);
 
         editDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -212,7 +237,7 @@ public class Supervision_Info extends AppCompatActivity implements View.OnClickL
                     ToastUtil.showShort(Supervision_Info.this,"请填写批准人姓名");
                     return;
                 }
-                postSave();
+                postApprove();
             }
         });
         editDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -224,7 +249,7 @@ public class Supervision_Info extends AppCompatActivity implements View.OnClickL
         editDialog.create().show();
     }
 
-    public void postSave(){
+    public void postApprove(){
         String address = AddressUtil.Supervision_approveOne();
         RequestBody requestBody = new FormBody.Builder()
                 .add("id",""+supervision.getId())
@@ -247,8 +272,13 @@ public class Supervision_Info extends AppCompatActivity implements View.OnClickL
                     e.printStackTrace();
                 }
                 if(code == 200 && msg.equals("成功")) {
-                    ToastUtil.showShort(Supervision_Info.this,"提交成功！");
-                    finish();
+                    ToastUtil.showShort(Supervision_Info.this,"批准成功！");
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String dateString = simpleDateFormat.format(new Date());
+                    supervision.setApproveDate(dateString);
+                    supervision.setApprover(dialog_approver_text.getText().toString());
+                    supervision.setSituation(1);
+                    refreshLayout();
                 }
             }
             @Override
@@ -325,6 +355,59 @@ public class Supervision_Info extends AppCompatActivity implements View.OnClickL
             @Override
             public void onFailure(Call call,IOException e){
                 ToastUtil.showShort(Supervision_Info.this,"修改失败！");
+            }
+        });
+    }
+
+    public void showExecuteDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Supervision_Info.this);
+        dialog.setMessage("确定此监督执行完毕？");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                postExecute();
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Do nothing
+            }
+        });
+        dialog.show();
+    }
+
+    public void postExecute(){
+        final String address = AddressUtil.Supervision_executeOne();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("id",""+supervision.getId())
+                .build();
+
+        HttpUtil.sendOkHttpWithRequestBody(address,requestBody,new okhttp3.Callback(){
+            @Override
+            public void onResponse(Call call, Response response)throws IOException {
+                String responseData = response.body().string();
+                Log.d("postExecute:",responseData);
+                int code = 0;
+                String msg = "";
+                try {
+                    JSONObject object = new JSONObject(responseData);
+                    code = object.getInt("code");
+                    msg = object.getString("msg");
+                    if(code == 200 && msg.equals("成功")) {
+                        ToastUtil.showShort(Supervision_Info.this,"执行确认成功！");
+                        supervision.setSituation(2);
+                        refreshLayout();
+                    }
+                }catch (JSONException e){
+                    ToastUtil.showShort(Supervision_Info.this,"网络连接错误，提交失败！");
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call call,IOException e){
+                ToastUtil.showShort(Supervision_Info.this,"操作失败！");
             }
         });
     }

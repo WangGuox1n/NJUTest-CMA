@@ -14,14 +14,6 @@
         android:background="?attr/colorPrimary"
         app:title="修改已有人员信息"
         android:theme="@style/AppTheme">
-        <Button
-            android:id="@+id/save_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="保存"
-            android:layout_gravity="right"
-            android:textSize="20sp"/>
     </android.support.v7.widget.Toolbar>
 
 
@@ -431,45 +423,6 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/line11"
-                android:layout_below="@+id/top10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line"/>
-
-            <LinearLayout
-                android:id="@+id/top11"
-                android:orientation="horizontal"
-                android:layout_below="@+id/line11"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/text_view11"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="#000"
-                    android:text="档案信息"
-                    />
-
-                <TextView
-                    android:id="@+id/dangan_view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:text="点击查看档案"
-                    android:textSize="19sp"
-                    android:textColor="@color/darkorchid"
-                    android:maxLines="1"
-                    />
-
-            </LinearLayout>
-
-            <TextView
                 android:id="@+id/line12"
                 android:layout_below="@+id/top10"
                 android:layout_width="match_parent"
@@ -483,10 +436,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/delete_button"
+                    android:id="@+id/save_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="删除此记录"
+                    android:text="保存此修改"
                     android:background="@drawable/button"
                     android:textSize="24sp"
                     />

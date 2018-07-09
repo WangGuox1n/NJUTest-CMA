@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -272,10 +273,10 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
         }).start();
     }
 
-    private void parseAll(String jsondata){
+    private void parseAll(String jsonData){
         JSONArray array = new JSONArray();
         try {
-            JSONObject object = new JSONObject(jsondata);//最外层的JSONObject对象
+            JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
             array = object.getJSONArray("data");
         }catch (Exception e){
             e.printStackTrace();
@@ -288,8 +289,7 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
                 }
             });
         }
-        Gson gson = new Gson();
-        wholeList  = gson.fromJson(array.toString(),new TypeToken<List<StaffManagement>>(){}.getType());
+        wholeList  = new Gson().fromJson(array.toString(),new TypeToken<List<StaffManagement>>(){}.getType());
     }
 
     @Override
@@ -315,6 +315,10 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
                         isPhotoSelect = true;
                     }
                 }
+                break;
+            case 3:
+                Uri uri = data.getData();
+                Log.d("Photo 1",uri.getPath().toString());
                 break;
             default:
                 break;
