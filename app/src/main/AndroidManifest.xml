@@ -9,9 +9,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_my_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_my_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
@@ -77,17 +77,19 @@
         <activity
             android:name=".ui.staff_management.StaffAuthorization_Add"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.staff_management.StaffTraining_main" />
-        <activity android:name=".ui.staff_management.StaffTraining_modify" />
-        <activity android:name=".ui.staff_management.StaffTraining_staff_main" />
-        <activity android:name=".ui.staff_management.StaffTraining_Add" />
-        <activity android:name=".ui.staff_management.StaffTraining_staff_modify" />
-        <activity android:name=".ui.staff_management.StaffTraining_result_main" />
-        <activity android:name=".ui.staff_management.StaffTraining_result_add" />
         <activity android:name=".ui.staff_management.StaffQualification_Main" />
         <activity android:name=".ui.staff_management.StaffQualification_Info" />
         <activity android:name=".ui.staff_management.StaffQualification_Add" />
         <activity android:name=".ui.staff_management.StaffQualification_Modify" />
+        <activity android:name=".ui.staff_management.StaffTraining_See" />
+        <activity android:name=".ui.staff_management.StaffTraining_result_See"/>
+        <activity android:name=".ui.staff_management.StaffTraining_main" />
+        <activity android:name=".ui.staff_management.StaffTraining_modify" />
+        <activity android:name=".ui.staff_management.StaffTraining_staff_main" />
+        <activity android:name=".ui.staff_management.StaffTraining_Add" />
+        <activity android:name=".ui.staff_management.StaffTraining_result_modify" />
+        <activity android:name=".ui.staff_management.StaffTraining_result_main" />
+        <activity android:name=".ui.staff_management.StaffTraining_result_add" />
 
         <!-- 培训管理 -->
         <activity android:name=".ui.training_management.TrainingApplication_Main" />
@@ -97,6 +99,7 @@
         <activity android:name=".ui.training_management.TrainingApplication_Approve" />
         <activity android:name=".ui.training_management.TrainingApplication_Disapprove" />
         <activity android:name=".ui.training_management.TrainingApplication_Entry" />
+
         <activity android:name=".ui.training_management.AnnualPlan_Main" />
         <activity android:name=".ui.training_management.AnnualPlan_Add" />
         <activity android:name=".ui.training_management.AnnualPlan_See" />
@@ -104,6 +107,7 @@
         <activity android:name=".ui.training_management.AnnualTrainingPlan_See" />
         <activity android:name=".ui.training_management.AnnualTrainingPlan_Modify" />
         <activity android:name=".ui.training_management.AnnualTrainingPlan_Add" />
+        <activity android:name=".ui.training_management.AnnualPlan_Approve" />
 
         <!-- 监督管理 -->
         <activity android:name=".ui.supervision.Supervision_Main" />
@@ -158,7 +162,106 @@
         <activity android:name=".ui.equipment_management.EquipmentMaintenance_Main" />
         <activity android:name=".ui.equipment_management.EquipmentMaintenance_Add" />
         <activity android:name=".ui.equipment_management.EquipmentMaintenance_Info" />
-        <activity android:name=".ui.equipment_management.EquipmentMaintenance_Modify"></activity>
+        <activity android:name=".ui.equipment_management.EquipmentMaintenance_Modify" />
+
+        <!-- 样品管理 -->
+        <activity android:name=".ui.sample_management.SampleManagement_Entey" />
+        <activity android:name=".ui.sample_management.SampleReceive_Main" />
+        <activity android:name=".ui.sample_management.SampleReceive_Add" />
+        <activity android:name=".ui.sample_management.SampleReceive_Info" />
+        <activity android:name=".ui.sample_management.SampleReceive_Modify" />
+        <activity android:name=".ui.sample_management.SampleIO_Main" />
+        <activity android:name=".ui.sample_management.SampleIO_Info" />
+        <activity android:name=".ui.sample_management.SampleIO_Add" />
+        <activity android:name=".ui.sample_management.SampleIO_Modify" />
+        <activity android:name=".ui.sample_management.SampleReceipt_Info" />
+        <activity android:name=".ui.sample_management.SampleReceipt_Add" />
+        <activity android:name=".ui.sample_management.SampleReceipt_Modify" />
+
+        <!-- 内审管理 -->
+        <activity android:name=".ui.internal_audit.InternalAuditManagementMain" />
+        <activity android:name=".ui.internal_audit.InternalAuditDocument_Main" />
+        <activity
+            android:name=".ui.internal_audit.InternalAuditDocument_Add"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.internal_audit.InternalAuditDocument_Info" />
+        <activity
+            android:name=".ui.internal_audit.InternalAuditDocument_Modify"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
+        <!-- 自查管理 -->
+        <activity android:name=".ui.self_inspection.SelfInspection_Main" />
+        <activity android:name=".ui.self_inspection.SelfInspection_FileList"/>
+
+        <!-- 检测机构 -->
+        <activity android:name=".ui.testing_institution.TestingInstitution_Entry" />
+        <activity android:name=".ui.testing_institution.TestingInstitutionResource_Info" />
+        <activity android:name=".ui.testing_institution.TestingInstitutionResource_Modify" />
+        <activity android:name=".ui.testing_institution.TestingInstitutionInformation_Info" />
+        <activity android:name=".ui.testing_institution.TestingInstitutionInformation_Modify" />
+        <activity android:name=".ui.testing_institution.Certificate_Main" />
+        <activity android:name=".ui.testing_institution.Certificate_Info" />
+        <activity android:name=".ui.testing_institution.Certificate_Modify" />
+        <activity android:name=".ui.testing_institution.Certificate_Add"/>
+
+        <!-- 外部审查 -->
+        <activity android:name=".ui.external_review.ExternalReviewManagement_Main" />
+        <activity android:name=".ui.external_review.ExternalReviewDocument_Main" />
+        <activity android:name=".ui.external_review.ExternalReviewDocument_Add" />
+        <activity android:name=".ui.external_review.ExternalReviewDocument_Info" />
+        <activity android:name=".ui.external_review.ExternalReviewDocument_Modify"/>
+        <!-- 管理评审 -->
+        <activity android:name=".ui.manage_review.ManageReview_Main" />
+        <activity android:name=".ui.manage_review.ManageReview_Modify" />
+        <activity android:name=".ui.manage_review.ManageReviewOne_Main" />
+        <activity android:name=".ui.manage_review.ManageReviewOne_Add" />
+        <activity android:name=".ui.manage_review.ManageReviewOne_Modify" />
+        <!-- 检验检测 -->
+        <activity android:name=".ui.test_ability.TestAbility_main" />
+        <activity android:name=".ui.test_ability.TestAbilityOne_main" />
+        <activity android:name=".ui.test_ability.TestAbility_add" />
+        <!-- 质量体系 -->
+        <activity android:name=".ui.quality_system.QualitySystem_Main" />
+        <activity android:name=".ui.quality_system.QualityManual_Main" />
+        <activity android:name=".ui.quality_system.QualityManual_Add" />
+        <activity android:name=".ui.quality_system.QualityManualHistory_Main" />
+        <activity android:name=".ui.quality_system.QualityManualCurrent_Main" />
+        <activity android:name=".ui.quality_system.QualityManualCurrent_Modify" />
+        <activity android:name=".ui.quality_system.QualityManualChange_Main" />
+        <activity android:name=".ui.quality_system.QualityManual_See" />
+        <!-- 标准管理 -->
+        <activity android:name=".ui.standard_management.StandardManagement_Main" />
+        <activity android:name=".ui.standard_management.StandardManagement_Info" />
+        <activity android:name=".ui.standard_management.StandardManagement_Add" />
+        <!-- 能力验证 -->
+        <activity android:name=".ui.capacity_verification.CapacityVerificationPlan_Main" />
+        <activity
+            android:name=".ui.capacity_verification.CapacityVerificationPlan_Add"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.capacity_verification.CapacityVerificationPlan_Info"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.capacity_verification.CapacityVericationPlan_Modify"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.capacity_verification.CapacityVerificationProject_Main" />
+        <activity android:name=".ui.capacity_verification.CapacityVericationProject_Info" />
+        <activity
+            android:name=".ui.capacity_verification.CapacityVerificationProject_Modify"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.capacity_verification.CapacityVerificationProject_Add"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.capacity_verification.CapacityverificationRecord_Info" />
+        <activity
+            android:name=".ui.capacity_verification.CapacityVerificationRecord_Add"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.capacity_verification.CapacityVerificationRecord_Modify"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.capacity_verification.CapacityVericationFile_Add" />
+        <activity android:name=".ui.capacity_verification.CapacityVericationFile_Info">
+        </activity>
     </application>
 
 </manifest>

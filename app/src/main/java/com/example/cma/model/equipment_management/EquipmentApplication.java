@@ -1,8 +1,5 @@
 package com.example.cma.model.equipment_management;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 /**

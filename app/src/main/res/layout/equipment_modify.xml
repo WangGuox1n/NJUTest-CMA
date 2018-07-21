@@ -25,7 +25,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -36,9 +36,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -46,7 +45,7 @@
                     android:layout_weight="4"
                     android:text="状态"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/state_text"
@@ -55,14 +54,14 @@
                     android:layout_weight="3"
                     android:text="状态"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
                 <Switch
                     android:id="@+id/switch_button"
+                    android:layout_gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    />
+                    android:layout_weight="3" />
             </LinearLayout>
 
             <TextView
@@ -73,9 +72,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -83,7 +81,7 @@
                     android:layout_weight="4"
                     android:text="名称"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/name_text"
@@ -92,7 +90,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
             </LinearLayout>
 
@@ -104,9 +102,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -114,7 +111,7 @@
                     android:layout_weight="4"
                     android:text="型号"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/model_text"
@@ -123,7 +120,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -134,9 +131,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -144,7 +140,7 @@
                     android:layout_weight="4"
                     android:text="CPU主频"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/cpu_text"
@@ -153,7 +149,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -164,9 +160,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -174,7 +169,7 @@
                     android:layout_weight="4"
                     android:text="内存"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/memory_text"
@@ -183,7 +178,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -194,9 +189,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -204,7 +198,7 @@
                     android:layout_weight="4"
                     android:text="硬盘"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/hardDisk_text"
@@ -213,7 +207,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -224,9 +218,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -234,7 +227,7 @@
                     android:layout_weight="4"
                     android:text="编号"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/equipmentNumber_text"
@@ -243,7 +236,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -254,9 +247,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -264,7 +256,7 @@
                     android:layout_weight="4"
                     android:text="用途"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/application_text"
@@ -273,7 +265,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -283,22 +275,21 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16.0dip"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:text="提交修改"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize"
+                    android:text="保存" />
             </LinearLayout>
         </LinearLayout>
 

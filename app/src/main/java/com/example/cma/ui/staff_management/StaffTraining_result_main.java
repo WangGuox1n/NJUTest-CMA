@@ -1,6 +1,8 @@
 package com.example.cma.ui.staff_management;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -142,7 +144,7 @@ public class StaffTraining_result_main extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient();
                     Log.d("￥￥￥￥￥￥￥￥￥￥￥￥￥￥￥",id);
                     String path="http://119.23.38.100:8080/cma/StaffTraining/getAllByStaff";
-                    String url_path = path +"?userId=" + URLEncoder.encode(id, "utf-8");
+                    String url_path = path +"?id=" + URLEncoder.encode(id, "utf-8");
                     Request request = new Request.Builder()
                             // 指定访问的服务器地址，后续在这里修改
                             //.url("http://10.0.2.2:3000/stars")
@@ -252,18 +254,78 @@ public class StaffTraining_result_main extends AppCompatActivity {
                     String responseData = response.body().string();
                     Log.d("点击获取的","here is json44");
                     Log.d("获得的数据:",responseData);
-                    TrainingResult result;
                     Gson gson = new Gson();
                     Result<TrainingResult> userListResult = gson.fromJson(responseData,new TypeToken<Result<TrainingResult>>(){}.getType());
-                    result=userListResult.data;
-                    Intent intent=new Intent(StaffTraining_result_main.this,StaffTraining_staff_modify.class);
-                    Log.d("222222222",result.getProgram());
-                    intent.putExtra("chuan",result);
-                    intent.putExtra("id",peopleid);
-                    intent.putExtra("staffname",staffname);
-                    intent.putExtra("training",train);
+                    TrainingResult result=userListResult.data;
+                    int code=userListResult.code;
+                    if(code==404 || result==null)
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(StaffTraining_result_main.this);
+                        builder.setTitle("无考核结果");
+                        builder.setPositiveButton("添加", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
 
-                    startActivity(intent);
+                            }
+                        });
+                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+
+                            }
+                        });
+                        builder.show();
+
+
+
+                    }
+                    else {
+                        if(result.getResult()==null ||result.getResult().length()<0)
+                        {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(StaffTraining_result_main.this);
+                                    builder.setTitle("无考核结果");
+                                    builder.setPositiveButton("添加", new DialogInterface.OnClickListener()
+                                    {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which)
+                                        {
+                                            Intent intent=new Intent(StaffTraining_result_main.this,StaffTraining_result_add.class);
+                                            intent.putExtra("trainingId",trainingId);
+                                            intent.putExtra("id",peopleid);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                                    {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which)
+                                        {
+
+                                        }
+                                    });
+                                    builder.show();
+                                }
+                            });
+
+                        }
+                        else {
+                            Intent intent = new Intent(StaffTraining_result_main.this, StaffTraining_result_See.class);
+                            Log.d("222222222", result.getProgram());
+                            intent.putExtra("chuan", result);
+                            intent.putExtra("id", peopleid);
+                            intent.putExtra("staffname", staffname);
+                            intent.putExtra("training", train);
+
+                            startActivity(intent);
+                        }
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }

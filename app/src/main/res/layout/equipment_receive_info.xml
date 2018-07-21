@@ -17,11 +17,13 @@
         <Button
             android:id="@+id/edit_button"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="编辑"
             android:layout_gravity="right"
-            android:textSize="20sp"/>
+            android:background="@drawable/edit_button"
+            android:layout_width="@dimen/edit_button_width"
+            android:layout_height="@dimen/edit_button_height"
+            android:layout_marginRight="@dimen/edit_button_marginRight"
+            android:text="编辑"
+            android:textSize="@dimen/edit_button_textSize"/>
     </android.support.v7.widget.Toolbar>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,7 +35,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -44,9 +46,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -54,7 +55,7 @@
                     android:layout_weight="4"
                     android:text="名称"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/name_text"
@@ -62,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
             </LinearLayout>
 
@@ -74,9 +75,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -84,7 +84,7 @@
                     android:layout_weight="4"
                     android:text="型号"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/model_text"
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -103,9 +103,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -113,7 +112,7 @@
                     android:layout_weight="4"
                     android:text="生产厂家"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/manufacturer_text"
@@ -121,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -132,9 +131,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -142,7 +140,7 @@
                     android:layout_weight="4"
                     android:text="接收情况"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/receiveSituation_text"
@@ -150,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -161,9 +159,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -171,7 +168,7 @@
                     android:layout_weight="4"
                     android:text="接收人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/recipient_text"
@@ -179,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -190,9 +187,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -200,7 +196,7 @@
                     android:layout_weight="4"
                     android:text="接收日期"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/receiveDate_text"
@@ -208,7 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -219,9 +215,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -229,7 +224,7 @@
                     android:layout_weight="4"
                     android:text="安装调试情况"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/equipmentSituation_text"
@@ -237,7 +232,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -248,9 +243,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -258,7 +252,7 @@
                     android:layout_weight="4"
                     android:text="验收情况"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/acceptance_text"
@@ -266,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -277,9 +271,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -287,7 +280,7 @@
                     android:layout_weight="4"
                     android:text="验收人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/acceptancePerson_text"
@@ -295,7 +288,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -306,9 +299,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -316,7 +308,7 @@
                     android:layout_weight="4"
                     android:text="验收日期"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/acceptanceDate_text"
@@ -324,7 +316,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -335,22 +327,252 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16.0dip"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="附件"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_text_size" />
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:singleLine="true"
+                    android:text="名称"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name1"
+                    android:layout_marginLeft="15dp"
+                    android:text="下载中..."
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_download1"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/download"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:singleLine="true"
+                    android:text="名称"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name2"
+                    android:layout_marginLeft="15dp"
+                    android:text="下载中..."
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_download2"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/download"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout3"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:singleLine="true"
+                    android:text="名称"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name3"
+                    android:layout_marginLeft="15dp"
+                    android:text="下载中..."
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_download3"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/download"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout4"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:singleLine="true"
+                    android:text="名称"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name4"
+                    android:layout_marginLeft="15dp"
+                    android:text="下载中..."
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_download4"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/download"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout5"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:ellipsize="end"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:singleLine="true"
+                    android:text="名称"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name5"
+                    android:layout_marginLeft="15dp"
+                    android:text="下载中..."
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_download5"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/download"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
                 android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/delete_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
                     android:text="删除此记录"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize" />
             </LinearLayout>
 
         </LinearLayout>

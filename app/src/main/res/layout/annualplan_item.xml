@@ -38,5 +38,16 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/item_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/item_year"
+            android:layout_alignBottom="@+id/item_year"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="23dp"
+            android:textColor="@color/blue"
+            android:text="批准状态" />
+
     </RelativeLayout>
 </LinearLayout>

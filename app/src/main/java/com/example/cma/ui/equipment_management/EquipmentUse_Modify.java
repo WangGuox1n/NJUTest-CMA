@@ -1,17 +1,13 @@
 package com.example.cma.ui.equipment_management;
 
-import android.content.DialogInterface;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,12 +35,12 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class EquipmentUse_Modify extends AppCompatActivity implements View.OnClickListener,Spinner.OnItemSelectedListener {
-
+public class EquipmentUse_Modify extends AppCompatActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
+    private static final String TAG = "EquipmentUse_Modify";
     //data
     private EquipmentUse equipmentUse;
     private List<Equipment> equipmentList = new ArrayList<>();
-    private List<String> spinnerData = new ArrayList<String>();
+    private List<String> spinnerData = new ArrayList<>();
     private ArrayAdapter<String> spinnerAdapter;
 
 
@@ -58,8 +54,6 @@ public class EquipmentUse_Modify extends AppCompatActivity implements View.OnCli
     private EditText user_text;
     private EditText remark_text;
     private Spinner spinner;
-    private Button submitButton;
-    private Toolbar toolbar;
 
     private String equipmentId;
 
@@ -68,40 +62,35 @@ public class EquipmentUse_Modify extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.equipment_use_modify);
         initView();
-        equipmentUse = (EquipmentUse)getIntent().getSerializableExtra("EquipmentUse");
+        equipmentUse = (EquipmentUse) getIntent().getSerializableExtra("EquipmentUse");
         getEquipmentList();
         setText();
     }
 
     public void initView() {
-        useDate_text = (TextView) findViewById(R.id.useDate_text);
-        openDate_text = (TextView) findViewById(R.id.openDate_text);
-        closeDate_text = (TextView) findViewById(R.id.closeDate_text);
-        sampleNumber_text = (EditText) findViewById(R.id.sampleNumber_text);
-        testProject_text = (EditText) findViewById(R.id.testProject_text);
-        beforeUse_text = (EditText) findViewById(R.id.beforeUse_text);
-        afterUse_text = (EditText) findViewById(R.id.afterUse_text);
-        user_text = (EditText) findViewById(R.id.user_text);
-        remark_text = (EditText) findViewById(R.id.remark_text);
+        useDate_text = findViewById(R.id.useDate_text);
+        openDate_text = findViewById(R.id.openDate_text);
+        closeDate_text = findViewById(R.id.closeDate_text);
+        sampleNumber_text = findViewById(R.id.sampleNumber_text);
+        testProject_text = findViewById(R.id.testProject_text);
+        beforeUse_text = findViewById(R.id.beforeUse_text);
+        afterUse_text = findViewById(R.id.afterUse_text);
+        user_text = findViewById(R.id.user_text);
+        remark_text = findViewById(R.id.remark_text);
 
-        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
-        submitButton = (Button) findViewById(R.id.submit_button);
-        submitButton.setOnClickListener(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //设置Toolbar左边显示一个返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        findViewById(R.id.submit_button).setOnClickListener(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
+
         useDate_text.setOnClickListener(this);
         openDate_text.setOnClickListener(this);
         closeDate_text.setOnClickListener(this);
     }
 
-    public void setText(){
+    public void setText() {
         useDate_text.setText(equipmentUse.getUseDate());
         openDate_text.setText(equipmentUse.getOpenDate());
         closeDate_text.setText(equipmentUse.getCloseDate());
@@ -123,10 +112,10 @@ public class EquipmentUse_Modify extends AppCompatActivity implements View.OnCli
                 ViewUtil.getInstance().selectDate(EquipmentUse_Modify.this, useDate_text);
                 break;
             case R.id.openDate_text:
-                ViewUtil.getInstance().selectDate(EquipmentUse_Modify.this, openDate_text);
+                ViewUtil.getInstance().selectTime(EquipmentUse_Modify.this, openDate_text);
                 break;
             case R.id.closeDate_text:
-                ViewUtil.getInstance().selectDate(EquipmentUse_Modify.this, closeDate_text);
+                ViewUtil.getInstance().selectTime(EquipmentUse_Modify.this, closeDate_text);
                 break;
             default:
                 break;
@@ -153,16 +142,16 @@ public class EquipmentUse_Modify extends AppCompatActivity implements View.OnCli
                 afterUse_text.getText().toString().isEmpty() ||
                 user_text.getText().toString().isEmpty() ||
                 remark_text.getText().toString().isEmpty()) {
-            ToastUtil.showShort(EquipmentUse_Modify.this, "请填写完整！");
+            ToastUtil.showShort(EquipmentUse_Modify.this, "请填写完整");
             return;
         }
         postSave();
     }
 
     public void postSave() {
-        String address = AddressUtil.EquipmentUse_modifyOne();
+        String address = AddressUtil.getAddress(AddressUtil.EquipmentUse_modifyOne);
         RequestBody requestBody = new FormBody.Builder()
-                .add("id",equipmentUse.getId()+"")
+                .add("id", equipmentUse.getId() + "")
                 .add("equipmentId", equipmentId)
                 .add("useDate", useDate_text.getText().toString())
                 .add("openDate", openDate_text.getText().toString())
@@ -179,7 +168,7 @@ public class EquipmentUse_Modify extends AppCompatActivity implements View.OnCli
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-                Log.d("EquipmentApp_Add:", responseData);
+                Log.d(TAG, responseData);
                 int code = 0;
                 String msg = "";
                 try {
@@ -190,14 +179,14 @@ public class EquipmentUse_Modify extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                 }
                 if (code == 200 && msg.equals("成功")) {
-                    ToastUtil.showShort(EquipmentUse_Modify.this, "提交成功！");
+                    ToastUtil.showShort(EquipmentUse_Modify.this, "修改成功");
                     finish();
                 }
             }
 
             @Override
             public void onFailure(Call call, IOException e) {
-                ToastUtil.showShort(EquipmentUse_Modify.this, "提交失败！");
+                ToastUtil.showShort(EquipmentUse_Modify.this, "修改失败");
             }
         });
     }
@@ -206,7 +195,7 @@ public class EquipmentUse_Modify extends AppCompatActivity implements View.OnCli
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address = AddressUtil.Equipment_getAll();
+                String address = AddressUtil.getAddress(AddressUtil.Equipment_getAll);
                 HttpUtil.sendOkHttpRequest(address, new okhttp3.Callback() {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
@@ -218,7 +207,7 @@ public class EquipmentUse_Modify extends AppCompatActivity implements View.OnCli
 
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        ToastUtil.showShort(EquipmentUse_Modify.this, "请求数据失败！");
+                        ToastUtil.showShort(EquipmentUse_Modify.this, "请求数据失败");
                     }
                 });
             }
@@ -233,28 +222,33 @@ public class EquipmentUse_Modify extends AppCompatActivity implements View.OnCli
         } catch (Exception e) {
             e.printStackTrace();
         }
-        List<Equipment> newList = new Gson().fromJson(array.toString(), new TypeToken<List<Equipment>>() {}.getType());
+        List<Equipment> newList = new Gson().fromJson(array.toString(), new TypeToken<List<Equipment>>() {
+        }.getType());
         equipmentList.clear();
         equipmentList.addAll(newList);
     }
 
     private void showResponse() {
         for (Equipment equipment : equipmentList) {
+            //检查该设备是否处于准用状态
+            //if (equipment.getState() == 1)
             spinnerData.add(equipment.getEquipmentNumber());
         }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //适配器
-                spinnerAdapter = new ArrayAdapter<String>(EquipmentUse_Modify.this, android.R.layout.simple_spinner_item, spinnerData);
-                //设置样式
+                /*
+                * 设置spinner的样式，加载spinner
+                * */
+                spinnerAdapter = new ArrayAdapter<>(EquipmentUse_Modify.this, android.R.layout.simple_spinner_item, spinnerData);
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                //加载适配器
                 spinner.setAdapter(spinnerAdapter);
                 int i = 0;
-                for(Equipment equipment:equipmentList){
-                    if(equipment.getEquipmentNumber().equals(equipmentUse.getEquipmentNumber()))
-                        spinner.setSelection(i,true); //设置初始显示值
+                for (Equipment equipment : equipmentList) {
+                    if (equipment.getEquipmentNumber().equals(equipmentUse.getEquipmentNumber())){
+                        spinner.setSelection(i, true); //设置初始显示值
+                        break;
+                    }
                     i++;
                 }
                 spinnerAdapter.notifyDataSetChanged();

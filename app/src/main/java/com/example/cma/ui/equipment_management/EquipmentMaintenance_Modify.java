@@ -1,17 +1,15 @@
 package com.example.cma.ui.equipment_management;
 
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,11 +39,10 @@ import okhttp3.Response;
 
 public class EquipmentMaintenance_Modify extends AppCompatActivity implements View.OnClickListener,Spinner.OnItemSelectedListener{
 
-
     //data
     private EquipmentMaintenance equipmentMaintenance;
     private List<Equipment> equipmentList = new ArrayList<>();
-    private List<String> spinnerData = new ArrayList<String>();
+    private List<String> spinnerData = new ArrayList<>();
     private ArrayAdapter<String> spinnerAdapter;
 
     private TextView name_text;
@@ -55,8 +52,6 @@ public class EquipmentMaintenance_Modify extends AppCompatActivity implements Vi
     private EditText confirmer_text;
     private TextView maintenanceDate_text;
     private Spinner spinner;
-    private Button submitButton;
-    private Toolbar toolbar;
 
     private String equipmentId;
 
@@ -71,25 +66,19 @@ public class EquipmentMaintenance_Modify extends AppCompatActivity implements Vi
     }
 
     public void initView() {
-        name_text = (TextView) findViewById(R.id.name_text);
-        model_text = (TextView) findViewById(R.id.model_text);
-        maintenanceContent_text = (EditText) findViewById(R.id.maintenanceContent_text);
-        maintenancePerson_text = (EditText) findViewById(R.id.maintenancePerson_text);
-        confirmer_text = (EditText) findViewById(R.id.confirmer_text);
-        maintenanceDate_text = (TextView) findViewById(R.id.maintenanceDate_text);
+        name_text =  findViewById(R.id.name_text);
+        model_text =  findViewById(R.id.model_text);
+        maintenanceContent_text =  findViewById(R.id.maintenanceContent_text);
+        maintenancePerson_text =  findViewById(R.id.maintenancePerson_text);
+        confirmer_text =  findViewById(R.id.confirmer_text);
+        maintenanceDate_text =  findViewById(R.id.maintenanceDate_text);
 
-        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner =  findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
-        submitButton = (Button) findViewById(R.id.submit_button);
-        submitButton.setOnClickListener(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //设置Toolbar左边显示一个返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        findViewById(R.id.submit_button).setOnClickListener(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
         maintenanceDate_text.setOnClickListener(this);
     }
 
@@ -143,14 +132,14 @@ public class EquipmentMaintenance_Modify extends AppCompatActivity implements Vi
                 maintenancePerson_text.getText().toString().isEmpty() ||
                 confirmer_text.getText().toString().isEmpty() ||
                 maintenanceDate_text.getText().toString().isEmpty()) {
-            ToastUtil.showShort(EquipmentMaintenance_Modify.this, "请填写完整！");
+            ToastUtil.showShort(EquipmentMaintenance_Modify.this, "请填写完整");
             return;
         }
         postSave();
     }
 
     public void postSave() {
-        String address = AddressUtil.EquipmentMaintenance_modifyOne();
+        String address = AddressUtil.getAddress(AddressUtil.EquipmentMaintenance_modifyOne);
         RequestBody requestBody = new FormBody.Builder()
                 .add("id",equipmentMaintenance.getId()+"")
                 .add("equipmentId", equipmentId)
@@ -175,14 +164,14 @@ public class EquipmentMaintenance_Modify extends AppCompatActivity implements Vi
                     e.printStackTrace();
                 }
                 if (code == 200 && msg.equals("成功")) {
-                    ToastUtil.showShort(EquipmentMaintenance_Modify.this, "提交成功！");
+                    ToastUtil.showShort(EquipmentMaintenance_Modify.this, "修改成功");
                     finish();
                 }
             }
 
             @Override
             public void onFailure(Call call, IOException e) {
-                ToastUtil.showShort(EquipmentMaintenance_Modify.this, "提交失败！");
+                ToastUtil.showShort(EquipmentMaintenance_Modify.this, "修改失败");
             }
         });
     }
@@ -220,7 +209,7 @@ public class EquipmentMaintenance_Modify extends AppCompatActivity implements Vi
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address = AddressUtil.Equipment_getAll();
+                String address = AddressUtil.getAddress(AddressUtil.Equipment_getAll);
                 HttpUtil.sendOkHttpRequest(address, new okhttp3.Callback() {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
@@ -261,7 +250,7 @@ public class EquipmentMaintenance_Modify extends AppCompatActivity implements Vi
             @Override
             public void run() {
                 //适配器
-                spinnerAdapter = new ArrayAdapter<String>(EquipmentMaintenance_Modify.this, android.R.layout.simple_spinner_item, spinnerData);
+                spinnerAdapter = new ArrayAdapter<>(EquipmentMaintenance_Modify.this, android.R.layout.simple_spinner_item, spinnerData);
                 //设置样式
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 //加载适配器

@@ -1,25 +1,21 @@
 package com.example.cma.ui.period_check;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.ViewUtils;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cma.R;
-import com.example.cma.ui.staff_management.StaffManagement_Add;
 import com.example.cma.utils.ViewUtil;
 
 import org.feezu.liuli.timeselector.TimeSelector;
@@ -32,7 +28,6 @@ import java.util.Locale;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;

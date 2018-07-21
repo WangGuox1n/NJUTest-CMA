@@ -1,0 +1,1072 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_boot"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/mToolbar4"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="修改检测机构概况"
+        android:theme="@style/AppTheme"/>
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="false"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mToolbar4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line" />
+            <LinearLayout
+                android:id="@+id/top1"
+                android:orientation="horizontal"
+                android:layout_below="@id/line1"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="检测机构名称"
+                    />
+
+                <EditText
+                    android:id="@+id/text1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line2"
+                android:layout_below="@+id/top1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+
+            <LinearLayout
+                android:id="@+id/top2"
+                android:orientation="horizontal"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="地址"
+                    />
+
+                <EditText
+                    android:id="@+id/text2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/line3"
+                android:layout_below="@+id/top2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+
+
+            <LinearLayout
+                android:id="@+id/top3"
+                android:orientation="horizontal"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="邮编"
+                    />
+
+                <EditText
+                    android:id="@+id/text3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/line4"
+                android:layout_below="@+id/top3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+
+            <LinearLayout
+                android:id="@+id/top4"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line4"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="传真"
+                    />
+                <EditText
+                    android:id="@+id/text4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line5"
+                android:layout_below="@+id/top4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+
+            <LinearLayout
+                android:id="@+id/top5"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line5"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="Email地址"
+                    />
+                <EditText
+                    android:id="@+id/text5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line6"
+                android:layout_below="@+id/top5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top6"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line6"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="负责人"
+                    />
+
+                <EditText
+                    android:id="@+id/text6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line7"
+                android:layout_below="@+id/top6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top7"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line7"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="职务"
+                    />
+
+                <EditText
+                    android:id="@+id/text7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line8"
+                android:layout_below="@+id/top7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top8"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line8"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="固定电话"
+                    />
+                <EditText
+                    android:id="@+id/text8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line9"
+                android:layout_below="@+id/top8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top9"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line9"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="手机"
+                    />
+
+                <EditText
+                    android:id="@+id/text9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line10"
+                android:layout_below="@+id/top9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top10"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line10"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="联络人"
+                    />
+
+                <EditText
+                    android:id="@+id/text10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line11"
+                android:layout_below="@+id/top10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top11"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line11"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="职务 "
+                    />
+
+                <EditText
+                    android:id="@+id/text11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line12"
+                android:layout_below="@+id/top11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top12"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line12"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="固定电话"
+                    />
+
+                <EditText
+                    android:id="@+id/text12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line13"
+                android:layout_below="@+id/top12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top13"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line12"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="手机"
+                    />
+
+                <EditText
+                    android:id="@+id/text13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/line14"
+                android:layout_below="@+id/top13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top14"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line13"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="社会信用代码"
+                    />
+
+                <EditText
+                    android:id="@+id/text14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line15"
+                android:layout_below="@+id/top14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top15"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line15"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="所属法人单位名称"
+                    />
+
+                <EditText
+                    android:id="@+id/text15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line16"
+                android:layout_below="@+id/top15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top16"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line16"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="地址"
+                    />
+
+                <EditText
+                    android:id="@+id/text16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line17"
+                android:layout_below="@+id/top16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top17"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line17"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view17"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="负责人"
+                    />
+
+                <EditText
+                    android:id="@+id/text17"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line18"
+                android:layout_below="@+id/top17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top18"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line18"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="职务"
+                    />
+
+                <EditText
+                    android:id="@+id/text18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line19"
+                android:layout_below="@+id/top18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top19"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line18"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view19"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="电话"
+                    />
+
+                <EditText
+                    android:id="@+id/text19"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line20"
+                android:layout_below="@+id/top19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top20"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line20"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view20"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="社会信用代码"
+                    />
+
+                <EditText
+                    android:id="@+id/text20"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line21"
+                android:layout_below="@+id/top20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top21"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line21"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view21"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="主管部门名称"
+                    />
+
+                <EditText
+                    android:id="@+id/text21"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line22"
+                android:layout_below="@+id/top21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top22"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line22"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view22"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="地址"
+                    />
+
+                <EditText
+                    android:id="@+id/text22"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line23"
+                android:layout_below="@+id/top22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top23"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line23"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view23"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="负责人"
+                    />
+
+                <EditText
+                    android:id="@+id/text23"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line24"
+                android:layout_below="@+id/top23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top24"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line24"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view24"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="职务"
+                    />
+
+                <EditText
+                    android:id="@+id/text24"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line25"
+                android:layout_below="@+id/top24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top25"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line25"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view25"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="电话"
+                    />
+
+                <EditText
+                    android:id="@+id/text25"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line26"
+                android:layout_below="@+id/top25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top26"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line26"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view26"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="结构设施特点"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/characteristic_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state0_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="固定" />
+                    <RadioButton
+                        android:id="@+id/state0_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="临时"/>
+                    <RadioButton
+                        android:id="@+id/state0_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="可移动" />
+                    <RadioButton
+                        android:id="@+id/state0_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="多场所" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line27"
+                android:layout_below="@+id/top26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top27"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line27"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view27"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="法人类别"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/legalentity_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state1_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="独立法人检测机构-社团法人" />
+                    <RadioButton
+                        android:id="@+id/state1_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="独立法人检测机构-事业法人"/>
+                    <RadioButton
+                        android:id="@+id/state1_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="独立法人检测机构-企业法人" />
+                    <RadioButton
+                        android:id="@+id/state1_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="独立法人检测机构-机关法人" />
+                    <RadioButton
+                        android:id="@+id/state1_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="独立法人检测机构-其他" />
+                    <RadioButton
+                        android:id="@+id/state1_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="检测检验机构所属法人-社团法人"/>
+                    <RadioButton
+                        android:id="@+id/state1_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="检测检验机构所属法人-事业法人" />
+                    <RadioButton
+                        android:id="@+id/state1_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="检测检验机构所属法人-企业法人" />
+                    <RadioButton
+                        android:id="@+id/state1_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="检测检验机构所属法人-机关法人" />
+                    <RadioButton
+                        android:id="@+id/state1_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="检测检验机构所属法人-其他" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line28"
+                android:layout_below="@+id/top27"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_below="@+id/line28"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="保存"
+                    android:background="@drawable/button"
+                    android:textSize="24sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

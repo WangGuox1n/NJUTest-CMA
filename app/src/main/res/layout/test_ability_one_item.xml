@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
+    <RelativeLayout
+        android:id="@+id/test_ability_one_item"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="100dp">
+
+
+        <TextView
+            android:id="@+id/item_production"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/item_ability"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:text="产品名称:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_production_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/item_ability_one"
+            android:layout_alignStart="@+id/item_ability_one"
+            android:text="产品名称"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/item_reference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/item_ability"
+            android:layout_below="@+id/item_ability"
+            android:text="依据标准:"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/item_reference_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/item_ability_one"
+            android:layout_below="@+id/item_ability_one"
+            android:text="依据标准"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/item_ability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/item_production"
+            android:layout_centerVertical="true"
+            android:text="检测能力:"
+            android:textSize="20sp"
+             />
+
+        <TextView
+            android:id="@+id/item_ability_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/item_ability"
+            android:layout_alignBottom="@+id/item_ability"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@+id/item_ability"
+            android:text="检测能力"
+            android:textSize="20sp"
+    />
+
+
+
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/bt"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="删除"
+        android:visibility="gone" />
+</LinearLayout>

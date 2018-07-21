@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.example.cma.R;
 import com.example.cma.model.training_management.AnnualTrainingPlan;
 
+import org.feezu.liuli.timeselector.TimeSelector;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,14 +85,60 @@ public class AnnualTrainingPlan_Modify extends AppCompatActivity {
         final EditText editText5=(EditText)findViewById(R.id.edit_text5);
         editText5.setText(String.valueOf(staff.getTrainingTime()));
 
-        final EditText editText6=(EditText)findViewById(R.id.edit_text6);
+        final TextView editText6=(TextView)findViewById(R.id.edit_text6);
         editText6.setText(staff.getStartTime());
 
-        final EditText editText7=(EditText)findViewById(R.id.edit_text7);
+        final TextView editText7=(TextView)findViewById(R.id.edit_text7);
         editText7.setText(staff.getEndTime());
 
         final EditText editText8=(EditText)findViewById(R.id.edit_text8);
         editText8.setText(staff.getNote());
+
+
+        editText6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                final String now=simpleDateFormat.format(new Date());
+                //editText.setText();
+                TimeSelector timeSelector = new TimeSelector(AnnualTrainingPlan_Modify.this,new TimeSelector.ResultHandler() {
+                    @Override
+                    public void handle(String time) {
+                        // Toast.makeText(StaffTraining_Add.this, time, Toast.LENGTH_SHORT).show();
+                        editText6.setText(time.split(" ")[0]);
+                    }
+                }, "2000-01-01 00:00", now);
+                timeSelector.setIsLoop(false);//设置不循环,true循环
+                timeSelector.setTitle("请选择日期");
+                //        timeSelector.setMode(TimeSelector.MODE.YMDHM);//显示 年月日时分（默认）
+                timeSelector.setMode(TimeSelector.MODE.YMD);//只显示 年月日
+                timeSelector.show();
+            }
+        });
+
+
+        editText7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                final String now=simpleDateFormat.format(new Date());
+                //editText.setText();
+                TimeSelector timeSelector = new TimeSelector(AnnualTrainingPlan_Modify.this,new TimeSelector.ResultHandler() {
+                    @Override
+                    public void handle(String time) {
+                        // Toast.makeText(StaffTraining_Add.this, time, Toast.LENGTH_SHORT).show();
+                        editText7.setText(time.split(" ")[0]);
+                    }
+                }, "2000-01-01 00:00", now);
+                timeSelector.setIsLoop(false);//设置不循环,true循环
+                timeSelector.setTitle("请选择日期");
+                //        timeSelector.setMode(TimeSelector.MODE.YMDHM);//显示 年月日时分（默认）
+                timeSelector.setMode(TimeSelector.MODE.YMD);//只显示 年月日
+                timeSelector.show();
+            }
+        });
+
+
 
 
 
@@ -104,8 +152,6 @@ public class AnnualTrainingPlan_Modify extends AppCompatActivity {
         ShowCursor(editText3);
         ShowCursor(editText4);
         ShowCursor(editText5);
-        ShowCursor(editText6);
-        ShowCursor(editText7);
         ShowCursor(editText8);
 
 
@@ -131,10 +177,10 @@ public class AnnualTrainingPlan_Modify extends AppCompatActivity {
                 EditText editText5=(EditText)findViewById(R.id.edit_text5);
                 final String s5=editText5.getText().toString();
 
-                EditText editText6=(EditText)findViewById(R.id.edit_text6);
+                TextView editText6=(TextView)findViewById(R.id.edit_text6);
                 final String s6=editText6.getText().toString();
 
-                EditText editText7=(EditText)findViewById(R.id.edit_text7);
+                TextView editText7=(TextView)findViewById(R.id.edit_text7);
                 final String s7=editText7.getText().toString();
 
                 EditText editText8=(EditText)findViewById(R.id.edit_text8);

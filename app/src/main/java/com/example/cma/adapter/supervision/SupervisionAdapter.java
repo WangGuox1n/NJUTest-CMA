@@ -4,19 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.TextView;
 
 import com.example.cma.R;
 import com.example.cma.model.supervision.Supervision;
 import com.example.cma.ui.supervision.Supervision_Info;
-import com.example.cma.ui.supervision.Supervision_Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,8 +76,8 @@ public class SupervisionAdapter extends RecyclerView.Adapter<SupervisionAdapter.
         holder.situation.setText(supervision.SituationToString());
         if(supervision.getSituation()==0)
             holder.situation.setTextColor(Color.GRAY);
-        else if(supervision.getSituation()==2)
-            holder.situation.setTextColor(Color.MAGENTA);
+        /*else if(supervision.getSituation()==2)
+            holder.situation.setTextColor(Color.MAGENTA);*/
         //需要把position传给holder
         holder.itemView.setTag(position);
     }

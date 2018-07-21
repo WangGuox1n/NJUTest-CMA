@@ -20,7 +20,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="项目名称："
-                android:textSize="18sp"
+                android:textSize="20sp"
+                android:textColor="#000"
                 />
 
             <TextView
@@ -28,8 +29,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_name"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:maxEms="8"
+                android:ellipsize="end"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -45,14 +50,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="申请部门："
-                android:textSize="18sp" />
+                android:textSize="20sp"
+                android:textColor="#000"
+                />
 
             <TextView
                 android:id="@+id/item_department"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:maxEms="8"
+                android:ellipsize="end"
+                />
         </LinearLayout>
 
         <TextView
@@ -60,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:text="状态"
             android:textSize="22sp"

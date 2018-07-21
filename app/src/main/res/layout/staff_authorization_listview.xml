@@ -5,55 +5,80 @@
     <RelativeLayout
         android:id="@+id/list_item"
         android:layout_width="match_parent"
-        android:layout_height="70dp">
+        android:layout_height="90dp">
 
         <LinearLayout
-            android:id="@+id/top"
+            android:id="@+id/author_layout"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="授权人:    "
+                android:textSize="18sp"
+                />
+
             <TextView
                 android:id="@+id/item_authorizerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="授权人"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/date_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/author_layout"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 授予 "
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:text="被授权人:"
+                android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:text="被授权人"
+                android:textSize="18sp"
                 android:textStyle="bold"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/item"
+        <LinearLayout
+            android:id="@+id/layout3"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_below="@+id/top"
-            android:layout_marginLeft="25dp"
-            android:textSize="15sp"
-            android:text="授权内容:"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/date_layout"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/item_content"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_below="@+id/top"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textSize="15sp"
-            android:layout_toRightOf="@+id/item"
-            android:text="授权内容.."/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="授权内容："
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/item_content"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="15sp"
+                android:layout_toRightOf="@+id/item"
+                android:text="授权内容.."/>
+
+        </LinearLayout>
+
     </RelativeLayout>
 </LinearLayout>

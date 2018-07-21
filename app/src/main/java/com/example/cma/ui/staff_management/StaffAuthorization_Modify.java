@@ -2,10 +2,10 @@ package com.example.cma.ui.staff_management;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -39,7 +39,6 @@ import java.util.Locale;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -54,8 +53,8 @@ public class StaffAuthorization_Modify extends AppCompatActivity  implements Ada
     EditText position;
     EditText name2;
     Button saveButton;
-    int pos1;
-    int pos2;
+  //  int pos1;
+    //int pos2;
     long id1;
     long id2;
     StaffAuthorization staffAuthorization;
@@ -204,7 +203,7 @@ public class StaffAuthorization_Modify extends AppCompatActivity  implements Ada
                 list.clear();
                 list=gson.fromJson(array,new TypeToken<List<StaffManagement>>(){}.getType());
 
-                int i=-1;
+              /*  int i=-1;
                 for(StaffManagement t:list){
                     i++;
                     if(t.getId()==staffAuthorization.getId())
@@ -219,12 +218,7 @@ public class StaffAuthorization_Modify extends AppCompatActivity  implements Ada
                         Log.d("chuandi authorizerId:",Long.toString(staffAuthorization.getAuthorizerId()));
                         pos2=i;
                     }
-                }
-                //Log.d("chuandi id:",Long.toString(staffAuthorization.getId()));
-                //Log.d("chuandi authorizerId:",Long.toString(staffAuthorization.getAuthorizerId()));
-
-                Log.d("pos1;",Integer.toString(pos1));
-                Log.d("pos2:",Integer.toString(pos2));
+                }*/
 
                 setSpinner1();
                 setSpinner2();
@@ -242,13 +236,15 @@ public class StaffAuthorization_Modify extends AppCompatActivity  implements Ada
             @Override
             public void run() {
                 stringList.clear();
+                int i=1;
                 for(StaffManagement temp:list){
-                    stringList.add("ID:"+temp.getId()+" "+temp.getName());
+                    stringList.add(i+" "+temp.getName());
+                    i++;
                 }
                 adapter1=new ArrayAdapter(StaffAuthorization_Modify.this,android.R.layout.simple_list_item_1,stringList);
                 adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner1.setAdapter(adapter1);
-                spinner1.setSelection(pos1,true);
+               // spinner1.setSelection(pos1,true);
                 spinner1.setOnItemSelectedListener(StaffAuthorization_Modify.this);
             }
         });
@@ -259,13 +255,15 @@ public class StaffAuthorization_Modify extends AppCompatActivity  implements Ada
             @Override
             public void run() {
                 stringList.clear();
+                int i=1;
                 for(StaffManagement temp:list){
-                    stringList.add("ID:"+temp.getId()+" "+temp.getName());
+                    stringList.add(i+" "+temp.getName());
+                    i++;
                 }
                 adapter2=new ArrayAdapter(StaffAuthorization_Modify.this,android.R.layout.simple_list_item_1,stringList);
                 adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner2.setAdapter(adapter2);
-                spinner2.setSelection(pos2,true);
+                //spinner2.setSelection(pos2,true);
                 spinner2.setOnItemSelectedListener(StaffAuthorization_Modify.this);
             }
         });
@@ -276,33 +274,21 @@ public class StaffAuthorization_Modify extends AppCompatActivity  implements Ada
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         switch (parent.getId()){
             case R.id.spinner1:
-                String string = (String) adapter1.getItem(pos);
-                String[] array=string.split(":");
-                String[] array2=array[1].split(" ");
-                long staffId=Long.parseLong(array2[0]);
-                for(StaffManagement temp:list){
-                    if(temp.getId()==staffId){
-                        id1=staffId;
-                        name.setText(temp.getName());
-                        department.setText(temp.getDepartment());
-                        position.setText(temp.getPosition());
-                        break;
-                    }
-                }
+                String q=(String)adapter1.getItem(pos);
+                String []qq=q.split(" ");
+                int qqq=Integer.valueOf(qq[0]);
+                name.setText(list.get(qqq-1).getName());
+                department.setText(list.get(qqq-1).getDepartment());
+                position.setText(list.get(qqq-1).getPosition());
+                id1=list.get(qqq-1).getId();
                 break;
             case R.id.spinner2:
                 String str = (String) adapter2.getItem(pos);
-                String[] ar=str.split(":");
-                String[] ar2=ar[1].split(" ");
-                long staffId2=Long.parseLong(ar2[0]);
-                for(StaffManagement temp:list){
-                    if(temp.getId()==staffId2){
-                        id2=staffId2;
-                        EditText editText= (EditText) findViewById(R.id.edit_text5_1);
-                        editText.setText(temp.getName());
-                        break;
-                    }
-                }
+                String []ar=str.split(" ");
+                int aaa=Integer.valueOf(ar[0]);
+                EditText editText= (EditText) findViewById(R.id.edit_text5_1);
+                editText.setText(list.get(aaa-1).getName());
+                id2=list.get(aaa-1).getId();
                 break;
         }
 

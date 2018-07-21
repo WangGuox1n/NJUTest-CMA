@@ -1,9 +1,6 @@
 package com.example.cma.model.supervision;
 
-import com.example.cma.utils.ToastUtil;
-
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by 王国新 on 2018/6/9.

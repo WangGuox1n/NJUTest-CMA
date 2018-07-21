@@ -19,20 +19,22 @@
         <Button
             android:id="@+id/edit_button"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_button"
+            android:layout_width="@dimen/edit_button_width"
+            android:layout_height="@dimen/edit_button_height"
+            android:layout_marginRight="@dimen/edit_button_marginRight"
+            android:layout_marginEnd="@dimen/edit_button_marginRight"
             android:text="编辑"
-            android:layout_gravity="right"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/edit_button_textSize"/>
     </android.support.v7.widget.Toolbar>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="false"
-        android:orientation="vertical"
-        >
+        android:fillViewport="true"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,29 +42,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/line" />
-            <!--android:layerType="software"-->
 
             <LinearLayout
-                android:id="@+id/layout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/line1"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
-                    android:id="@+id/text_view1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="状态"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/situation_text"
@@ -70,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -81,22 +77,18 @@
                 android:background="@drawable/line" />
 
             <LinearLayout
-                android:id="@+id/layout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/line2"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
-                    android:id="@+id/text_view2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="编制人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/author_text"
@@ -104,35 +96,30 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
             </LinearLayout>
 
 
             <TextView
-                android:id="@+id/line3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout2"
                 android:background="@drawable/line" />
 
             <LinearLayout
                 android:id="@+id/layout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/line3"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
-                    android:id="@+id/text_view3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="编制日期"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/createDate_text"
@@ -140,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <!--已批准状态下 才显示 -->
@@ -158,18 +145,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_marginLeft="20dp"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="20dp">
 
                     <TextView
-                        android:id="@+id/text_view4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="批准人"
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/tv_text_size" />
 
                     <TextView
                         android:id="@+id/approver_text"
@@ -177,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/et_text_size" />
                 </LinearLayout>
 
                 <TextView
@@ -188,18 +173,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_marginLeft="20dp"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="20dp">
 
                     <TextView
-                        android:id="@+id/text_view5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="批准日期"
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/tv_text_size" />
 
                     <TextView
                         android:id="@+id/approveDate_text"
@@ -207,42 +190,36 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/et_text_size" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/line6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/layout5"
                     android:background="@drawable/line" />
 
                 <LinearLayout
-                    android:id="@+id/layout6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/line5"
                     android:layout_marginLeft="20dp"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="20dp">
 
                     <TextView
-                        android:id="@+id/text_view6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="监督计划"
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/tv_text_size" />
 
                     <TextView
                         android:id="@+id/plan_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="20sp"
+                        android:text="点击查看监督计划"
                         android:textColor="@color/blue"
-                        android:text="点击查看监督计划" />
+                        android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -255,19 +232,17 @@
                 android:id="@+id/layout7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/line5"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/text_view7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="备注:"
+                    android:text="备注"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/remark_text"
@@ -275,7 +250,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:lines="5"
-                    android:textColor="#0000ff"
+                    android:textColor="@color/black"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -289,37 +264,38 @@
                 android:id="@+id/approve_button_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="20dp">
 
                 <Button
                     android:id="@+id/approve_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/selector_btm"
                     android:layout_marginBottom="18.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
+                    android:background="@drawable/selector_btm"
                     android:text="批准此监督"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:layout_height="0dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/delete_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:layout_marginBottom="18.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
-                    android:text="删除此监督记录"
-                    android:textSize="24sp" />
+                    android:text="删除此记录"
+                    android:textSize="@dimen/bottom_btn_textSize" />
             </LinearLayout>
         </LinearLayout>
 

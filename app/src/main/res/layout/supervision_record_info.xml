@@ -18,11 +18,14 @@
         <Button
             android:id="@+id/edit_button"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_button"
+            android:layout_width="@dimen/edit_button_width"
+            android:layout_height="@dimen/edit_button_height"
+            android:layout_marginRight="@dimen/edit_button_marginRight"
+            android:layout_marginEnd="@dimen/edit_button_marginRight"
             android:text="编辑"
-            android:layout_gravity="right"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/edit_button_textSize"/>
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
@@ -31,12 +34,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -47,9 +49,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view1"
@@ -58,7 +59,7 @@
                     android:layout_weight="1"
                     android:text="部门"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/department_text"
@@ -66,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
             </LinearLayout>
 
@@ -78,9 +79,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view2"
@@ -89,7 +89,7 @@
                     android:layout_weight="1"
                     android:text="监督员"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/supervisor_text"
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
             </LinearLayout>
 
@@ -109,9 +109,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view3"
@@ -120,7 +119,7 @@
                     android:layout_weight="1"
                     android:text="监督时间"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/superviseDate_text"
@@ -128,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -139,9 +138,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view4"
@@ -150,7 +148,7 @@
                     android:layout_weight="1"
                     android:text="被监督人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/supervisedPerson_text"
@@ -158,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -169,8 +167,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -180,7 +178,7 @@
                     android:layout_weight="1"
                     android:text="监督内容记录："
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/record_text"
@@ -189,7 +187,7 @@
                     android:textColor="@color/black"
                     android:layout_weight="1"
                     android:lines="4"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -200,8 +198,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -211,7 +209,7 @@
                     android:layout_weight="1"
                     android:text="结论："
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/conclusion_text"
@@ -220,7 +218,7 @@
                     android:textColor="@color/black"
                     android:layout_weight="1"
                     android:lines="3"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -231,9 +229,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view7"
@@ -242,7 +239,7 @@
                     android:layout_weight="1"
                     android:text="操作人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/operator_text"
@@ -250,7 +247,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -261,9 +258,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view8"
@@ -272,7 +268,7 @@
                     android:layout_weight="1"
                     android:text="记录时间"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/recordDate_text"
@@ -280,7 +276,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -290,22 +286,22 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16.0dip"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/delete_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:text="删除此监督记录"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize"
+                    android:text="删除此监督记录" />
             </LinearLayout>
 
         </LinearLayout>

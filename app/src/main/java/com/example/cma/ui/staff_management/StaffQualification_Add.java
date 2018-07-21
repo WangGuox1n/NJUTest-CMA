@@ -4,10 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.cma.R;
 import com.example.cma.model.staff_management.StaffManagement;
-import com.example.cma.model.staff_management.StaffQualification;
 import com.example.cma.utils.HttpUtil;
 import com.example.cma.utils.PhotoUtil;
 import com.example.cma.utils.ToastUtil;
@@ -147,7 +146,7 @@ public class StaffQualification_Add extends AppCompatActivity implements View.On
         Log.d("data_list",""+i+staff_list.size());
     }
 
-    //向后端发送请求，返回所有没有档案的人员
+
     public void getDataFromServer(){
         new Thread(new Runnable() {
             @Override
@@ -348,6 +347,12 @@ public class StaffQualification_Add extends AppCompatActivity implements View.On
                         postDataToServer();
                     }
                 }).start();
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(StaffQualification_Add.this, "你仍旧可以修改！", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();

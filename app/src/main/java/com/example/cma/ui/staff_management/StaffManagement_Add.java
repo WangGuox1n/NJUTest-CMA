@@ -1,10 +1,10 @@
 package com.example.cma.ui.staff_management;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,10 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import org.feezu.liuli.timeselector.TimeSelector;
 
 import com.example.cma.R;
-import com.google.gson.Gson;
+
+import org.feezu.liuli.timeselector.TimeSelector;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

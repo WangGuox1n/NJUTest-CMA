@@ -2,32 +2,24 @@ package com.example.cma.ui.training_management;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cma.R;
-import com.example.cma.model.staff_management.StaffManagement;
 import com.example.cma.model.training_management.TrainingApplication;
-import com.example.cma.ui.staff_management.StaffManagement_Modify;
-import com.example.cma.ui.supervision.Supervision_Info;
-import com.example.cma.utils.AddressUtil;
-import com.example.cma.utils.HttpUtil;
-import com.example.cma.utils.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -45,10 +37,11 @@ public class TrainingApplication_Info extends AppCompatActivity {
     TrainingApplication trainingApplication;
     TrainingApplication trainingApplicationtemp;
     Byte situtemp;
-    //Button button;
-    //Button button4;
-    //Button button2;
-    //Button button3;
+    Byte situ;
+    // private Button button;
+    private Button button4;
+    private Button button2;
+    private Button button3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +50,12 @@ public class TrainingApplication_Info extends AppCompatActivity {
         trainingApplicationtemp=(TrainingApplication) intent.getSerializableExtra("ta");
         init(trainingApplicationtemp.getId());
         situtemp=trainingApplicationtemp.getSituation();
+
+
         ScrollView scrollView=(ScrollView)findViewById(R.id.scrollView);
 
         //在Activity代码中使用Toolbar对象替换ActionBar
-        toolbar = (Toolbar) findViewById(R.id.mToolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //设置Toolbar左边显示一个返回按钮
@@ -70,13 +65,12 @@ public class TrainingApplication_Info extends AppCompatActivity {
         }
 
 
-
         Button button=(Button)findViewById(R.id.delete_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dialog=new AlertDialog.Builder(TrainingApplication_Info.this);
-                dialog.setTitle("确定删除此人的档案吗？");
+                dialog.setTitle("确定删除此培训申请吗？");
                 dialog.setCancelable(false);
                 dialog.setPositiveButton("取消", new DialogInterface.OnClickListener() {
                     @Override
@@ -103,7 +97,7 @@ public class TrainingApplication_Info extends AppCompatActivity {
 
 
         //对 编辑 按钮监听
-        Button button2=(Button)findViewById(R.id.edit_button);
+        button2=(Button)findViewById(R.id.edit_button);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +107,7 @@ public class TrainingApplication_Info extends AppCompatActivity {
             }
         });
 
-        Button button3=(Button)findViewById(R.id.approve_button);
+        button3=(Button)findViewById(R.id.approve_button);
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +117,7 @@ public class TrainingApplication_Info extends AppCompatActivity {
             }
         });
 
-        Button button4=(Button)findViewById(R.id.disapprove_button);
+        button4=(Button)findViewById(R.id.disapprove_button);
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,9 +129,11 @@ public class TrainingApplication_Info extends AppCompatActivity {
 
         if(situtemp==2){
             //button.setEnabled(false);
-            button2.setEnabled(false);
-            button3.setEnabled(false);
-            button4.setEnabled(false);
+            button2.setVisibility(View.GONE);
+            button3.setVisibility(View.GONE);
+            button4.setVisibility(View.GONE);
+            //button3.setEnabled(false);
+            //button4.setEnabled(false);
         }
     }
 
@@ -171,6 +167,15 @@ public class TrainingApplication_Info extends AppCompatActivity {
 
         TextView textView10=(TextView) findViewById(R.id.text_view10_1);
         textView10.setText(trainingApplication.getApproveDate());
+
+        Log.d("back situ",situ+"");
+        if(situ==2){
+
+            //button.setEnabled(false);
+            button2.setVisibility(View.GONE);
+            button3.setVisibility(View.GONE);
+            button4.setVisibility(View.GONE);
+        }
     }
 
     private void postDelete(long id){
@@ -255,6 +260,7 @@ public class TrainingApplication_Info extends AppCompatActivity {
             {
                 Gson gson=new Gson();
                 trainingApplication=gson.fromJson(array,new TypeToken<TrainingApplication>(){}.getType());
+                situ=trainingApplication.getSituation();
                 Log.d("ta_name:",trainingApplication.getName());
             }
 
@@ -268,6 +274,17 @@ public class TrainingApplication_Info extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         init(trainingApplicationtemp.getId());
+    }
+
+    //监听返回按钮的点击事件，比如可以返回上级Activity
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

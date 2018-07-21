@@ -178,12 +178,6 @@ public class AnnualPlan_Main extends AppCompatActivity {
         Log.d("点击获取的","init");
         sendRequestWithOkHttp();
 
-     /*   AnnualPlan d1=new AnnualPlan(1,"java培训","2015-01-01","仙林","张天","第一课", "无");
-        dangAns.add(d1);
-        AnnualPlan d2=new AnnualPlan(2,"python培训","2017-01-01","鼓楼","唐杰","第一课", "无");
-        dangAns.add(d2);
-        */
-
     }
 
     private void initView(){
@@ -206,6 +200,7 @@ public class AnnualPlan_Main extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        Log.d("更新！！！！！！","!!!!!!!1");
         initDangan();
     }
 }

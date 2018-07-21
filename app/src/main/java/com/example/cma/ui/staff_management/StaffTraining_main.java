@@ -100,7 +100,7 @@ public class StaffTraining_main extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent=new Intent(StaffTraining_main.this,StaffTraining_modify.class);
+                Intent intent=new Intent(StaffTraining_main.this,StaffTraining_See.class);
                 StaffTraining d=(StaffTraining) listView.getItemAtPosition(i);
                 intent.putExtra("chuandi",d);
                 startActivity(intent);

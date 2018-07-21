@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.cma.ui.sample_management.SampleReceive_Add">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/mToolbar4"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="新增样品接收单"
+        android:theme="@style/AppTheme"/>
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="false"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mToolbar4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line" />
+            <LinearLayout
+                android:id="@+id/top1"
+                android:orientation="horizontal"
+                android:layout_below="@id/line1"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="申报单位"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_text1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="请输入申报单位"
+                    android:background="@null"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line2"
+                android:layout_below="@+id/top1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+
+            <LinearLayout
+                android:id="@+id/top2"
+                android:orientation="horizontal"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="样品名称"
+                    />
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/line3"
+                android:layout_below="@+id/top2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+
+
+            <LinearLayout
+                android:id="@+id/top3"
+                android:orientation="horizontal"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="版本号"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_text3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入版本号"
+                    android:inputType="number"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/line4"
+                android:layout_below="@+id/top3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+
+            <LinearLayout
+                android:id="@+id/top4"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line4"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="合同编号"
+                    />
+                <EditText
+                    android:id="@+id/edit_text4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入合同编号"
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line5"
+                android:layout_below="@+id/top4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+
+            <LinearLayout
+                android:id="@+id/top5"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line5"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="测试类型"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/testtype_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state0_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="登记检测" />
+                    <RadioButton
+                        android:id="@+id/state0_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="确认检测"/>
+                    <RadioButton
+                        android:id="@+id/state0_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="验收检测" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line6"
+                android:layout_below="@+id/top5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top6"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line6"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="电子媒介"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_text6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入电子媒介"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line7"
+                android:layout_below="@+id/top6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top7"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line7"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="用户手册"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/readme_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state1_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="没有该材料" />
+                    <RadioButton
+                        android:id="@+id/state1_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有电子文档"/>
+                    <RadioButton
+                        android:id="@+id/state1_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有书面文档" />
+                    <RadioButton
+                        android:id="@+id/state1_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="两种文档都有" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line8"
+                android:layout_below="@+id/top7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top8"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line8"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="计算机软件产品等级检测申请表"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/application_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state2_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="没有该材料" />
+                    <RadioButton
+                        android:id="@+id/state2_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有电子文档"/>
+                    <RadioButton
+                        android:id="@+id/state2_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有书面文档" />
+                    <RadioButton
+                        android:id="@+id/state2_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="两种文档都有" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line9"
+                android:layout_below="@+id/top8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top9"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line9"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="材料接收单"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/materialreceipt_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state3_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="没有该材料" />
+                    <RadioButton
+                        android:id="@+id/state3_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有电子文档"/>
+                    <RadioButton
+                        android:id="@+id/state3_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有书面文档" />
+                    <RadioButton
+                        android:id="@+id/state3_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="两种文档都有" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line10"
+                android:layout_below="@+id/top9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top10"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line10"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="软件产品功能列表"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/function_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state4_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="没有该材料" />
+                    <RadioButton
+                        android:id="@+id/state4_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有电子文档"/>
+                    <RadioButton
+                        android:id="@+id/state4_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有书面文档" />
+                    <RadioButton
+                        android:id="@+id/state4_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="两种文档都有" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line11"
+                android:layout_below="@+id/top10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top11"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line11"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="软件名称与版本号确认单"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/confirmats_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state5_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="没有该材料" />
+                    <RadioButton
+                        android:id="@+id/state5_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有电子文档"/>
+                    <RadioButton
+                        android:id="@+id/state5_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有书面文档" />
+                    <RadioButton
+                        android:id="@+id/state5_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="两种文档都有" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line12"
+                android:layout_below="@+id/top11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top12"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line12"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="受测软件产品简介"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/introduction_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state6_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="没有该材料" />
+                    <RadioButton
+                        android:id="@+id/state6_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有电子文档"/>
+                    <RadioButton
+                        android:id="@+id/state6_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有书面文档" />
+                    <RadioButton
+                        android:id="@+id/state6_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="两种文档都有" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line13"
+                android:layout_below="@+id/top12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top13"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line12"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="自主产权保证书"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/guarantee_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state7_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="没有该材料" />
+                    <RadioButton
+                        android:id="@+id/state7_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有电子文档"/>
+                    <RadioButton
+                        android:id="@+id/state7_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="只有书面文档" />
+                    <RadioButton
+                        android:id="@+id/state7_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="两种文档都有" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/line14"
+                android:layout_below="@+id/top13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top14"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line13"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="软件样品一套"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/software_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state8_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="无" />
+                    <RadioButton
+                        android:id="@+id/state8_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="有电子档"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line15"
+                android:layout_below="@+id/top14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top15"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line15"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="其他材料（选填）"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_text15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入其他材料"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line16"
+                android:layout_below="@+id/top15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top16"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line16"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="软件类型"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/softwaretype_rg"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/state9_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="系统软件" />
+                    <RadioButton
+                        android:id="@+id/state9_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="支持软件"/>
+                    <RadioButton
+                        android:id="@+id/state9_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="应用软件" />
+                    <RadioButton
+                        android:id="@+id/state9_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="其他软件" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line17"
+                android:layout_below="@+id/top16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top17"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line17"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view17"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="接收单位"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_text17"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入接收单位"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line18"
+                android:layout_below="@+id/top17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top18"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line18"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="接收时间"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_text18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入接收时间"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line19"
+                android:layout_below="@+id/top18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top19"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line18"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view19"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="报送人"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_text19"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入报送人"
+
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/line20"
+                android:layout_below="@+id/top19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:id="@+id/top20"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line20"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/text_view20"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:text="受理人"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_text20"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入受理人"
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/line21"
+                android:layout_below="@+id/top20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_below="@+id/line21"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/submit_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="提交"
+                    android:background="@drawable/button"
+                    android:textSize="24sp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

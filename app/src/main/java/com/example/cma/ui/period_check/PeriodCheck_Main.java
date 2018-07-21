@@ -1,15 +1,15 @@
 package com.example.cma.ui.period_check;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListAdapter;
@@ -121,7 +121,8 @@ public class PeriodCheck_Main extends AppCompatActivity {
             }
         });
         //添加按钮
-        Button button = (Button) findViewById(R.id.add_button);
+
+        FloatingActionButton button=(FloatingActionButton)findViewById(R.id.add_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

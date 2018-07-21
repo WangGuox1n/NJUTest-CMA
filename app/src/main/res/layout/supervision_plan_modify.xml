@@ -27,7 +27,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -38,7 +38,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
                 android:orientation="vertical">
 
@@ -47,8 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="监督内容："
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/content_text"
@@ -57,8 +57,8 @@
                     android:lines="8"
                     android:background="@null"
                     android:cursorVisible="false"
-                    android:gravity="top|left"
-                    android:textSize="20sp" />
+                    android:gravity="top|start"
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -69,18 +69,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
-                    android:id="@+id/text_view2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="监督对象"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/object_text"
@@ -89,7 +87,7 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:cursorVisible="false"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
             </LinearLayout>
 
@@ -101,18 +99,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
-                    android:id="@+id/text_view3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="监督时间/频率"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/dateFrequency_text"
@@ -121,7 +117,7 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:cursorVisible="false"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
 
@@ -132,22 +128,21 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16.0dip"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:text="提交"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize"
+                    android:text="保存" />
             </LinearLayout>
         </LinearLayout>
 

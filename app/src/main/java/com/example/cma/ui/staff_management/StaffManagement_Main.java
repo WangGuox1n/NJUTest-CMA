@@ -1,15 +1,15 @@
 package com.example.cma.ui.staff_management;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListAdapter;
@@ -21,11 +21,7 @@ import com.example.cma.adapter.staff_management.StaffManagementAdapter;
 import com.example.cma.model.staff_management.StaffManagement;
 import com.example.cma.utils.ReceiveData;
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +110,7 @@ public class StaffManagement_Main extends AppCompatActivity {
             }
         });
         //添加按钮
-        Button button = (Button) findViewById(R.id.add_button);
+        FloatingActionButton button=(FloatingActionButton)findViewById(R.id.add_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

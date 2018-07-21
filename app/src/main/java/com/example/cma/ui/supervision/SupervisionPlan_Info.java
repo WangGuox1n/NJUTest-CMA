@@ -3,17 +3,15 @@ package com.example.cma.ui.supervision;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cma.R;
 import com.example.cma.model.supervision.Supervision;
@@ -22,6 +20,7 @@ import com.example.cma.model.supervision.SupervisionRecord;
 import com.example.cma.utils.AddressUtil;
 import com.example.cma.utils.HttpUtil;
 import com.example.cma.utils.ToastUtil;
+import com.example.cma.utils.ViewUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,7 +36,8 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class SupervisionPlan_Info extends AppCompatActivity implements View.OnClickListener{
+public class SupervisionPlan_Info extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "SupervisionPlan_Info";
 
     private Supervision supervision;
     private SupervisionPlan supervisionPlan;
@@ -46,17 +46,15 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
     private TextView object_text;
     private TextView dateFrequency_text;
     private TextView record_button;
-    private Button deleteButton;
-    private Button editButton;
-    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.supervision_plan_info);
-        initView();
         Intent intent = getIntent();
-        supervision = (Supervision)intent.getSerializableExtra("Supervision");
-        supervisionPlan = (SupervisionPlan)intent.getSerializableExtra("SupervisionPlan");
+        supervision = (Supervision) intent.getSerializableExtra("Supervision");
+        supervisionPlan = (SupervisionPlan) intent.getSerializableExtra("SupervisionPlan");
+        initView();
     }
 
     @Override
@@ -67,29 +65,29 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
         getSupervisionPlan();
     }
 
-    public void initView(){
-        content_text = (TextView)findViewById(R.id.content_text);
-        object_text = (TextView)findViewById(R.id.object_text);
-        dateFrequency_text = (TextView)findViewById(R.id.dateFrequency_text);
-        record_button = (TextView)findViewById(R.id.record_text);
+    public void initView() {
+        content_text = findViewById(R.id.content_text);
+        object_text = findViewById(R.id.object_text);
+        dateFrequency_text = findViewById(R.id.dateFrequency_text);
+        record_button = findViewById(R.id.record_text);
         record_button.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-        editButton = (Button)findViewById(R.id.edit_button);
-        deleteButton = (Button)findViewById(R.id.delete_button);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //设置Toolbar左边显示一个返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
         record_button.setOnClickListener(this);
-        editButton.setOnClickListener(this);
-        deleteButton.setOnClickListener(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        Button edit_Button = findViewById(R.id.edit_button);
+        Button delete_Button = findViewById(R.id.delete_button);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
+
+        edit_Button.setOnClickListener(this);
+        delete_Button.setOnClickListener(this);
+        if (supervision.getSituation() == 2) {
+            edit_Button.setEnabled(false);
+            delete_Button.setEnabled(false);
+        }
     }
 
-    public void setText(){
-        if(supervisionPlan == null){
-            ToastUtil.showShort(SupervisionPlan_Info.this,"数据传送失败！");
+    public void setText() {
+        if (supervisionPlan == null) {
+            ToastUtil.showShort(SupervisionPlan_Info.this, "数据传送失败");
             return;
         }
         runOnUiThread(new Runnable() {
@@ -104,10 +102,10 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.edit_button: {
-                if(supervision.getSituation()==2){
-                    ToastUtil.showShort(SupervisionPlan_Info.this,"此监督已执行完毕，无法编辑");
+                if (supervision.getSituation() == 2) {
+                    ToastUtil.showShort(SupervisionPlan_Info.this, "此监督已执行完毕，无法编辑");
                     return;
                 }
                 Intent intent = new Intent(SupervisionPlan_Info.this, SupervisionPlan_Modify.class);
@@ -116,34 +114,35 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
             }
             break;
             case R.id.delete_button:  //点击删除，弹出弹窗
-                if(supervision.getSituation()==2){
-                    ToastUtil.showShort(SupervisionPlan_Info.this,"此监督已执行完毕，无法删除");
+                if (supervision.getSituation() == 2) {
+                    ToastUtil.showShort(SupervisionPlan_Info.this, "此监督已执行完毕，无法删除");
                     return;
                 }
-                onDeleteComfirm();
+                onDeleteConfirm();
                 break;
             case R.id.record_text: {
-                if(supervisionRecord == null){  //执行记录为空，跳转到添加页面
-                    if(supervision.getSituation()==2){
-                        ToastUtil.showShort(SupervisionPlan_Info.this,"此监督已执行完毕，无法添加监督记录");
+                if (supervisionRecord == null) {  //执行记录为空，跳转到添加页面
+                    if (supervision.getSituation() == 2) {
+                        ToastUtil.showShort(SupervisionPlan_Info.this, "此监督已执行完毕，无法添加监督记录");
                         return;
                     }
                     Intent intent = new Intent(SupervisionPlan_Info.this, SupervisionRecord_Add.class);
                     intent.putExtra("SupervisionPlan", supervisionPlan);
                     startActivity(intent);
-                }
-                else{ //执行记录不为空，跳转到信息查看页面
+                } else { //执行记录不为空，跳转到信息查看页面
                     Intent intent = new Intent(SupervisionPlan_Info.this, SupervisionRecord_Info.class);
+                    intent.putExtra("Supervision", supervision);
                     intent.putExtra("SupervisionRecord", supervisionRecord);
                     startActivity(intent);
                 }
             }
-            default:break;
+            default:
+                break;
         }
     }
 
     //是否确认删除的对话框
-    public void onDeleteComfirm(){
+    public void onDeleteConfirm() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(SupervisionPlan_Info.this);
         dialog.setMessage("确定删除？");
         dialog.setCancelable(false);
@@ -162,32 +161,32 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
         dialog.show();
     }
 
-    public void onDelete(){
-        String address = AddressUtil.SupervisionPlan_deleteOne();
-        Log.d("SupervisionPlan Delete",address);
-        RequestBody requestBody=new FormBody.Builder().add("planId",""+supervisionPlan.getPlanId()).build();
-        HttpUtil.sendOkHttpWithRequestBody(address,requestBody,new okhttp3.Callback(){
+    public void onDelete() {
+        String address = AddressUtil.getAddress(AddressUtil.SupervisionPlan_deleteOne);
+        RequestBody requestBody = new FormBody.Builder().add("planId", "" + supervisionPlan.getPlanId()).build();
+        HttpUtil.sendOkHttpWithRequestBody(address, requestBody, new okhttp3.Callback() {
             @Override
-            public void onResponse(Call call, Response response)throws IOException {
+            public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-                Log.d("SupervisionPlan Delete",responseData);
+                Log.d(TAG, responseData);
                 int code = 0;
                 String msg = "";
                 try {
                     JSONObject object = new JSONObject(responseData);
                     code = object.getInt("code");
                     msg = object.getString("msg");
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if(code == 200 && msg.equals("成功")) {
-                    ToastUtil.showShort(SupervisionPlan_Info.this,"删除成功！");
+                if (code == 200 && msg.equals("成功")) {
+                    ToastUtil.showShort(SupervisionPlan_Info.this, "删除成功");
                     finish();
                 }
             }
+
             @Override
-            public void onFailure(Call call,IOException e){
-                ToastUtil.showShort(SupervisionPlan_Info.this,"删除失败！");
+            public void onFailure(Call call, IOException e) {
+                ToastUtil.showShort(SupervisionPlan_Info.this, "删除失败");
             }
         });
     }
@@ -204,40 +203,42 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
     }
 
     //向后端发送请求，返回所有人员记录
-    public void getSupervisionPlan(){
+    public void getSupervisionPlan() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address = AddressUtil.SupervisionPlan_getAll(supervisionPlan.getId());
-                HttpUtil.sendOkHttpRequest(address,new okhttp3.Callback(){
+                String address = AddressUtil.getAddress(AddressUtil.SupervisionPlan_getAll) + supervisionPlan.getId();
+                HttpUtil.sendOkHttpRequest(address, new okhttp3.Callback() {
                     @Override
-                    public void onResponse(Call call, Response response)throws IOException {
+                    public void onResponse(Call call, Response response) throws IOException {
                         String responseData = response.body().string();
-                        Log.d("getSupervisionPlan",responseData);
+                        Log.d(TAG, responseData);
                         JSONArray array = new JSONArray();
                         try {
                             JSONObject object = new JSONObject(responseData);//最外层的JSONObject对象
                             array = object.getJSONArray("data");
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        if(array.equals("null")){
-                            ToastUtil.showLong(SupervisionPlan_Info.this, "监督计划为空！");
+                        if (array.length() == 0) {
+                            ToastUtil.showLong(SupervisionPlan_Info.this, "监督计划为空");
                         }
                         Gson gson = new Gson();
-                        List<SupervisionPlan> list = gson.fromJson(array.toString(),new TypeToken<List<SupervisionPlan>>(){}.getType());
-                        for(SupervisionPlan newSupervisionPlan:list){
-                            Log.d("getSupervisionPlan",supervisionPlan.getPlanId() + " "+newSupervisionPlan.getPlanId());
-                            if(supervisionPlan.getPlanId().equals(newSupervisionPlan.getPlanId())){
+                        List<SupervisionPlan> list = gson.fromJson(array.toString(), new TypeToken<List<SupervisionPlan>>() {
+                        }.getType());
+                        for (SupervisionPlan newSupervisionPlan : list) {
+                            Log.d("getSupervisionPlan", supervisionPlan.getPlanId() + " " + newSupervisionPlan.getPlanId());
+                            if (supervisionPlan.getPlanId().equals(newSupervisionPlan.getPlanId())) {
                                 supervisionPlan = newSupervisionPlan;
-                                Log.d("getSupervisionPlan",supervisionPlan.getContent());
+                                Log.d("getSupervisionPlan", supervisionPlan.getContent());
                                 setText();     //在重新获取数据后，再写到页面上
                                 break;
                             }
                         }
                     }
+
                     @Override
-                    public void onFailure(Call call,IOException e){
+                    public void onFailure(Call call, IOException e) {
                         ToastUtil.showShort(SupervisionPlan_Info.this, "请求数据失败！");
                     }
                 });
@@ -246,37 +247,38 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
     }
 
     //从服务器获取计划执行记录
-    public void getSupervisionRecord(){
+    public void getSupervisionRecord() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address = AddressUtil.SupervisionRecord_getAll(supervisionPlan.getPlanId());
-                HttpUtil.sendOkHttpRequest(address,new okhttp3.Callback(){
+                String address = AddressUtil.getAddress(AddressUtil.SupervisionRecord_getAll) + supervisionPlan.getPlanId();
+                HttpUtil.sendOkHttpRequest(address, new okhttp3.Callback() {
                     @Override
-                    public void onResponse(Call call, Response response)throws IOException {
+                    public void onResponse(Call call, Response response) throws IOException {
                         String responseData = response.body().string();
-                        Log.d("getSupervisionRecord",responseData);
+                        Log.d(TAG, responseData);
                         parseJSONWithGSON(responseData);
                     }
+
                     @Override
-                    public void onFailure(Call call,IOException e){
-                        ToastUtil.showShort(SupervisionPlan_Info.this,"请求数据失败！");
+                    public void onFailure(Call call, IOException e) {
+                        ToastUtil.showShort(SupervisionPlan_Info.this, "请求数据失败！");
                     }
                 });
             }
         }).start();
     }
 
-    private void parseJSONWithGSON(String jsonData){
+    private void parseJSONWithGSON(String jsonData) {
         String record = "";
         try {
             JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
             record = object.getString("data");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             supervisionRecord = null;
         }
-        if(record.equals("[]")){
+        if (record.equals("[]")) {
             supervisionRecord = null;
             runOnUiThread(new Runnable() {
                 @Override
@@ -284,10 +286,11 @@ public class SupervisionPlan_Info extends AppCompatActivity implements View.OnCl
                     record_button.setText("点击添加执行记录");
                 }
             });
-        }else{
-            List<SupervisionRecord> list = new Gson().fromJson(record.toString(),new TypeToken<List<SupervisionRecord>>(){}.getType());
-            if(list.size()>1){
-                ToastUtil.showShort(SupervisionPlan_Info.this,"记录条数大于2");
+        } else {
+            List<SupervisionRecord> list = new Gson().fromJson(record, new TypeToken<List<SupervisionRecord>>() {
+            }.getType());
+            if (list.size() > 1) {
+                ToastUtil.showShort(SupervisionPlan_Info.this, "记录条数大于2");
             }
             supervisionRecord = list.get(0);
             runOnUiThread(new Runnable() {

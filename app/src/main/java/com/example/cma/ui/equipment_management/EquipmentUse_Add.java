@@ -1,21 +1,16 @@
 package com.example.cma.ui.equipment_management;
 
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -41,11 +36,11 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class EquipmentUse_Add extends AppCompatActivity implements View.OnClickListener,Spinner.OnItemSelectedListener{
-
+public class EquipmentUse_Add extends AppCompatActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
+    private static final String TAG = "EquipmentUse_Add";
     //data
-    private List<Equipment> equipmentList= new ArrayList<>();;
-    private List<String> spinnerData = new ArrayList<String>();
+    private List<Equipment> equipmentList = new ArrayList<>();
+    private List<String> spinnerData = new ArrayList<>();
     private ArrayAdapter<String> spinnerAdapter;
 
     private TextView useDate_text;
@@ -58,8 +53,6 @@ public class EquipmentUse_Add extends AppCompatActivity implements View.OnClickL
     private EditText user_text;
     private EditText remark_text;
     private Spinner spinner;
-    private Button submitButton;
-    private Toolbar toolbar;
 
     private String equipmentId;
 
@@ -71,29 +64,23 @@ public class EquipmentUse_Add extends AppCompatActivity implements View.OnClickL
         getEquipmentList();
     }
 
-    public void initView(){
-        useDate_text = (TextView)findViewById(R.id.useDate_text);
-        openDate_text = (TextView)findViewById(R.id.openDate_text);
-        closeDate_text = (TextView)findViewById(R.id.closeDate_text);
-        sampleNumber_text = (EditText)findViewById(R.id.sampleNumber_text);
-        testProject_text = (EditText)findViewById(R.id.testProject_text);
-        beforeUse_text = (EditText)findViewById(R.id.beforeUse_text);
-        afterUse_text = (EditText)findViewById(R.id.afterUse_text);
-        user_text = (EditText)findViewById(R.id.user_text);
-        remark_text = (EditText)findViewById(R.id.remark_text);
+    public void initView() {
+        useDate_text = findViewById(R.id.useDate_text);
+        openDate_text = findViewById(R.id.openDate_text);
+        closeDate_text = findViewById(R.id.closeDate_text);
+        sampleNumber_text = findViewById(R.id.sampleNumber_text);
+        testProject_text = findViewById(R.id.testProject_text);
+        beforeUse_text = findViewById(R.id.beforeUse_text);
+        afterUse_text = findViewById(R.id.afterUse_text);
+        user_text = findViewById(R.id.user_text);
+        remark_text = findViewById(R.id.remark_text);
 
-        spinner = (Spinner)findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
-        submitButton = (Button)findViewById(R.id.submit_button);
-        submitButton.setOnClickListener(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //设置Toolbar左边显示一个返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
+        findViewById(R.id.submit_button).setOnClickListener(this);
         useDate_text.setOnClickListener(this);
         openDate_text.setOnClickListener(this);
         closeDate_text.setOnClickListener(this);
@@ -101,20 +88,21 @@ public class EquipmentUse_Add extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.submit_button:
                 onSave();
                 break;
             case R.id.useDate_text:
-                ViewUtil.getInstance().selectDate(EquipmentUse_Add.this,useDate_text);
+                ViewUtil.getInstance().selectDate(EquipmentUse_Add.this, useDate_text);
                 break;
             case R.id.openDate_text:
-                ViewUtil.getInstance().selectDate(EquipmentUse_Add.this,openDate_text);
+                ViewUtil.getInstance().selectTime(EquipmentUse_Add.this, openDate_text);
                 break;
             case R.id.closeDate_text:
-                ViewUtil.getInstance().selectDate(EquipmentUse_Add.this,closeDate_text);
+                ViewUtil.getInstance().selectTime(EquipmentUse_Add.this, closeDate_text);
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 
@@ -133,80 +121,80 @@ public class EquipmentUse_Add extends AppCompatActivity implements View.OnClickL
         onBackConfirm(false);
     }
 
-
-    public void onSave(){
-        if(equipmentList.size()==0){
+    public void onSave() {
+        if (equipmentList.size() == 0) {
             ToastUtil.showShort(EquipmentUse_Add.this, "无可操作设备");
             return;
         }
 
-        if(useDate_text.getText().toString().isEmpty()||
-                openDate_text.getText().toString().isEmpty()||
+        if (useDate_text.getText().toString().isEmpty() ||
+                openDate_text.getText().toString().isEmpty() ||
                 closeDate_text.getText().toString().isEmpty() ||
-                sampleNumber_text.getText().toString().isEmpty()||
-                testProject_text.getText().toString().isEmpty()||
-                beforeUse_text.getText().toString().isEmpty()||
-                afterUse_text.getText().toString().isEmpty()||
-                user_text.getText().toString().isEmpty()||
-                remark_text.getText().toString().isEmpty()){
-            ToastUtil.showShort(EquipmentUse_Add.this, "请填写完整！");
+                sampleNumber_text.getText().toString().isEmpty() ||
+                testProject_text.getText().toString().isEmpty() ||
+                beforeUse_text.getText().toString().isEmpty() ||
+                afterUse_text.getText().toString().isEmpty() ||
+                user_text.getText().toString().isEmpty() ||
+                remark_text.getText().toString().isEmpty()) {
+            ToastUtil.showShort(EquipmentUse_Add.this, "请填写完整");
             return;
         }
         postSave();
     }
 
-    public void postSave(){
-        String address = AddressUtil.EquipmentUse_addOne();
+    public void postSave() {
+        String address = AddressUtil.getAddress(AddressUtil.EquipmentUse_addOne);
         RequestBody requestBody = new FormBody.Builder()
-                .add("equipmentId",equipmentId)
-                .add("useDate",useDate_text.getText().toString())
-                .add("openDate",openDate_text.getText().toString())
-                .add("closeDate",closeDate_text.getText().toString())
-                .add("sampleNumber",sampleNumber_text.getText().toString())
-                .add("testProject",testProject_text.getText().toString())
-                .add("beforeUse",beforeUse_text.getText().toString())
-                .add("afterUse",afterUse_text.getText().toString())
-                .add("user",user_text.getText().toString())
-                .add("remark",remark_text.getText().toString())
+                .add("equipmentId", equipmentId)
+                .add("useDate", useDate_text.getText().toString())
+                .add("openDate", openDate_text.getText().toString())
+                .add("closeDate", closeDate_text.getText().toString())
+                .add("sampleNumber", sampleNumber_text.getText().toString())
+                .add("testProject", testProject_text.getText().toString())
+                .add("beforeUse", beforeUse_text.getText().toString())
+                .add("afterUse", afterUse_text.getText().toString())
+                .add("user", user_text.getText().toString())
+                .add("remark", remark_text.getText().toString())
                 .build();
 
-        HttpUtil.sendOkHttpWithRequestBody(address,requestBody,new okhttp3.Callback(){
+        HttpUtil.sendOkHttpWithRequestBody(address, requestBody, new okhttp3.Callback() {
             @Override
-            public void onResponse(Call call, Response response)throws IOException {
+            public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-                Log.d("EquipmentApp_Add:",responseData);
+                Log.d(TAG, responseData);
                 int code = 0;
                 String msg = "";
                 try {
                     JSONObject object = new JSONObject(responseData);
                     code = object.getInt("code");
                     msg = object.getString("msg");
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if(code == 200 && msg.equals("成功")) {
-                    ToastUtil.showShort(EquipmentUse_Add.this, "提交成功！");
+                if (code == 200 && msg.equals("成功")) {
+                    ToastUtil.showShort(EquipmentUse_Add.this, "添加成功");
                     finish();
                 }
             }
+
             @Override
-            public void onFailure(Call call,IOException e){
-                ToastUtil.showShort(EquipmentUse_Add.this, "提交失败！");
+            public void onFailure(Call call, IOException e) {
+                ToastUtil.showShort(EquipmentUse_Add.this, "添加失败");
             }
         });
     }
 
-    public void onBackConfirm(boolean flag){
-        if(!useDate_text.getText().toString().isEmpty()||
-                !openDate_text.getText().toString().isEmpty()||
+    public void onBackConfirm(boolean flag) {
+        if (!useDate_text.getText().toString().isEmpty() ||
+                !openDate_text.getText().toString().isEmpty() ||
                 !closeDate_text.getText().toString().isEmpty() ||
-                !sampleNumber_text.getText().toString().isEmpty()||
-                !testProject_text.getText().toString().isEmpty()||
-                !beforeUse_text.getText().toString().isEmpty()||
-                !afterUse_text.getText().toString().isEmpty()||
-                !user_text.getText().toString().isEmpty()||
-                !remark_text.getText().toString().isEmpty())  {
-            AlertDialog.Builder dialog=new AlertDialog.Builder(EquipmentUse_Add.this);
+                !sampleNumber_text.getText().toString().isEmpty() ||
+                !testProject_text.getText().toString().isEmpty() ||
+                !beforeUse_text.getText().toString().isEmpty() ||
+                !afterUse_text.getText().toString().isEmpty() ||
+                !user_text.getText().toString().isEmpty() ||
+                !remark_text.getText().toString().isEmpty()) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(EquipmentUse_Add.this);
             dialog.setTitle("内容尚未保存");
             dialog.setMessage("是否退出？");
             dialog.setCancelable(true);
@@ -222,59 +210,64 @@ public class EquipmentUse_Add extends AppCompatActivity implements View.OnClickL
                 }
             });
             dialog.show();
-        }else if(flag)
+        } else if (flag)
             finish();
         else
             super.onBackPressed();
     }
 
-    public void getEquipmentList(){
+    public void getEquipmentList() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address = AddressUtil.Equipment_getAll();
-                HttpUtil.sendOkHttpRequest(address,new okhttp3.Callback(){
+                String address = AddressUtil.getAddress(AddressUtil.Equipment_getAll);
+                HttpUtil.sendOkHttpRequest(address, new okhttp3.Callback() {
                     @Override
-                    public void onResponse(Call call, Response response)throws IOException {
+                    public void onResponse(Call call, Response response) throws IOException {
                         String responseData = response.body().string();
-                        Log.d("EquipmentApp_Add",responseData);
+                        Log.d(TAG, responseData);
                         parseJSONWithGSON(responseData);
                         showResponse();
                     }
+
                     @Override
-                    public void onFailure(Call call,IOException e){
-                        ToastUtil.showShort(EquipmentUse_Add.this, "请求数据失败！");
+                    public void onFailure(Call call, IOException e) {
+                        ToastUtil.showShort(EquipmentUse_Add.this, "请求数据失败");
                     }
                 });
             }
         }).start();
     }
 
-    private void parseJSONWithGSON(String jsonData){
+    private void parseJSONWithGSON(String jsonData) {
         JSONArray array = new JSONArray();
         try {
-            JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
+            JSONObject object = new JSONObject(jsonData);
             array = object.getJSONArray("data");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        List<Equipment> newList = new Gson().fromJson(array.toString(),new TypeToken<List<Equipment>>(){}.getType());
+        List<Equipment> newList = new Gson().fromJson(array.toString(), new TypeToken<List<Equipment>>() {
+        }.getType());
         equipmentList.clear();
         equipmentList.addAll(newList);
     }
 
     private void showResponse() {
-        for(Equipment equipment:equipmentList){
-            spinnerData.add(equipment.getEquipmentNumber());
+        for (Equipment equipment : equipmentList) {
+            //检查该设备是否处于准用状态
+            //if (equipment.getState() == 1)
+                spinnerData.add(equipment.getEquipmentNumber());
         }
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //适配器
-                spinnerAdapter = new ArrayAdapter<String>(EquipmentUse_Add.this, android.R.layout.simple_spinner_item, spinnerData);
-                //设置样式
+                /*
+                * 设置适配器的样式，加载适配器
+                * */
+                spinnerAdapter = new ArrayAdapter<>(EquipmentUse_Add.this, android.R.layout.simple_spinner_item, spinnerData);
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                //加载适配器
                 spinner.setAdapter(spinnerAdapter);
                 spinnerAdapter.notifyDataSetChanged();
             }
@@ -283,15 +276,16 @@ public class EquipmentUse_Add extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-        for(Equipment equipment : equipmentList) {
+        for (Equipment equipment : equipmentList) {
             String selectedItem = arg0.getSelectedItem().toString();
-            if(equipment.getEquipmentNumber().equals(selectedItem))
-                equipmentId = equipment.getId()+"";
+            if (equipment.getEquipmentNumber().equals(selectedItem))
+                equipmentId = equipment.getId() + "";
         }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        equipmentId = equipmentList.get(0).getId()+"";
+        equipmentId = equipmentList.get(0).getId() + "";
     }
+
 }

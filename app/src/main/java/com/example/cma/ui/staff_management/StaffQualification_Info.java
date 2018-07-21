@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,9 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.signature.StringSignature;
 import com.example.cma.R;
 import com.example.cma.model.staff_management.StaffManagement;
 import com.example.cma.model.staff_management.StaffQualification;
@@ -30,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -68,8 +72,10 @@ public class StaffQualification_Info extends AppCompatActivity implements View.O
         position=staffQualification.getPosition();
         //setText();
         //getImage();
+        Log.d("getimage","111");
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         if(staffQualification == null){
@@ -77,8 +83,9 @@ public class StaffQualification_Info extends AppCompatActivity implements View.O
             return;
         }
         getStaffQualification(staffQualification.getQualificationId());  //重新获取是为了从编辑页面返回后刷新
-        getStaff(staffQualification.getId());
+        //getStaff(staffQualification.getId());
         getImage();
+        Log.d("onresumegetimage","1111");
     }
 
     public void initView(){
@@ -275,6 +282,8 @@ public class StaffQualification_Info extends AppCompatActivity implements View.O
             staffQualification.setPosition(staff.getPosition());
         }else if(object instanceof StaffQualification){
             staffQualification = gson.fromJson(staffData,StaffQualification.class);
+            Log.d("sqqqqqqqq","sq");
+            setText();
         }
     }
 
@@ -285,6 +294,9 @@ public class StaffQualification_Info extends AppCompatActivity implements View.O
                 .load(address)
                 .error(R.drawable.invalid_image)   //图片加载失败时，将image_invalid放进去
                 .animate(android.R.anim.slide_in_left)
+                //.signature(new StringSignature(UUID.randomUUID().toString()))
+                .diskCacheStrategy( DiskCacheStrategy.NONE )//禁用磁盘缓存
+                .skipMemoryCache( true )//跳过内存缓存
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -303,5 +315,16 @@ public class StaffQualification_Info extends AppCompatActivity implements View.O
                     }
                 })
                 .into(file_image);
+    }
+
+    //监听返回按钮的点击事件，比如可以返回上级Activity
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -35,9 +35,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -45,7 +44,7 @@
                     android:layout_weight="4"
                     android:text="设备编号"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <Spinner
                     android:id="@+id/spinner"
@@ -64,9 +63,8 @@
                 android:id="@+id/useDate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -74,7 +72,7 @@
                     android:layout_weight="4"
                     android:text="设备名称"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/name_text"
@@ -82,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -93,9 +91,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -103,7 +100,7 @@
                     android:layout_weight="4"
                     android:text="设备型号"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/model_text"
@@ -111,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -122,9 +119,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -132,17 +128,17 @@
                     android:layout_weight="4"
                     android:text="维护保养内容"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
-                    android:id="@+id/sampleNumber_text"
+                    android:id="@+id/maintenanceContent_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:background="@null"
                     android:hint="请输入维护保养内容"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -153,9 +149,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -163,7 +158,7 @@
                     android:layout_weight="4"
                     android:text="维护保养人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/maintenancePerson_text"
@@ -173,7 +168,7 @@
                     android:background="@null"
                     android:hint="请输入维护保养人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -184,9 +179,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -194,7 +188,7 @@
                     android:layout_weight="4"
                     android:text="确认人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/confirmer_text"
@@ -204,7 +198,7 @@
                     android:background="@null"
                     android:hint="请输入确认人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -215,9 +209,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -225,7 +218,7 @@
                     android:layout_weight="4"
                     android:text="记录日期"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/maintenanceDate_text"
@@ -234,7 +227,7 @@
                     android:layout_weight="6"
                     android:hint="请选择记录日期"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -246,22 +239,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16.0dip"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:text="提交"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize"
+                    android:text="保存" />
             </LinearLayout>
 
         </LinearLayout>

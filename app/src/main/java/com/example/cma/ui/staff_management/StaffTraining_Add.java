@@ -11,11 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cma.R;
+import com.example.cma.model.staff_management.StaffTraining;
+
+import org.feezu.liuli.timeselector.TimeSelector;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -47,7 +54,27 @@ public class StaffTraining_Add extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
+        final TextView editText=(TextView) findViewById(R.id.edit_text2);
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                final String now=simpleDateFormat.format(new Date());
+                //editText.setText();
+                TimeSelector timeSelector = new TimeSelector(StaffTraining_Add.this,new TimeSelector.ResultHandler() {
+                    @Override
+                    public void handle(String time) {
+                        // Toast.makeText(StaffTraining_Add.this, time, Toast.LENGTH_SHORT).show();
+                        editText.setText(time.split(" ")[0]);
+                    }
+                }, "2000-01-01 00:00", now);
+                timeSelector.setIsLoop(false);//设置不循环,true循环
+                timeSelector.setTitle("请选择日期");
+                //        timeSelector.setMode(TimeSelector.MODE.YMDHM);//显示 年月日时分（默认）
+                timeSelector.setMode(TimeSelector.MODE.YMD);//只显示 年月日
+                timeSelector.show();
+            }
+        });
 
 
         Button button=(Button)findViewById(R.id.submit_button);
@@ -58,8 +85,8 @@ public class StaffTraining_Add extends AppCompatActivity {
                 EditText editText1=(EditText)findViewById(R.id.edit_text1);
                 final String s1=editText1.getText().toString();
 
-                EditText editText2=(EditText)findViewById(R.id.edit_text2);
-                final String s2=editText2.getText().toString();
+
+                final String s2=editText.getText().toString();
 
                 EditText editText3=(EditText)findViewById(R.id.edit_text3);
                 final String s3=editText3.getText().toString();
@@ -159,7 +186,7 @@ public class StaffTraining_Add extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(StaffTraining_Add.this, "上传成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StaffTraining_Add.this, "考核结果添加成功！", Toast.LENGTH_SHORT).show();
                     }
                 });
 

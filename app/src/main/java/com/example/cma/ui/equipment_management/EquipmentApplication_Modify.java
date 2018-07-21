@@ -1,18 +1,14 @@
 package com.example.cma.ui.equipment_management;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -47,8 +43,8 @@ public class EquipmentApplication_Modify extends AppCompatActivity implements Vi
 
     //data
     private EquipmentApplication equipmentApplication;
-    private List<Equipment> equipmentList= new ArrayList<>();;
-    private List<String> spinnerData = new ArrayList<String>();
+    private List<Equipment> equipmentList= new ArrayList<>();
+    private List<String> spinnerData = new ArrayList<>();
     private ArrayAdapter<String> spinnerAdapter;
 
     private EditText applicant_text;
@@ -61,8 +57,7 @@ public class EquipmentApplication_Modify extends AppCompatActivity implements Vi
     private CheckBox service_check;
     private CheckBox test_check;
     private Spinner spinner;
-    private Button submitButton;
-    private Toolbar toolbar;
+
 
     private boolean isServiceSelected;
     private boolean isTestSelected;
@@ -79,35 +74,29 @@ public class EquipmentApplication_Modify extends AppCompatActivity implements Vi
     }
 
     public void initView(){
-        applicant_text = (EditText)findViewById(R.id.applicant_text);
-        applicationDate_text = (TextView)findViewById(R.id.applicationDate_text);
-        applicationPurpose_text = (EditText)findViewById(R.id.applicationPurpose_text);
-        softwareInfo_text = (EditText)findViewById(R.id.softwareInfo_text);
-        auditor_text = (EditText)findViewById(R.id.auditor_text);
-        auditDate_text = (TextView)findViewById(R.id.auditDate_text);
-        auditOpinion_text = (EditText)findViewById(R.id.auditOpinion_text);
-        service_check = (CheckBox)findViewById(R.id.service_check);
-        test_check = (CheckBox)findViewById(R.id.test_check);
-        spinner = (Spinner)findViewById(R.id.spinner);
+        applicant_text = findViewById(R.id.applicant_text);
+        applicationDate_text = findViewById(R.id.applicationDate_text);
+        applicationPurpose_text = findViewById(R.id.applicationPurpose_text);
+        softwareInfo_text = findViewById(R.id.softwareInfo_text);
+        auditor_text = findViewById(R.id.auditor_text);
+        auditDate_text = findViewById(R.id.auditDate_text);
+        auditOpinion_text = findViewById(R.id.auditOpinion_text);
+        service_check = findViewById(R.id.service_check);
+        test_check = findViewById(R.id.test_check);
+        spinner = findViewById(R.id.spinner);
         service_check.setOnCheckedChangeListener(this);
         test_check.setOnCheckedChangeListener(this);
         spinner.setOnItemSelectedListener(this);
 
-        submitButton = (Button)findViewById(R.id.submit_button);
-        submitButton.setOnClickListener(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //设置Toolbar左边显示一个返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        findViewById(R.id.submit_button).setOnClickListener(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
 
-        LinearLayout applicationDate_layout=(LinearLayout)findViewById(R.id.applicationDate_layout);
+        LinearLayout applicationDate_layout=findViewById(R.id.applicationDate_layout);
         applicationDate_text.setOnClickListener(this);
         applicationDate_layout.setOnClickListener(this);
 
-        LinearLayout auditDate_layout=(LinearLayout)findViewById(R.id.auditDate_layout);
+        LinearLayout auditDate_layout=findViewById(R.id.auditDate_layout);
         auditDate_text.setOnClickListener(this);
         auditDate_layout.setOnClickListener(this);
     }
@@ -179,7 +168,7 @@ public class EquipmentApplication_Modify extends AppCompatActivity implements Vi
                 auditor_text.getText().toString().isEmpty()||
                 auditDate_text.getText().toString().isEmpty()||
                 auditOpinion_text.getText().toString().isEmpty()){
-            ToastUtil.showShort(EquipmentApplication_Modify.this, "请填写完整！");
+            ToastUtil.showShort(EquipmentApplication_Modify.this, "请填写完整");
             return;
         }
         if(equipmentNumber == null){
@@ -190,7 +179,7 @@ public class EquipmentApplication_Modify extends AppCompatActivity implements Vi
     }
 
     public void postSave(){
-        String address = AddressUtil.EquipmentApplication_modifyOne();
+        String address = AddressUtil.getAddress(AddressUtil.EquipmentApplication_modifyOne);
         RequestBody requestBody = new FormBody.Builder()
                 .add("id",equipmentApplication.getId()+"")
                 .add("applicant",applicant_text.getText().toString())
@@ -219,13 +208,13 @@ public class EquipmentApplication_Modify extends AppCompatActivity implements Vi
                     e.printStackTrace();
                 }
                 if(code == 200 && msg.equals("成功")) {
-                    ToastUtil.showShort(EquipmentApplication_Modify.this, "提交成功！");
+                    ToastUtil.showShort(EquipmentApplication_Modify.this, "修改成功");
                     finish();
                 }
             }
             @Override
             public void onFailure(Call call,IOException e){
-                ToastUtil.showShort(EquipmentApplication_Modify.this, "提交失败！");
+                ToastUtil.showShort(EquipmentApplication_Modify.this, "修改失败");
             }
         });
     }
@@ -245,7 +234,7 @@ public class EquipmentApplication_Modify extends AppCompatActivity implements Vi
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address = AddressUtil.Equipment_getAll();
+                String address = AddressUtil.getAddress(AddressUtil.Equipment_getAll);
                 HttpUtil.sendOkHttpRequest(address,new okhttp3.Callback(){
                     @Override
                     public void onResponse(Call call, Response response)throws IOException {
@@ -256,7 +245,7 @@ public class EquipmentApplication_Modify extends AppCompatActivity implements Vi
                     }
                     @Override
                     public void onFailure(Call call,IOException e){
-                        ToastUtil.showShort(EquipmentApplication_Modify.this, "请求数据失败！");
+                        ToastUtil.showShort(EquipmentApplication_Modify.this, "请求数据失败");
                     }
                 });
             }
@@ -285,7 +274,7 @@ public class EquipmentApplication_Modify extends AppCompatActivity implements Vi
             @Override
             public void run() {
                 //适配器
-                spinnerAdapter = new ArrayAdapter<String>(EquipmentApplication_Modify.this, android.R.layout.simple_spinner_item, spinnerData);
+                spinnerAdapter = new ArrayAdapter<>(EquipmentApplication_Modify.this, android.R.layout.simple_spinner_item, spinnerData);
                 //设置样式
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 //加载适配器

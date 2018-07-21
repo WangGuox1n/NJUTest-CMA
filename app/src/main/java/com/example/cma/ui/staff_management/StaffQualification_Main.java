@@ -1,6 +1,5 @@
 package com.example.cma.ui.staff_management;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -46,11 +45,13 @@ public class StaffQualification_Main extends AppCompatActivity implements Search
     private SearchView searchView;
     private Button addButton;
     private StaffQualificationAdapter adapter;
-
+    private long preid=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.staff_qualification__main);
+        Intent intent = getIntent();
+        preid = intent.getLongExtra("id", -1);
         initView();
         getDataFromServer();
     }
@@ -190,15 +191,22 @@ public class StaffQualification_Main extends AppCompatActivity implements Search
         }
         Gson gson = new Gson();
         List<StaffQualification> newList = gson.fromJson(array.toString(),new TypeToken<List<StaffQualification>>(){}.getType());
-        list.clear();
-        list.addAll(newList);
+        if(preid != -1){
+            list.clear();
+            for(StaffQualification t : newList){
+                if(t.getId()==preid)
+                    list.add(t);
+            }
+        } else
+            list=gson.fromJson(array.toString(),new TypeToken<List<StaffQualification>>(){}.getType());
+
     }
 
     private void showResponse() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                adapter = new StaffQualificationAdapter(StaffQualification_Main.this, R.layout.staff_management_listview,list);
+                adapter = new StaffQualificationAdapter(StaffQualification_Main.this, R.layout.staff_qualification_listview_item,list);
                 listView.setAdapter(adapter);
             }
         });

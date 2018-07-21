@@ -40,9 +40,9 @@ public class EquipmentUseAdapter extends RecyclerView.Adapter<EquipmentUseAdapte
         public ViewHolder(View view) {
             super(view);
             this.item = view;
-            name = (TextView) view.findViewById(R.id.item_name);
-            testProject = (TextView) view.findViewById(R.id.item_testProject);
-            useDate = (TextView) view.findViewById(R.id.item_useDate);
+            name =  view.findViewById(R.id.item_name);
+            testProject =  view.findViewById(R.id.item_testProject);
+            useDate =  view.findViewById(R.id.item_useDate);
         }
     }
 
@@ -58,7 +58,6 @@ public class EquipmentUseAdapter extends RecyclerView.Adapter<EquipmentUseAdapte
             public void onClick(View v) {
                 int position = (int)v.getTag();
                 Intent intent=new Intent(mContext,EquipmentUse_Info.class);
-
                 intent.putExtra("EquipmentUse", mList.get(position));
                 mContext.startActivity(intent);
             }

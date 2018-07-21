@@ -1,11 +1,10 @@
 package com.example.cma.ui.staff_management;
 
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -182,8 +181,6 @@ public class StaffAuthorization_Add extends AppCompatActivity implements Adapter
                 Gson gson=new Gson();
                 list.clear();
                 list=gson.fromJson(array,new TypeToken<List<StaffManagement>>(){}.getType());
-                id1=list.get(0).getId();
-                id2=list.get(0).getId();
                 setSpinner1();
                 setSpinner2();
             }
@@ -198,8 +195,10 @@ public class StaffAuthorization_Add extends AppCompatActivity implements Adapter
             @Override
             public void run() {
                 stringList.clear();
+                int i=1;
                 for(StaffManagement temp:list){
-                    stringList.add("ID:"+temp.getId()+" "+temp.getName());
+                    stringList.add(i+" "+temp.getName());
+                    i++;
                 }
                 adapter1=new ArrayAdapter(StaffAuthorization_Add.this,android.R.layout.simple_list_item_1,stringList);
                 adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -214,8 +213,10 @@ public class StaffAuthorization_Add extends AppCompatActivity implements Adapter
             @Override
             public void run() {
                 stringList.clear();
+                int i=1;
                 for(StaffManagement temp:list){
-                    stringList.add("ID:"+temp.getId()+" "+temp.getName());
+                    stringList.add(i+" "+temp.getName());
+                    i++;
                 }
                 adapter2=new ArrayAdapter(StaffAuthorization_Add.this,android.R.layout.simple_list_item_1,stringList);
                 adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -230,33 +231,22 @@ public class StaffAuthorization_Add extends AppCompatActivity implements Adapter
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         switch (parent.getId()){
             case R.id.spinner1:
-                String string = (String) adapter1.getItem(pos);
-                String[] array=string.split(":");
-                String[] array2=array[1].split(" ");
-                long staffId=Long.parseLong(array2[0]);
-                for(StaffManagement temp:list){
-                    if(temp.getId()==staffId){
-                        id1=staffId;
-                        name.setText(temp.getName());
-                        department.setText(temp.getDepartment());
-                        position.setText(temp.getPosition());
-                        break;
-                    }
-                }
+
+                String q=(String)adapter1.getItem(pos);
+                String []qq=q.split(" ");
+                int qqq=Integer.valueOf(qq[0]);
+                name.setText(list.get(qqq-1).getName());
+                department.setText(list.get(qqq-1).getDepartment());
+                position.setText(list.get(qqq-1).getPosition());
+                id1=list.get(qqq-1).getId();
                 break;
             case R.id.spinner2:
                 String str = (String) adapter2.getItem(pos);
-                String[] ar=str.split(":");
-                String[] ar2=ar[1].split(" ");
-                long staffId2=Long.parseLong(ar2[0]);
-                for(StaffManagement temp:list){
-                    if(temp.getId()==staffId2){
-                        id2=staffId2;
-                        EditText editText= (EditText) findViewById(R.id.edit_text5_1);
-                        editText.setText(temp.getName());
-                        break;
-                    }
-                }
+                String []ar=str.split(" ");
+                int aaa=Integer.valueOf(ar[0]);
+                EditText editText= (EditText) findViewById(R.id.edit_text5_1);
+                editText.setText(list.get(aaa-1).getName());
+                id2=list.get(aaa-1).getId();
                 break;
         }
 
@@ -267,7 +257,8 @@ public class StaffAuthorization_Add extends AppCompatActivity implements Adapter
         name.setText(list.get(0).getName());
         department.setText(list.get(0).getDepartment());
         position.setText(list.get(0).getName());
-
+        id1=list.get(0).getId();
+        id2=list.get(0).getId();
     }
 
     public void saveData(){

@@ -2,10 +2,10 @@ package com.example.cma.ui.staff_management;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -153,6 +154,16 @@ public class StaffManagement_See extends AppCompatActivity {
             }
         });
 
+        TextView qualication_info=(TextView)findViewById(R.id.zizhi_view);
+        qualication_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(StaffManagement_See.this, StaffQualification_Main.class);
+                intent.putExtra("id",stafftemp.getId());
+                startActivity(intent);
+            }
+        });
+
         TextView training_see=(TextView)findViewById(R.id.training_view);
         training_see.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,11 +268,14 @@ public class StaffManagement_See extends AppCompatActivity {
 
             }else
             {
-                Gson gson=new Gson();
-                StaffFile staffFile=gson.fromJson(array,new TypeToken<StaffFile>(){}.getType());
-                Intent intent=new Intent(StaffManagement_See.this,StaffFile_Info.class);
-                intent.putExtra("StaffFile",staffFile);
-                startActivity(intent);
+                List<StaffFile> list = new Gson().fromJson(array, new TypeToken<List<StaffFile>>() {}.getType());
+                if (list.size() == 1){
+                    StaffFile staffFile = list.get(0);
+                    Intent intent=new Intent(StaffManagement_See.this,StaffFile_Info.class);
+                    intent.putExtra("StaffFile",staffFile);
+                    startActivity(intent);
+                }
+
             }
 
         }catch (Exception e){
@@ -287,7 +301,7 @@ public class StaffManagement_See extends AppCompatActivity {
     private void postDelete(long id){
         OkHttpClient okHttpClient=new OkHttpClient();
         RequestBody requestBody=new FormBody.Builder().add("id",Long.toString(id)).build();
-        Request request = new Request.Builder()
+        final Request request = new Request.Builder()
                 .url("http://119.23.38.100:8080/cma/StaffManagement/deleteOne")//url的地址
                 .post(requestBody)
                 .build();
@@ -304,7 +318,7 @@ public class StaffManagement_See extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
+                final String result = response.body().string();
                 Log.d("androixx.cn", result);
 
                 runOnUiThread(new Runnable() {
@@ -312,7 +326,22 @@ public class StaffManagement_See extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        Toast.makeText(StaffManagement_See.this, "删除成功！", Toast.LENGTH_SHORT).show();
+
+                        try {
+                            Log.d("??response:",result);
+                            if(result.contains("Error")==true)
+                            {
+                                Toast.makeText(StaffManagement_See.this, "    数据库不许删除\n此人存在其他相关数据！", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(StaffManagement_See.this, "删除成功！", Toast.LENGTH_SHORT).show();
+                            }
+                        }catch (Exception e)
+                        {
+
+                        }
+
                     }
                 });
 

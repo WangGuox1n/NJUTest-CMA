@@ -1,21 +1,21 @@
 package com.example.cma.ui.staff_management;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.cma.R;
 import com.example.cma.model.staff_management.StaffManagement;
+import com.example.cma.ui.self_inspection.SelfInspection_FileList;
 import com.example.cma.utils.HttpUtil;
 import com.example.cma.utils.PhotoUtil;
 import com.example.cma.utils.ToastUtil;
@@ -37,8 +38,11 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -47,13 +51,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class StaffFile_Add extends AppCompatActivity implements View.OnClickListener,Spinner.OnItemSelectedListener{
+public class StaffFile_Add extends AppCompatActivity implements View.OnClickListener, Spinner.OnItemSelectedListener {
+    private static final String TAG = "StaffFile_Add";
 
     private List<StaffManagement> wholeList = new ArrayList<>();
     private StaffManagement staffManagement;
     private Spinner spinner;
-    private List<StaffManagement> staff_list = new ArrayList<>();
-    private List<String> data_list = new ArrayList<String>();
+    private List<StaffManagement> noFile_staffList = new ArrayList<>();
+    private List<String> data_list = new ArrayList<>();
     private ArrayAdapter<String> adapter;
 
     private TextView name_text;
@@ -61,8 +66,7 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
     private TextView position_text;
     private EditText id_text;
     private EditText location_text;
-    private Button submitButton;
-    private Toolbar toolbar;
+    private ProgressDialog loadingDialog;
 
     private ImageView fileImage;
     private File outputImage;
@@ -77,54 +81,54 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
         getDataFromServer();
     }
 
-    public void initView(){
-        spinner = (Spinner) findViewById(R.id.spinner);
-        name_text = (TextView)findViewById(R.id.name_text);
-        department_text = (TextView)findViewById(R.id.department_text);
-        position_text = (TextView)findViewById(R.id.position_text);
-        id_text = (EditText)findViewById(R.id.id_text);
-        location_text = (EditText)findViewById(R.id.location_text);
-        submitButton = (Button)findViewById(R.id.submit_button);
-        toolbar = (Toolbar) findViewById(R.id.mToolbar4);
-        fileImage=(ImageView)findViewById(R.id.file_image);
+    public void initView() {
+        spinner = findViewById(R.id.spinner);
+        name_text = findViewById(R.id.name_text);
+        department_text = findViewById(R.id.department_text);
+        position_text = findViewById(R.id.position_text);
+        id_text = findViewById(R.id.id_text);
+        location_text = findViewById(R.id.location_text);
+        fileImage = findViewById(R.id.file_image);
         fileImage.setOnClickListener(this);
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
         ViewUtil.ShowCursor(id_text);
         ViewUtil.ShowCursor(location_text);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
         //设置监听
-        submitButton.setOnClickListener(this);
+        findViewById(R.id.submit_button).setOnClickListener(this);
         spinner.setOnItemSelectedListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.submit_button:
                 onSave();
                 break;
             case R.id.file_image:
                 PhotoUtil.getInstance().showPopupWindow(this);
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
         int i = 1;
-        for(StaffManagement staff : staff_list) {
+        for (StaffManagement staff : noFile_staffList) {
             String selectedItem = arg0.getSelectedItem().toString();
-            if(selectedItem.equals(i +". "+staff.getName())){
-                for(StaffManagement info : wholeList){
-                    if(info.getId() == staff.getId()){
-                        name_text.setText(info.getName());
-                        department_text.setText(info.getDepartment());
-                        position_text.setText(info.getPosition());
+            if (selectedItem.equals(i + ". " + staff.getName())) {
+                for (final StaffManagement info : wholeList) {
+                    if (info.getId() == staff.getId()) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                name_text.setText(info.getName());
+                                department_text.setText(info.getDepartment());
+                                position_text.setText(info.getPosition());
+                            }
+                        });
                     }
                 }
                 staffManagement = staff;
@@ -138,32 +142,33 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    public void initDataList(){
+    public void initDataList() {
         data_list.clear();
         int i = 1;
-        for(StaffManagement staff : staff_list){
-            data_list.add(i+". "+staff.getName());
+        for (StaffManagement staff : noFile_staffList) {
+            data_list.add(i + ". " + staff.getName());
             i++;
         }
-        Log.d("data_list",""+i+staff_list.size());
+        Log.d(TAG, "" + i + noFile_staffList.size());
     }
 
     //向后端发送请求，返回所有没有档案的人员
-    public void getDataFromServer(){
+    public void getDataFromServer() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                HttpUtil.sendOkHttpRequest("http://119.23.38.100:8080/cma/StaffManagement/getNoFile",new okhttp3.Callback(){
+                HttpUtil.sendOkHttpRequest("http://119.23.38.100:8080/cma/StaffManagement/getNoFile", new okhttp3.Callback() {
                     @Override
-                    public void onResponse(Call call, Response response)throws IOException {
+                    public void onResponse(Call call, Response response) throws IOException {
                         String responseData = response.body().string();
-                        Log.d("responseData:",responseData);
+                        Log.d(TAG, responseData);
                         parseJSONWithGSON(responseData);
                         initDataList();
                         showResponse();
                     }
+
                     @Override
-                    public void onFailure(Call call,IOException e){
+                    public void onFailure(Call call, IOException e) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -176,15 +181,15 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
         }).start();
     }
 
-    private void parseJSONWithGSON(String jsondata){
+    private void parseJSONWithGSON(String jsonData) {
         JSONArray array = new JSONArray();
         try {
-            JSONObject object = new JSONObject(jsondata);//最外层的JSONObject对象
+            JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
             array = object.getJSONArray("data");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        if(array.equals("null")){
+        if (array.length() == 0) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -193,9 +198,10 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
             });
         }
         Gson gson = new Gson();
-        List<StaffManagement> newList = gson.fromJson(array.toString(),new TypeToken<List<StaffManagement>>(){}.getType());
-        staff_list.clear();
-        staff_list.addAll(newList);
+        List<StaffManagement> newList = gson.fromJson(array.toString(), new TypeToken<List<StaffManagement>>() {
+        }.getType());
+        noFile_staffList.clear();
+        noFile_staffList.addAll(newList);
     }
 
     private void showResponse() {
@@ -203,7 +209,7 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
             @Override
             public void run() {
                 //适配器
-                adapter= new ArrayAdapter<String>(StaffFile_Add.this, android.R.layout.simple_spinner_item, data_list);
+                adapter = new ArrayAdapter<>(StaffFile_Add.this, android.R.layout.simple_spinner_item, data_list);
                 //设置样式
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 //加载适配器
@@ -226,9 +232,9 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
-        if(!id_text.getText().toString().isEmpty()||
-                !location_text.getText().toString().isEmpty()||isPhotoSelect) {
-            AlertDialog.Builder dialog=new AlertDialog.Builder(StaffFile_Add.this);
+        if (!id_text.getText().toString().isEmpty() ||
+                !location_text.getText().toString().isEmpty() || isPhotoSelect) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(StaffFile_Add.this);
             dialog.setTitle("内容尚未保存");
             dialog.setMessage("是否退出？");
             dialog.setCancelable(true);
@@ -244,27 +250,28 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
                 }
             });
             dialog.show();
-        }else
+        } else
             super.onBackPressed();
     }
 
-    public void getAll(){
+    public void getAll() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                HttpUtil.sendOkHttpRequest("http://119.23.38.100:8080/cma/StaffManagement/getAll",new okhttp3.Callback(){
+                HttpUtil.sendOkHttpRequest("http://119.23.38.100:8080/cma/StaffManagement/getAll", new okhttp3.Callback() {
                     @Override
-                    public void onResponse(Call call, Response response)throws IOException {
+                    public void onResponse(Call call, Response response) throws IOException {
                         String responseData = response.body().string();
-                        Log.d("getAll:",responseData);
+                        Log.d(TAG, responseData);
                         parseAll(responseData);
                     }
+
                     @Override
-                    public void onFailure(Call call,IOException e){
+                    public void onFailure(Call call, IOException e) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(StaffFile_Add.this, "请求数据失败！", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(StaffFile_Add.this, "请求数据失败", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -273,15 +280,15 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
         }).start();
     }
 
-    private void parseAll(String jsonData){
+    private void parseAll(String jsonData) {
         JSONArray array = new JSONArray();
         try {
             JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
             array = object.getJSONArray("data");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        if(array.equals("null")){
+        if (array.length() == 0) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -289,16 +296,16 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
                 }
             });
         }
-        wholeList  = new Gson().fromJson(array.toString(),new TypeToken<List<StaffManagement>>(){}.getType());
+        wholeList = new Gson().fromJson(array.toString(), new TypeToken<List<StaffManagement>>() {
+        }.getType());
     }
 
     @Override
-    protected void onActivityResult(int requestCode,int resultCode,Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
-        switch (requestCode){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
             case PhotoUtil.TAKE_PHOTO:
-                if(resultCode==RESULT_OK)
-                {
+                if (resultCode == RESULT_OK) {
                     outputImage = PhotoUtil.getInstance().getOutputImage();
                     Bitmap bitmap = BitmapFactory.decodeFile(outputImage.getPath());
                     fileImage.setImageBitmap(bitmap);
@@ -306,9 +313,8 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case PhotoUtil.CHOOSE_PHOTO:
-                if(resultCode==RESULT_OK)
-                {
-                    if(PhotoUtil.getInstance().selectPicture(data)){
+                if (resultCode == RESULT_OK) {
+                    if (PhotoUtil.getInstance().selectPicture(data)) {
                         Bitmap bitmap = PhotoUtil.getInstance().getBitmap();
                         fileImage.setImageBitmap(bitmap);
                         outputImage = PhotoUtil.getInstance().getOutputImage();
@@ -316,36 +322,46 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
                     }
                 }
                 break;
-            case 3:
-                Uri uri = data.getData();
-                Log.d("Photo 1",uri.getPath().toString());
-                break;
             default:
                 break;
         }
     }
 
-    public void onSave(){
-        if(staff_list.size() == 0){
-            ToastUtil.showShort(StaffFile_Add.this,"没有可添加档案的人员");
+    public void onSave() {
+        if (noFile_staffList.size() == 0) {
+            ToastUtil.showShort(StaffFile_Add.this, "没有可添加档案的人员");
             return;
         }
-        if(id_text.getText().toString().isEmpty()||
+        if (id_text.getText().toString().isEmpty() ||
                 location_text.getText().toString().isEmpty()) {
-            Toast.makeText(StaffFile_Add.this, "请填写完整！", Toast.LENGTH_LONG).show();
+            Toast.makeText(StaffFile_Add.this, "请填写完整", Toast.LENGTH_LONG).show();
             return;
         }
-        if(outputImage == null){
-            Toast.makeText(StaffFile_Add.this, "请选择档案图片！", Toast.LENGTH_LONG).show();
+        if (outputImage == null) {
+            Toast.makeText(StaffFile_Add.this, "请选择档案图片", Toast.LENGTH_LONG).show();
             return;
         }
 
-        AlertDialog.Builder dialog=new AlertDialog.Builder(StaffFile_Add.this);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(StaffFile_Add.this);
         dialog.setMessage("确定提交？");
         dialog.setCancelable(false);
         dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                /*final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(StaffFile_Add.this);
+                final View dialogView = LayoutInflater.from(StaffFile_Add.this)
+                        .inflate(R.layout.post_file_loading, null);
+                builder.setTitle("记录上传中");
+                builder.setView(dialogView);
+                builder.setCancelable(false);
+                loadingDialog = builder.create();
+                loadingDialog.show();*/
+                loadingDialog = new ProgressDialog(StaffFile_Add.this);
+                loadingDialog.setTitle("正在上传中");
+                loadingDialog.setMessage("请稍等......");
+                loadingDialog.setCancelable(true);
+                loadingDialog.show();
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -357,56 +373,62 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
         dialog.show();
     }
 
-    public void postDataToServer(){
+    public void postDataToServer() {
         String address = "\thttp://119.23.38.100:8080/cma/StaffFile/addOne";
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        requestBody.addFormDataPart("id", ""+staffManagement.getId());
+        requestBody.addFormDataPart("id", "" + staffManagement.getId());
         requestBody.addFormDataPart("fileId", id_text.getText().toString());
         requestBody.addFormDataPart("fileLocation", location_text.getText().toString());
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        final String now = simpleDateFormat.format(new Date());
         RequestBody body = RequestBody.create(MediaType.parse("image/*"), outputImage);
-        requestBody.addFormDataPart("fileImage", outputImage.getName(), body);
+        requestBody.addFormDataPart("fileImage", staffManagement.getName()+"_档案扫描件_"+now+".jpg", body);
 
-        HttpUtil.sendOkHttpWithMultipartBody(address,requestBody.build(),new okhttp3.Callback(){
+        HttpUtil.sendOkHttpWithMultipartBody(address, requestBody.build(), new okhttp3.Callback() {
             @Override
-            public void onResponse(Call call, Response response)throws IOException {
+            public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-                Log.d("onSave:",responseData);
+                Log.d(TAG, responseData);
                 int code = 0;
                 String msg = "";
                 try {
                     JSONObject object = new JSONObject(responseData);
                     code = object.getInt("code");
                     msg = object.getString("msg");
-                }catch (JSONException e){
+                } catch (JSONException e) {
+                    loadingDialog.dismiss();
                     e.printStackTrace();
                 }
-                if(code == 200 && msg.equals("成功")) {
+                if (code == 200 && msg.equals("成功")) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(StaffFile_Add.this, "提交成功！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(StaffFile_Add.this, "添加成功", Toast.LENGTH_SHORT).show();
+                            loadingDialog.dismiss();
                         }
                     });
                     finish();
                 }
             }
+
             @Override
-            public void onFailure(Call call,IOException e){
+            public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(StaffFile_Add.this, "提交失败！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StaffFile_Add.this, "添加失败", Toast.LENGTH_SHORT).show();
+                        loadingDialog.dismiss();
                     }
                 });
             }
         });
     }
 
-    public void onBackConfirm(){
-        if(!id_text.getText().toString().isEmpty()||
-                !location_text.getText().toString().isEmpty()||isPhotoSelect) {
-            AlertDialog.Builder dialog=new AlertDialog.Builder(StaffFile_Add.this);
+    public void onBackConfirm() {
+        if (!id_text.getText().toString().isEmpty() ||
+                !location_text.getText().toString().isEmpty() || isPhotoSelect) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(StaffFile_Add.this);
             dialog.setTitle("内容尚未保存");
             dialog.setMessage("是否退出？");
             dialog.setCancelable(true);
@@ -422,7 +444,7 @@ public class StaffFile_Add extends AppCompatActivity implements View.OnClickList
                 }
             });
             dialog.show();
-        }else
+        } else
             finish();
     }
 }

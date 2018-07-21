@@ -48,6 +48,7 @@ public class AnnualPlanAdapter  extends ArrayAdapter<AnnualPlan> {
             viewHolder.year =(TextView) view.findViewById(R.id.item_year);
             viewHolder.author=(TextView) view.findViewById(R.id.item_author);
             viewHolder.createDate=(TextView)view.findViewById(R.id.item_create_time);
+            viewHolder.state=(TextView)view.findViewById(R.id.item_state);
             view.setTag(viewHolder);  //ViewHolder存在View中
         }else{
             view = convertView;
@@ -56,8 +57,11 @@ public class AnnualPlanAdapter  extends ArrayAdapter<AnnualPlan> {
 
         viewHolder.year.setText(String.valueOf(temp.getYear()));
         viewHolder.author.setText(temp.getAuthor());
-
         viewHolder.createDate.setText(temp.getCreateDate());
+        if(temp.getApprover()==null)
+            viewHolder.state.setText("未批准");
+        else
+            viewHolder.state.setText("已批准");
         return view;
     }
 
@@ -65,6 +69,7 @@ public class AnnualPlanAdapter  extends ArrayAdapter<AnnualPlan> {
         TextView year;
         TextView author;
         TextView createDate;
+        TextView state;
 
 
     }
@@ -108,7 +113,7 @@ public class AnnualPlanAdapter  extends ArrayAdapter<AnnualPlan> {
             } else {
                 // 过滤出新数据
                 filterList = new ArrayList<>();
-                for (AnnualPlan staff : list) {
+                for (AnnualPlan staff : rawList) {
                     if(String.valueOf(staff.getYear()).contains(constraint)||staff.getAuthor().contains(constraint))
                         filterList.add(staff);
                 }

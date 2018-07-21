@@ -10,12 +10,14 @@ import okhttp3.RequestBody;
  */
 
 public class HttpUtil {
-    //get
+
+    /**
+     * 向服务器发送 GET 请求
+     *
+     * @param address 地址
+     * @param callback 回调函数
+     * */
     public static void sendOkHttpRequest(String address,okhttp3.Callback callback){
-        /*if(!isNetworkAvailable()){
-
-        }*/
-
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(address)
@@ -23,7 +25,13 @@ public class HttpUtil {
         client.newCall(request).enqueue(callback);
     }
 
-    //post
+    /**
+     * 向服务器发送 POST请求
+     *
+     * @param address 地址
+     * @param requestBody 上传的内容
+     * @param callback 回调函数
+     * */
     public static void sendOkHttpWithRequestBody(String address, RequestBody requestBody, okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -33,11 +41,13 @@ public class HttpUtil {
         client.newCall(request).enqueue(callback);
     }
 
-    private static boolean isNetworkAvailable(){
-        return false;
-    }
-
-    //post
+    /**
+     * 向服务器发送 POST请求
+     *
+     * @param address 地址
+     * @param requestBody 上传的内容，形式为Multipart
+     * @param callback 回调函数
+     * */
     public static void sendOkHttpWithMultipartBody(String address, MultipartBody requestBody, okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()

@@ -24,7 +24,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -35,9 +35,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -45,7 +44,7 @@
                     android:layout_weight="4"
                     android:text="设备编号"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <Spinner
                     android:id="@+id/spinner"
@@ -64,17 +63,16 @@
                 android:id="@+id/useDate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="记录日期"
+                    android:text="使用日期"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/useDate_text"
@@ -82,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -93,9 +91,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -103,7 +100,7 @@
                     android:layout_weight="4"
                     android:text="开机时间"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/openDate_text"
@@ -111,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -122,9 +119,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -132,7 +128,7 @@
                     android:layout_weight="4"
                     android:text="关机时间"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/closeDate_text"
@@ -140,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -151,9 +147,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -161,7 +156,7 @@
                     android:layout_weight="4"
                     android:text="样品编号"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/sampleNumber_text"
@@ -170,7 +165,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -181,9 +176,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -191,7 +185,7 @@
                     android:layout_weight="4"
                     android:text="测试项目"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/testProject_text"
@@ -200,7 +194,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -211,26 +205,27 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
                     android:text="设备使用前状况"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/beforeUse_text"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:paddingTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -241,26 +236,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
                     android:text="设备使用后状况"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/afterUse_text"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:layout_marginRight="20dp"
+                    android:paddingTop="5dp"
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -271,9 +266,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -281,7 +275,7 @@
                     android:layout_weight="4"
                     android:text="使用人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/user_text"
@@ -290,7 +284,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -301,9 +295,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -311,7 +304,7 @@
                     android:layout_weight="4"
                     android:text="备注"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/remark_text"
@@ -320,7 +313,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -330,27 +323,23 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16.0dip"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
                 android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:text="保存"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize"
+                    android:text="保存" />
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

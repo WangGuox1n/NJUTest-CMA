@@ -1,5 +1,6 @@
 package com.example.cma.ui.staff_management;
 
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -8,9 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
@@ -18,16 +21,20 @@ import android.widget.Filterable;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.cma.R;
 import com.example.cma.adapter.staff_management.StaffTrainingPeopleAdapter;
 import com.example.cma.model.staff_management.Result;
+import com.example.cma.model.staff_management.StaffManagement;
 import com.example.cma.model.staff_management.StaffTraining;
 import com.example.cma.model.staff_management.StaffTrainingPeople;
 import com.example.cma.model.staff_management.TrainingResult;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -50,15 +57,18 @@ public class StaffTraining_staff_main extends AppCompatActivity {
     private StaffTraining train;
     Toolbar toolbar;
     private String c;
-    static public List<StaffTrainingPeople> dangAns=new ArrayList<StaffTrainingPeople>();
+    List<StaffManagement> list = new ArrayList<StaffManagement>();
+    List<String> stringList = new ArrayList<String>();
+    static public List<StaffTrainingPeople> dangAns = new ArrayList<StaffTrainingPeople>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.staff_training_staff_main);
 
-        Intent intent=getIntent();
-        c=(String)intent.getSerializableExtra("chuandi");
-        train=(StaffTraining)intent.getSerializableExtra("programName");
+        Intent intent = getIntent();
+        c = (String) intent.getSerializableExtra("chuandi");
+        train = (StaffTraining) intent.getSerializableExtra("programName");
         initView();
         initDangan();
         //在Activity代码中使用Toolbar对象替换ActionBar
@@ -80,12 +90,12 @@ public class StaffTraining_staff_main extends AppCompatActivity {
             //当点击搜索按钮触发该方法进行回调
             @Override
             public boolean onQueryTextSubmit(String s) {
-                ListAdapter listAdapter=listView.getAdapter();
-                if(listAdapter instanceof Filterable){
-                    Filter filter=((Filterable)listAdapter).getFilter();
-                    if(s==null||s.length()==0){
+                ListAdapter listAdapter = listView.getAdapter();
+                if (listAdapter instanceof Filterable) {
+                    Filter filter = ((Filterable) listAdapter).getFilter();
+                    if (s == null || s.length() == 0) {
                         filter.filter(null);
-                    }else{
+                    } else {
                         filter.filter(s);
                     }
                 }
@@ -95,12 +105,12 @@ public class StaffTraining_staff_main extends AppCompatActivity {
             //当搜索内容改变时触发该方法进行回调
             @Override
             public boolean onQueryTextChange(String s) {
-                ListAdapter adapter=listView.getAdapter();
-                if(adapter instanceof Filterable){
-                    Filter filter=((Filterable)adapter).getFilter();
-                    if(s==null||s.length()==0){
+                ListAdapter adapter = listView.getAdapter();
+                if (adapter instanceof Filterable) {
+                    Filter filter = ((Filterable) adapter).getFilter();
+                    if (s == null || s.length() == 0) {
                         filter.filter(null);
-                    }else{
+                    } else {
                         filter.filter(s);
                     }
                 }
@@ -111,77 +121,152 @@ public class StaffTraining_staff_main extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                // Intent intent=new Intent(StaffTraining_staff_main.this,StaffTraining_staff_modify.class);
+                // Intent intent=new Intent(StaffTraining_staff_main.this,StaffTraining_result_modify.class);
                 StaffTrainingPeople d = (StaffTrainingPeople) listView.getItemAtPosition(i);
                 String trainingid = c;
                 String id = String.valueOf(d.getId());
-                String staffname=d.getName();
-                check(trainingid,id,staffname);
+                String staffname = d.getName();
+                check(trainingid, id, staffname);
 
 
             }
         });
-        Button button=(Button)findViewById(R.id.add_button);
+        Button button = (Button) findViewById(R.id.add_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final EditText et = new EditText(StaffTraining_staff_main.this);
-
-                new AlertDialog.Builder(StaffTraining_staff_main.this).setTitle("请输入人员编号").setIcon(android.R.drawable.ic_dialog_info).setView(et).setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        String input = et.getText().toString();
-                        if (input.equals("")) {
-                            Toast.makeText(getApplicationContext(), "搜索内容不能为空！" + input, Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            Log.d("获得编号",input);
-                            String result="{"+"\"trainingId\""+":"+c+","+"\"data\""+":"+"[{"+"\"id\""+":"+input+"}]}";
-                            Log.d("结果！！",result);
-                            OkHttpClient okHttpClient=new OkHttpClient();
-                            //创建一个请求对象
-                            MediaType JSON=MediaType.parse("application/json; charset=utf-8");
-                            RequestBody requestBody=RequestBody.create(JSON,result);
-                            Request request = new Request.Builder()
-                                    .url("http://119.23.38.100:8080/cma/StaffTraining/addTrainingPeople")//url的地址
-                                    .post(requestBody)
-                                    .build();
-                            okHttpClient.newCall(request).enqueue(new Callback() {
-                                @Override
-                                public void onFailure(Call call, IOException e) {
-                                    Log.d("androixx.cn", "失败！！！！");
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(StaffTraining_staff_main.this, "上传失败！", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-
-                                @Override
-                                public void onResponse(Call call, Response response) throws IOException {
-                                    String result = response.body().string();
-                                    Log.d("androixx.cn", result);
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-                                            Toast.makeText(StaffTraining_staff_main.this, "上传成功！", Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    });
-
-                                }
-                            });
-                        }
-                    }
-                }).setNegativeButton("取消", null).show();
-
+              setString();
             }
         });
 
         showResponse();//对于从数据库获取的数据重新开UI线程否则出错。
 
     }
+
+    private void setString() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Log.d("点击获取的", "here is json11");
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            // 指定访问的服务器地址，后续在这里修改
+                            .url("http://119.23.38.100:8080/cma/StaffManagement/getAll")
+                            //.url("http://192.168.200.111/get_staff.json")
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    Log.d("获得的数据:", responseData);
+                    parseJSONWithGSON2(responseData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    public void parseJSONWithGSON2(String responseData){
+        try{
+            JSONObject object=new JSONObject(responseData);
+            String array=object.getString("data");
+            if(array.equals("null"))
+            {
+
+            }else
+            {
+                Log.d("开始解析！！！！！1","好了！！！");
+                Gson gson=new Gson();
+                list.clear();
+                list=gson.fromJson(array,new TypeToken<List<StaffManagement>>(){}.getType());
+                stringList.clear();
+                for(StaffManagement temp:list){
+                    stringList.add("ID:"+temp.getId()+" "+temp.getName());
+                }
+                Log.d("String!!!!!!", stringList.get(0));
+                final String[] strings=stringList.toArray(new String[stringList.size()]);
+                final String[] s1={"aaaa","bbbbb"};
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AlertDialog dialog = new AlertDialog.Builder(StaffTraining_staff_main.this)
+                                .setTitle("选择添加的人员")
+                                .setItems(strings, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, final int which) {
+                                        String string =strings[which];
+                                        String[] array=string.split(":");
+                                        String[] array2=array[1].split(" ");
+                                        final long staffId=Long.parseLong(array2[0]);
+                                        AlertDialog dialog2 = new AlertDialog.Builder(
+                                                StaffTraining_staff_main.this)
+                                                .setTitle("提示")
+                                                .setMessage("确定添加人员编号为" + String.valueOf(staffId)+"的人员吗")
+                                                .setPositiveButton("确定",
+                                                        new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                String result="{"+"\"trainingId\""+":"+c+","+"\"data\""+":"+"[{"+"\"id\""+":"+String.valueOf(staffId)+"}]}";
+                                                                postAdd(result);
+                                                            }
+                                                        }).create();
+                                        dialog2.show();
+                                    }
+                                }).create();
+
+                        dialog.show();
+
+                    }
+                });
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+  private void postAdd(String result)
+  {
+      OkHttpClient okHttpClient=new OkHttpClient();
+      //创建一个请求对象
+      MediaType JSON=MediaType.parse("application/json; charset=utf-8");
+      RequestBody requestBody=RequestBody.create(JSON,result);
+      Request request = new Request.Builder()
+              .url("http://119.23.38.100:8080/cma/StaffTraining/addTrainingPeople")//url的地址
+              .post(requestBody)
+              .build();
+      okHttpClient.newCall(request).enqueue(new Callback() {
+          @Override
+          public void onFailure(Call call, IOException e) {
+              Log.d("androixx.cn", "失败！！！！");
+              runOnUiThread(new Runnable() {
+                  @Override
+                  public void run() {
+                      Toast.makeText(StaffTraining_staff_main.this, "人员添加失败！", Toast.LENGTH_SHORT).show();
+                  }
+              });
+          }
+
+          @Override
+          public void onResponse(Call call, Response response) throws IOException {
+              String result = response.body().string();
+              Log.d("androixx.cn", result);
+              runOnUiThread(new Runnable() {
+                  @Override
+                  public void run() {
+                      initDangan();
+                      Toast.makeText(StaffTraining_staff_main.this, "人员添加成功！", Toast.LENGTH_SHORT).show();
+
+                  }
+              });
+
+          }
+      });
+  }
     private void sendRequestWithOkHttp(){
         new Thread(new Runnable() {
             @Override
@@ -290,14 +375,75 @@ public class StaffTraining_staff_main extends AppCompatActivity {
                     Gson gson = new Gson();
                     Result<TrainingResult> userListResult = gson.fromJson(responseData,new TypeToken<Result<TrainingResult>>(){}.getType());
                     result=userListResult.data;
-                    Intent intent=new Intent(StaffTraining_staff_main.this,StaffTraining_staff_modify.class);
-                    Log.d("222222222",result.getProgram());
-                    intent.putExtra("chuan",result);
-                    intent.putExtra("id",peopleid);
-                    intent.putExtra("staffname",staffname);
-                    intent.putExtra("training",train);
+                    int code=userListResult.code;
+                    if(code==404 || result==null)
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(StaffTraining_staff_main.this);
+                        builder.setTitle("无考核结果");
+                        builder.setPositiveButton("添加", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
 
-                    startActivity(intent);
+                            }
+                        });
+                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+
+                            }
+                        });
+                        builder.show();
+
+
+
+                    }
+                    else {
+                        if(result.getResult()==null ||result.getResult().length()<0)
+                        {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(StaffTraining_staff_main.this);
+                                    builder.setTitle("无考核结果");
+                                    builder.setPositiveButton("添加", new DialogInterface.OnClickListener()
+                                    {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which)
+                                        {
+                                                Intent intent=new Intent(StaffTraining_staff_main.this,StaffTraining_result_add.class);
+                                                intent.putExtra("trainingId",trainingId);
+                                                intent.putExtra("id",peopleid);
+                                                startActivity(intent);
+                                        }
+                                    });
+                                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                                    {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which)
+                                        {
+
+                                        }
+                                    });
+                                    builder.show();
+                                }
+                            });
+
+                        }
+                        else {
+                            Intent intent = new Intent(StaffTraining_staff_main.this, StaffTraining_result_See.class);
+                            Log.d("222222222", result.getProgram());
+                            intent.putExtra("chuan", result);
+                            intent.putExtra("id", peopleid);
+                            intent.putExtra("staffname", staffname);
+                            intent.putExtra("training", train);
+
+                            startActivity(intent);
+                        }
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }

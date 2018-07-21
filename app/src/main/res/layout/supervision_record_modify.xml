@@ -27,7 +27,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -38,9 +38,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view1"
@@ -49,7 +48,7 @@
                     android:layout_weight="1"
                     android:text="部门"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/department_text"
@@ -59,7 +58,7 @@
                     android:background="@null"
                     android:cursorVisible="false"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
             </LinearLayout>
 
@@ -71,9 +70,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view2"
@@ -82,7 +80,7 @@
                     android:layout_weight="1"
                     android:text="监督员"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/supervisor_text"
@@ -92,7 +90,7 @@
                     android:background="@null"
                     android:cursorVisible="false"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
             </LinearLayout>
 
@@ -105,9 +103,8 @@
                 android:id="@+id/superviseDate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view3"
@@ -116,16 +113,15 @@
                     android:layout_weight="1"
                     android:text="监督时间"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/superviseDate_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:cursorVisible="false"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -136,9 +132,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view4"
@@ -147,7 +142,7 @@
                     android:layout_weight="1"
                     android:text="被监督人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/supervisedPerson_text"
@@ -157,7 +152,7 @@
                     android:background="@null"
                     android:cursorVisible="false"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -168,8 +163,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -179,7 +174,7 @@
                     android:layout_weight="1"
                     android:text="监督内容记录："
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/record_text"
@@ -187,11 +182,11 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:background="@null"
-                    android:gravity="top|left"
+                    android:gravity="top|start"
                     android:cursorVisible="false"
                     android:layout_weight="1"
                     android:lines="4"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -202,8 +197,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -213,7 +208,7 @@
                     android:layout_weight="1"
                     android:text="结论："
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/conclusion_text"
@@ -222,10 +217,10 @@
                     android:textColor="@color/black"
                     android:background="@null"
                     android:cursorVisible="false"
-                    android:gravity="top|left"
+                    android:gravity="top|start"
                     android:layout_weight="1"
                     android:lines="3"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -236,9 +231,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view7"
@@ -247,7 +241,7 @@
                     android:layout_weight="1"
                     android:text="操作人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/operator_text"
@@ -257,7 +251,7 @@
                     android:background="@null"
                     android:cursorVisible="false"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -269,9 +263,8 @@
                 android:id="@+id/recordDate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp">
 
                 <TextView
                     android:id="@+id/text_view8"
@@ -280,16 +273,15 @@
                     android:layout_weight="1"
                     android:text="记录时间"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/recordDate_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:cursorVisible="false"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -299,22 +291,22 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginBottom="16.0dip"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_marginTop="30dp"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:text="提交"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize"
+                    android:text="保存"/>
             </LinearLayout>
 
         </LinearLayout>

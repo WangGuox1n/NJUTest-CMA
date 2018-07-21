@@ -19,7 +19,17 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:title="新增考核记录"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme">
+
+            <Button
+                android:id="@+id/submit_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提交"
+                android:layout_gravity="right"
+                android:textSize="20sp"/>
+        </android.support.v7.widget.Toolbar>
 
         <TextView
             android:id="@+id/line1"
@@ -41,7 +51,7 @@
                 android:layout_weight="1"
                 android:textSize="20sp"
                 android:textColor="#000"
-                android:text="培训编号"
+                android:text="考核结果"
                 />
 
             <EditText
@@ -49,63 +59,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="请输入培训编号"
-                android:background="@null"
-                android:maxLines="1"
-                />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/line2"
-            android:layout_below="@+id/top1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/line"/>
-
-        <LinearLayout
-            android:id="@+id/top2"
-            android:orientation="horizontal"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:layout_below="@+id/line2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/text_view2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:textColor="#000"
-                android:text="考核结果"
-                />
-
-            <EditText
-                android:id="@+id/edit_text2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
                 android:hint="请输入考核结果"
+                android:background="@null"
                 android:maxLines="1"
                 />
-
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="bottom"
-            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/submit_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="提交"
-                android:background="@drawable/button"
-                android:textSize="24sp"
-                />
-        </LinearLayout>
 
     </LinearLayout>
 

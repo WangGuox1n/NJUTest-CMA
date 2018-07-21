@@ -1,4 +1,5 @@
 package com.example.cma.adapter.staff_management;
+
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
+
 import com.example.cma.R;
 import com.example.cma.model.staff_management.StaffTraining;
 
@@ -96,7 +98,7 @@ public class StaffTrainingAdapter extends ArrayAdapter<StaffTraining> {
             } else {
                 // 过滤出新数据
                 filterList = new ArrayList<>();
-                for (StaffTraining staff : list) {
+                for (StaffTraining staff : rawList) {
                     if(staff.getProgram().contains(constraint)||
                             staff.getPlace().contains(constraint)||staff.getPresenter().contains(constraint))
 

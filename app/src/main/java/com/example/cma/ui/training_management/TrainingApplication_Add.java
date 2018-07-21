@@ -1,10 +1,10 @@
 package com.example.cma.ui.training_management;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,8 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cma.R;
-import com.example.cma.model.training_management.TrainingApplication;
-import com.example.cma.ui.staff_management.StaffManagement_Add;
 
 import org.feezu.liuli.timeselector.TimeSelector;
 
@@ -77,7 +75,7 @@ public class TrainingApplication_Add extends AppCompatActivity {
                         editText.setText(time.split(" ")[0]);
                     }
                 }, "2000-01-01 00:00", now);
-                timeSelector.setIsLoop(false);//设置不循环,true循环
+                timeSelector.setIsLoop(true);//设置不循环,true循环
                 timeSelector.setTitle("请选择日期");
                 //        timeSelector.setMode(TimeSelector.MODE.YMDHM);//显示 年月日时分（默认）
                 timeSelector.setMode(TimeSelector.MODE.YMD);//只显示 年月日
@@ -98,7 +96,7 @@ public class TrainingApplication_Add extends AppCompatActivity {
                         editText.setText(time.split(" ")[0]);
                     }
                 }, "2000-01-01 00:00", now);
-                timeSelector.setIsLoop(false);//设置不循环,true循环
+                timeSelector.setIsLoop(true);//设置不循环,true循环
 
                 //        timeSelector.setMode(TimeSelector.MODE.YMDHM);//显示 年月日时分（默认）
                 timeSelector.setMode(TimeSelector.MODE.YMD);//只显示 年月日
@@ -196,7 +194,7 @@ public class TrainingApplication_Add extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(TrainingApplication_Add.this, "上传失败！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TrainingApplication_Add.this, "添加失败！", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -209,7 +207,7 @@ public class TrainingApplication_Add extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(TrainingApplication_Add.this, "上传成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TrainingApplication_Add.this, "添加成功！", Toast.LENGTH_SHORT).show();
                     }
                 });
 

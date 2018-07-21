@@ -1,16 +1,12 @@
 package com.example.cma.ui.equipment_management;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -26,7 +22,6 @@ import com.example.cma.utils.ViewUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -34,8 +29,8 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Equipment_Modify extends AppCompatActivity implements View.OnClickListener{
-
+public class Equipment_Modify extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "Equipment_Modify";
     private Equipment equipment;
     private TextView state_text;
     private EditText name_text;
@@ -45,38 +40,32 @@ public class Equipment_Modify extends AppCompatActivity implements View.OnClickL
     private EditText hardDisk_text;
     private EditText equipmentNumber_text;
     private EditText application_text;
-    private Button submitButton;
     private Switch switchButton;
-    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.equipment_modify);
         Intent intent = getIntent();
-        equipment = (Equipment)intent.getSerializableExtra("Equipment");
+        equipment = (Equipment) intent.getSerializableExtra("Equipment");
         initView();
         setText();
     }
 
-    public void initView(){
-        state_text = (TextView)findViewById(R.id.state_text);
-        name_text = (EditText)findViewById(R.id.name_text);
-        model_text = (EditText)findViewById(R.id.model_text);
-        cpu_text = (EditText)findViewById(R.id.cpu_text);
-        memory_text = (EditText)findViewById(R.id.memory_text);
-        hardDisk_text = (EditText)findViewById(R.id.hardDisk_text);
-        equipmentNumber_text = (EditText)findViewById(R.id.equipmentNumber_text);
-        application_text = (EditText)findViewById(R.id.application_text);
+    public void initView() {
+        state_text = findViewById(R.id.state_text);
+        name_text = findViewById(R.id.name_text);
+        model_text = findViewById(R.id.model_text);
+        cpu_text = findViewById(R.id.cpu_text);
+        memory_text = findViewById(R.id.memory_text);
+        hardDisk_text = findViewById(R.id.hardDisk_text);
+        equipmentNumber_text = findViewById(R.id.equipmentNumber_text);
+        application_text = findViewById(R.id.application_text);
+        switchButton = findViewById(R.id.switch_button);
 
-        switchButton = (Switch) findViewById(R.id.switch_button);
-        submitButton = (Button)findViewById(R.id.submit_button);
-        submitButton.setOnClickListener(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        findViewById(R.id.submit_button).setOnClickListener(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
 
         ViewUtil.ShowCursor(name_text);
         ViewUtil.ShowCursor(model_text);
@@ -89,17 +78,17 @@ public class Equipment_Modify extends AppCompatActivity implements View.OnClickL
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(equipment.getState()==0)
-                    switchButton.setChecked(false);
-                else
+                if (equipment.getState() == 0)
                     switchButton.setChecked(true);
+                else
+                    switchButton.setChecked(false);
+
             }
         });
 
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // TODO Auto-generated method stub
                 if (isChecked) {
                     equipment.setState(0);
                     setState(true);
@@ -111,7 +100,7 @@ public class Equipment_Modify extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    public void setText(){
+    public void setText() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -127,11 +116,11 @@ public class Equipment_Modify extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    public void setState(final boolean flag){
+    public void setState(final boolean flag) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(flag)
+                if (flag)
                     state_text.setText("准用");
                 else
                     state_text.setText("停用");
@@ -141,11 +130,12 @@ public class Equipment_Modify extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.submit_button:
                 onSave();
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 
@@ -159,56 +149,57 @@ public class Equipment_Modify extends AppCompatActivity implements View.OnClickL
         return super.onOptionsItemSelected(item);
     }
 
-    public void onSave(){
-        if(name_text.getText().toString().isEmpty()||
-                model_text.getText().toString().isEmpty()||
+    public void onSave() {
+        if (name_text.getText().toString().isEmpty() ||
+                model_text.getText().toString().isEmpty() ||
                 cpu_text.getText().toString().isEmpty() ||
-                memory_text.getText().toString().isEmpty()||
-                hardDisk_text.getText().toString().isEmpty()||
-                equipmentNumber_text.getText().toString().isEmpty()||
-                application_text.getText().toString().isEmpty()){
-            ToastUtil.showShort(Equipment_Modify.this, "请填写完整！");
+                memory_text.getText().toString().isEmpty() ||
+                hardDisk_text.getText().toString().isEmpty() ||
+                equipmentNumber_text.getText().toString().isEmpty() ||
+                application_text.getText().toString().isEmpty()) {
+            ToastUtil.showShort(Equipment_Modify.this, "请填写完整");
             return;
         }
         postSave();
     }
 
-    public void postSave(){
-        String address = AddressUtil.Equipment_modifyOne();
+    public void postSave() {
+        String address = AddressUtil.getAddress(AddressUtil.Equipment_modifyOne);
         RequestBody requestBody = new FormBody.Builder()
-                .add("id",equipment.getId()+"")
-                .add("name",name_text.getText().toString())
-                .add("model",model_text.getText().toString())
-                .add("cpu",cpu_text.getText().toString())
-                .add("memory",memory_text.getText().toString())
-                .add("hardDisk",hardDisk_text.getText().toString())
-                .add("equipmentNumber",equipmentNumber_text.getText().toString())
-                .add("application",application_text.getText().toString())
-                .add("state",equipment.getState()+"")
+                .add("id", equipment.getId() + "")
+                .add("name", name_text.getText().toString())
+                .add("model", model_text.getText().toString())
+                .add("cpu", cpu_text.getText().toString())
+                .add("memory", memory_text.getText().toString())
+                .add("hardDisk", hardDisk_text.getText().toString())
+                .add("equipmentNumber", equipmentNumber_text.getText().toString())
+                .add("application", application_text.getText().toString())
+                .add("state", equipment.getState() + "")
                 .build();
 
-        HttpUtil.sendOkHttpWithRequestBody(address,requestBody,new okhttp3.Callback(){
+        HttpUtil.sendOkHttpWithRequestBody(address, requestBody, new okhttp3.Callback() {
             @Override
-            public void onResponse(Call call, Response response)throws IOException {
+            public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-                Log.d("Equipment_Modify:",responseData);
+                Log.d(TAG, responseData);
                 int code = 0;
                 String msg = "";
                 try {
                     JSONObject object = new JSONObject(responseData);
                     code = object.getInt("code");
                     msg = object.getString("msg");
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                     ToastUtil.showShort(Equipment_Modify.this, "修改失败");
                 }
-                if(code == 200 && msg.equals("成功")) {
+                if (code == 200 && msg.equals("成功")) {
                     ToastUtil.showShort(Equipment_Modify.this, "修改成功");
                     finish();
                 }
             }
+
             @Override
-            public void onFailure(Call call,IOException e){
+            public void onFailure(Call call, IOException e) {
                 ToastUtil.showShort(Equipment_Modify.this, "修改失败");
             }
         });

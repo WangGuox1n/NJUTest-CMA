@@ -1,9 +1,9 @@
 package com.example.cma.ui.training_management;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -18,13 +18,8 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.cma.R;
-import com.example.cma.adapter.staff_management.StaffFileAdapter;
 import com.example.cma.adapter.training_management.TrainingApplicationAdapter;
-import com.example.cma.model.staff_management.StaffFile;
 import com.example.cma.model.training_management.TrainingApplication;
-import com.example.cma.ui.staff_management.StaffFile_Add;
-import com.example.cma.ui.staff_management.StaffFile_Info;
-import com.example.cma.ui.staff_management.StaffFile_Main;
 import com.example.cma.utils.HttpUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -186,7 +181,7 @@ public class TrainingApplication_Main extends AppCompatActivity implements Searc
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(TrainingApplication_Main.this, "档案记录为空", Toast.LENGTH_LONG).show();
+                    Toast.makeText(TrainingApplication_Main.this, "培训申请记录为空", Toast.LENGTH_LONG).show();
                 }
             });
         }

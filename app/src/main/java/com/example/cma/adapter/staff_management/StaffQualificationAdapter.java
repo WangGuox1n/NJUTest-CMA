@@ -10,7 +10,6 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import com.example.cma.R;
-import com.example.cma.model.staff_management.StaffFile;
 import com.example.cma.model.staff_management.StaffQualification;
 
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ public class StaffQualificationAdapter extends ArrayAdapter<StaffQualification> 
     private  MyFilter mFilter;
     private List<StaffQualification> list;   //用于展示的数据
     private List<StaffQualification> rawList;//原始数据
+
 
     public StaffQualificationAdapter(Context context, int textViewResourceId, List<StaffQualification> objects){
         super(context,textViewResourceId,objects);
@@ -40,7 +40,7 @@ public class StaffQualificationAdapter extends ArrayAdapter<StaffQualification> 
             viewHolder = new StaffQualificationAdapter.ViewHolder();
             viewHolder.name =(TextView) view.findViewById(R.id.item_name);
             viewHolder.department=(TextView) view.findViewById(R.id.item_department);
-            viewHolder.position=(TextView)view.findViewById(R.id.item_position);
+            viewHolder.qualificationName=(TextView)view.findViewById(R.id.qualificationName);
             view.setTag(viewHolder);  //ViewHolder存在View中
         }else{
             view = convertView;
@@ -49,14 +49,14 @@ public class StaffQualificationAdapter extends ArrayAdapter<StaffQualification> 
 
         viewHolder.name.setText(staffQualification.getName());
         viewHolder.department.setText(staffQualification.getDepartment());
-        viewHolder.position.setText(staffQualification.getPosition());
+        viewHolder.qualificationName.setText(staffQualification.getQualificationName());
         return view;
     }
 
     class ViewHolder{
         TextView name;
         TextView department;
-        TextView position;
+        TextView qualificationName;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class StaffQualificationAdapter extends ArrayAdapter<StaffQualification> 
                 for (StaffQualification staff : rawList) {
                     if(staff.getName().contains(constraint)||
                             staff.getDepartment().contains(constraint)||
-                            staff.getPosition().contains(constraint))
+                            staff.getQualificationName().contains(constraint))
                         filterList.add(staff);
                 }
             }

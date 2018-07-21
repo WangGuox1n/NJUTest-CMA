@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.cma.ui.staff_management.StaffFile_Info">
 
     <android.support.v7.widget.Toolbar
@@ -17,21 +19,23 @@
         <Button
             android:id="@+id/edit_button"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_button"
+            android:layout_width="@dimen/edit_button_width"
+            android:layout_height="@dimen/edit_button_height"
+            android:layout_marginRight="@dimen/edit_button_marginRight"
+            android:layout_marginEnd="@dimen/edit_button_marginRight"
             android:text="编辑"
-            android:layout_gravity="right"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/edit_button_textSize"/>
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="false"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +43,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/line" />
@@ -48,8 +51,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -57,16 +60,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="姓名"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/name_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_text_size" />
             </LinearLayout>
 
             <TextView
@@ -77,8 +80,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -86,16 +89,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="档案编号"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/id_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -107,9 +110,8 @@
                 android:id="@+id/top5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/line5"
                 android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -118,16 +120,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="档案存放位置"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/location_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -138,37 +140,46 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:text="档案扫描件："
-                android:textColor="#000"
-                android:textSize="20sp" />
+                android:layout_marginStart="20dp"
+                android:text="档案扫描件"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tv_text_size" />
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
             <ImageView
                 android:id="@+id/file_image"
-                android:layout_width="300dp"
-                android:layout_height="200dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/invalid_image" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/delete_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:layout_marginBottom="16.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
-                    android:text="删除此档案记录"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize"
+                    android:text="删除此档案记录" />
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

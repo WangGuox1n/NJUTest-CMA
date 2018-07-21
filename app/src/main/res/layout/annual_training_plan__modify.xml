@@ -253,7 +253,7 @@
                     android:text="培训开始时间"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_text6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -291,7 +291,7 @@
                     android:text="培训结束时间"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_text7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

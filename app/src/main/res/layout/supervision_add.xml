@@ -3,58 +3,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical" >
-
-
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:text="编制人"
-        android:textSize="18sp"/>
-    <EditText
-        android:id="@+id/author_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入编制人姓名"
-        >
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:text="备注"
-        android:textSize="18sp"/>
-    <EditText
-        android:id="@+id/remark_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:hint="请输入备注">
-
-    </EditText>
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编制人："
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/author_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入编制人名称">
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备注："
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/remark_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入备注"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:textSize="18sp"
-            android:text="取消" />
+            android:background="@drawable/edit_button"
+            android:text="取消"
+            android:textSize="18sp" />
+
         <Button
             android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="提交数据"
-            android:textSize="18sp"/>
+            android:background="@drawable/edit_button"
+            android:text="保存"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

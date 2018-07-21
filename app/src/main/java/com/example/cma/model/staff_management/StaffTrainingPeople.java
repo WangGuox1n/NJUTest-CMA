@@ -1,6 +1,5 @@
 package com.example.cma.model.staff_management;
 
-import java.io.Serializable;
 /**
  * Created by new on 2018/6/4.
  */

@@ -1,17 +1,13 @@
 package com.example.cma.ui.staff_management;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +15,7 @@ import android.widget.Toast;
 import com.example.cma.R;
 import com.example.cma.model.staff_management.StaffManagement;
 import com.example.cma.utils.HttpUtil;
+import com.example.cma.utils.ToastUtil;
 import com.example.cma.utils.ViewUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,34 +25,28 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import org.feezu.liuli.timeselector.TimeSelector;
 
 public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickListener,Spinner.OnItemSelectedListener{
-
-    private List<StaffManagement> whole_stafflist = new ArrayList<>();
+    private static final String TAG = "StaffLeaving_Add";
     private StaffManagement staffManagement = new StaffManagement();
     private Spinner spinner;
     private List<StaffManagement> staff_list = new ArrayList<>();
-    private List<String> data_list = new ArrayList<String>();;
+    private List<String> data_list = new ArrayList<>();
     private ArrayAdapter<String> adapter;
 
     private TextView name_text;
     private TextView department_text;
     private TextView position_text;
     private TextView date_text;
-    private Button submitButton;
-    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,27 +56,17 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
     }
 
     public void initView(){
-        spinner = (Spinner) findViewById(R.id.spinner);
-        name_text = (TextView)findViewById(R.id.name_text);
-        department_text = (TextView)findViewById(R.id.department_text);
-        position_text = (TextView)findViewById(R.id.position_text);
-        date_text = (TextView)findViewById(R.id.date_text);
+        spinner = findViewById(R.id.spinner);
+        name_text = findViewById(R.id.name_text);
+        department_text = findViewById(R.id.department_text);
+        position_text = findViewById(R.id.position_text);
+        date_text = findViewById(R.id.date_text);
 
-        submitButton = (Button)findViewById(R.id.submit_button);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        //设置监听
-        submitButton.setOnClickListener(this);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this,toolbar);
+        findViewById(R.id.submit_button).setOnClickListener(this);
         spinner.setOnItemSelectedListener(this);
-
-        LinearLayout dateLayout=(LinearLayout)findViewById(R.id.layout5);
         date_text.setOnClickListener(this);
-        dateLayout.setOnClickListener(this);
     }
 
     @Override
@@ -95,9 +76,6 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
                 onSave();
                 break;
             case R.id.date_text:
-                ViewUtil.getInstance().selectDate(StaffLeaving_Add.this,date_text);
-                break;
-            case R.id.layout5:
                 ViewUtil.getInstance().selectDate(StaffLeaving_Add.this,date_text);
                 break;
             default:break;
@@ -131,7 +109,7 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
             data_list.add(i+". "+staff.getName());
             i++;
         }
-        Log.d("data_list",""+i+staff_list.size());
+        Log.d(TAG,""+i+staff_list.size());
     }
 
     //向后端发送请求，返回所有人员记录
@@ -143,7 +121,7 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onResponse(Call call, Response response)throws IOException {
                         String responseData = response.body().string();
-                        Log.d("StaffLeaving_Add Data:",responseData);
+                        Log.d(TAG,responseData);
                         parseJSONWithGSON(responseData);
                         initDataList();
                         showResponse();
@@ -153,7 +131,7 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(StaffLeaving_Add.this, "请求数据失败！", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(StaffLeaving_Add.this, "请求数据失败", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -162,10 +140,10 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
         }).start();
     }
 
-    private void parseJSONWithGSON(String jsondata){
+    private void parseJSONWithGSON(String jsonData){
         JSONArray array = new JSONArray();
         try {
-            JSONObject object = new JSONObject(jsondata);//最外层的JSONObject对象
+            JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
             array = object.getJSONArray("data");
         }catch (Exception e){
             e.printStackTrace();
@@ -181,7 +159,7 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
             @Override
             public void run() {
                 //适配器
-                adapter= new ArrayAdapter<String>(StaffLeaving_Add.this, android.R.layout.simple_spinner_item, data_list);
+                adapter= new ArrayAdapter<>(StaffLeaving_Add.this, android.R.layout.simple_spinner_item, data_list);
                 //设置样式
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 //加载适配器
@@ -194,7 +172,7 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
     public void onSave(){
         //保存前先判断
         if(date_text.getText().toString().isEmpty()) {
-            Toast.makeText(StaffLeaving_Add.this, "请填写离休日期！", Toast.LENGTH_LONG).show();
+            ToastUtil.showShort(StaffLeaving_Add.this, "请选择离休日期");
             return;
         }
         postSave();
@@ -213,12 +191,11 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(Call call, Response response)throws IOException {
                 String responseData = response.body().string();
-                Log.d("StaffLeaving_Add:",responseData);
-                JSONObject object = new JSONObject();
+                Log.d(TAG,responseData);
                 int code = 0;
                 String msg = "";
                 try {
-                    object = new JSONObject(responseData);
+                    JSONObject object = new JSONObject(responseData);
                     code = object.getInt("code");
                     msg = object.getString("msg");
                 }catch (JSONException e){
@@ -228,7 +205,7 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(StaffLeaving_Add.this, "提交成功！", Toast.LENGTH_SHORT).show();
+                            ToastUtil.showShort(StaffLeaving_Add.this, "添加成功");
                         }
                     });
                     finish();
@@ -239,7 +216,7 @@ public class StaffLeaving_Add extends AppCompatActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(StaffLeaving_Add.this, "提交失败！", Toast.LENGTH_SHORT).show();
+                        ToastUtil.showShort(StaffLeaving_Add.this, "添加失败");
                     }
                 });
             }

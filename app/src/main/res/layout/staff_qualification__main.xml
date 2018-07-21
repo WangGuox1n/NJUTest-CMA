@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:title="人员资质档案管理记录"
+        app:title="人员资质档案管理"
         android:theme="@style/AppTheme"/>
 
 

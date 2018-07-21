@@ -24,7 +24,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -35,9 +35,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -45,7 +44,7 @@
                     android:layout_weight="4"
                     android:text="名称"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/name_text"
@@ -54,7 +53,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
 
             </LinearLayout>
 
@@ -66,9 +65,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -76,7 +74,7 @@
                     android:layout_weight="4"
                     android:text="型号"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/model_text"
@@ -85,7 +83,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -96,9 +94,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -106,7 +103,7 @@
                     android:layout_weight="4"
                     android:text="生产厂家"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/manufacturer_text"
@@ -115,7 +112,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -126,9 +123,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -136,7 +132,7 @@
                     android:layout_weight="4"
                     android:text="接收情况"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/receiveSituation_text"
@@ -145,7 +141,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -156,9 +152,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -166,7 +161,7 @@
                     android:layout_weight="4"
                     android:text="接收人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/recipient_text"
@@ -175,7 +170,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -187,9 +182,8 @@
                 android:id="@+id/receiveDate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -197,7 +191,7 @@
                     android:layout_weight="4"
                     android:text="接收日期"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/receiveDate_text"
@@ -205,7 +199,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -216,9 +210,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -226,7 +219,7 @@
                     android:layout_weight="4"
                     android:text="安装调试情况"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/equipmentSituation_text"
@@ -235,7 +228,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -246,9 +239,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -256,7 +248,7 @@
                     android:layout_weight="4"
                     android:text="验收情况"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/acceptance_text"
@@ -265,7 +257,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -276,9 +268,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -286,7 +277,7 @@
                     android:layout_weight="4"
                     android:text="验收人"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <EditText
                     android:id="@+id/acceptancePerson_text"
@@ -295,7 +286,7 @@
                     android:layout_weight="6"
                     android:background="@null"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -307,9 +298,8 @@
                 android:id="@+id/acceptanceDate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -317,7 +307,7 @@
                     android:layout_weight="4"
                     android:text="验收日期"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/tv_text_size" />
 
                 <TextView
                     android:id="@+id/acceptanceDate_text"
@@ -325,7 +315,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/et_text_size" />
             </LinearLayout>
 
             <TextView
@@ -336,22 +326,265 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16.0dip"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="附件"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/tv_text_size" />
+
+                <TextView
+                    android:id="@+id/attachment_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="点击添加附件"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/tv_text_size" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line" />
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:text="名称"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name1"
+                    android:layout_marginLeft="15dp"
+                    android:text="大小"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_delete1"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/delete"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:text="名称"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name2"
+                    android:layout_marginLeft="15dp"
+                    android:text="大小"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_delete2"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/delete"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout3"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:text="名称"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name3"
+                    android:layout_marginLeft="15dp"
+                    android:text="大小"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_delete3"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/delete"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout4"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:text="名称"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name4"
+                    android:layout_marginLeft="15dp"
+                    android:text="大小"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_delete4"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/delete"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/attachment_layout5"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/attachment">
+
+                <TextView
+                    android:id="@+id/attachment_name5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:paddingRight="@dimen/attachment_layout_btn_width"
+                    android:text="名称"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/attachment_size5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachment_name5"
+                    android:layout_marginLeft="15dp"
+                    android:text="大小"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/attachment_delete5"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/attachment_layout_btn_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/delete"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
                 android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:text="提交"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/bottom_btn_textSize"
+                    android:text="保存" />
             </LinearLayout>
 
         </LinearLayout>

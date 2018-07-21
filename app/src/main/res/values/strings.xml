@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">CMA</string>
+
+    <!-- 编辑按钮 宽度和高度 -->
+    <dimen name="edit_button_width">70dp</dimen>
+    <dimen name="edit_button_height">40dp</dimen>
+    <dimen name="edit_button_marginRight">5dp</dimen>
+    <dimen name="edit_button_textSize">18sp</dimen>
+
+    <!-- 底部按钮与四周的差距 -->Bottom
+    <dimen name="bottom_btn_layout_marginBottom">16dp</dimen>
+    <!-- 设置这个2dp是为了让边框底部的线不被覆盖-->
+    <dimen name="bottom_btn_marginBottom">2dp</dimen>
+    <dimen name="bottom_btn_marginHorizontal">20dp</dimen>
+    <dimen name="bottom_btn_textSize">24sp</dimen>
+
+    <dimen name="attachment_layout_btn_width">50dp</dimen>
+
+    <dimen name="tv_text_size">20sp</dimen>
+    <dimen name="et_text_size">18sp</dimen>
 </resources>

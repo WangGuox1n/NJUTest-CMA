@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
+
+    <RelativeLayout
+        android:id="@+id/annual_plan_item"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/item_info"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="评审年度" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/item_info"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="年份"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_create_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/bt"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="删除"
+        android:visibility="gone" />
+
+</LinearLayout>

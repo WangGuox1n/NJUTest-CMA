@@ -35,7 +35,6 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
     class ViewHolder extends RecyclerView.ViewHolder{
         View item;
         TextView name;
-        TextView model;
         TextView equipment_number;
         TextView state;
 
@@ -43,7 +42,6 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
             super(view);
             this.item = view;
             name = (TextView) view.findViewById(R.id.item_name);
-            model = (TextView) view.findViewById(R.id.item_model);
             equipment_number = (TextView) view.findViewById(R.id.item_number);
             state = (TextView) view.findViewById(R.id.item_state);
         }
@@ -73,7 +71,6 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
     public void onBindViewHolder(EquipmentAdapter.ViewHolder holder, int position) {
         Equipment equipment = mEquipmentList.get(position);
         holder.name.setText(equipment.getName());
-        holder.model.setText(equipment.getModel());
         holder.equipment_number.setText(equipment.getEquipmentNumber());
         holder.state.setText(equipment.stateToString());
         if(equipment.getState()==1)
@@ -95,7 +92,6 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
             text = text.toLowerCase();
             for(Equipment equipment: rawList){
                 if(equipment.getName().contains(text) ||
-                        equipment.getModel().contains(text)||
                         equipment.getEquipmentNumber().contains(text)||
                         equipment.stateToString().contains(text)){
                     mEquipmentList.add(equipment);

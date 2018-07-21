@@ -104,7 +104,7 @@ public class AnnualTrainingPlanAdapter  extends ArrayAdapter<AnnualTrainingPlan>
             } else {
                 // 过滤出新数据
                 filterList = new ArrayList<>();
-                for (AnnualTrainingPlan staff : list) {
+                for (AnnualTrainingPlan staff : rawList) {
                     if(String.valueOf(staff.getPlanId()).contains(constraint)||staff.getTrainProject().contains(constraint))
                         filterList.add(staff);
                 }

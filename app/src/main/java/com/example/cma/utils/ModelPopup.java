@@ -22,10 +22,8 @@ public class ModelPopup extends PopupWindow implements android.view.View.OnClick
     /**
      *
      * @param context
-     * @param listener
-     *            接口回调
-     * @param isShowMd
-     *            可以控制按钮数量
+     * @param listener 接口回调
+     * @param isShowMd 可以控制按钮数量
      */
     public ModelPopup(Context context, OnPopListener listener, boolean isShowMd) {
         super(context);
@@ -46,7 +44,7 @@ public class ModelPopup extends PopupWindow implements android.view.View.OnClick
         btn_3.setOnClickListener(this);
         // 设置SelectPicPopupWindow弹出窗体可点击
         this.setFocusable(true);
-        // 点击外面的控件也可以使得PopUpWindow dimiss
+        // 点击外面的控件也可以使得PopUpWindow dismiss
         this.setOutsideTouchable(true);
         // 设置SelectPicPopupWindow弹出窗体动画效果
         this.setAnimationStyle(R.style.PopupAnimation);

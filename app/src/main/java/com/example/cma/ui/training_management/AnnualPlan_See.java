@@ -3,6 +3,7 @@ package com.example.cma.ui.training_management;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,7 @@ public class AnnualPlan_See extends AppCompatActivity {
     Toolbar toolbar;
     String year;
     AnnualPlan temp;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,17 @@ public class AnnualPlan_See extends AppCompatActivity {
         //staff=(AnnualPlan) intent.getSerializableExtra("chuandi");
 
         initStaff(year);
-
         ScrollView scrollView = (ScrollView) findViewById(R.id.scrollView);
+
+        button=(Button)findViewById(R.id.approve_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(AnnualPlan_See.this,AnnualPlan_Approve.class);
+                intent.putExtra("year",year);
+                startActivity(intent);
+            }
+        });
 
         //在Activity代码中使用Toolbar对象替换ActionBar
         toolbar = (Toolbar) findViewById(R.id.mToolbar4);
@@ -77,11 +88,6 @@ public class AnnualPlan_See extends AppCompatActivity {
         });
 
     }
-
-
-
-
-
     public void initView(){
 
 
@@ -105,15 +111,13 @@ public class AnnualPlan_See extends AppCompatActivity {
         editText5.setText(temp.getApproveDate());
         editText5.setKeyListener(null);
 
-
-
+        if(temp.getApprover()!=null) {
+            button.setTextColor(Color.rgb(90, 90, 90));
+            button.setClickable(false);
+        }
 
 
     }
-
-
-
-
     //监听返回按钮的点击事件，比如可以返回上级Activity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

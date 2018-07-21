@@ -2,16 +2,13 @@ package com.example.cma.ui.supervision;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cma.R;
@@ -19,6 +16,7 @@ import com.example.cma.model.supervision.Supervision;
 import com.example.cma.utils.AddressUtil;
 import com.example.cma.utils.HttpUtil;
 import com.example.cma.utils.ToastUtil;
+import com.example.cma.utils.ViewUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,14 +28,14 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class SupervisionPlan_Add extends AppCompatActivity implements View.OnClickListener{
+public class SupervisionPlan_Add extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "SupervisionPlan_Add";
 
     private Supervision supervision;
     private EditText content_text;
     private EditText object_text;
     private EditText dateFrequency_text;
-    private Button submitButton;
-    private Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,34 +43,29 @@ public class SupervisionPlan_Add extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.supervision_plan_add);
         initView();
         Intent intent = getIntent();
-        supervision = (Supervision)intent.getSerializableExtra("Supervision");
-        if(supervision == null){
-            ToastUtil.showShort(SupervisionPlan_Add.this,"数据传送失败！");
+        supervision = (Supervision) intent.getSerializableExtra("Supervision");
+        if (supervision == null) {
+            ToastUtil.showShort(SupervisionPlan_Add.this, "数据传送失败");
         }
     }
 
-    public void initView(){
-        content_text = (EditText)findViewById(R.id.content_text);
-        object_text = (EditText)findViewById(R.id.object_text);
-        dateFrequency_text = (EditText)findViewById(R.id.dateFrequency_text);
-        submitButton = (Button)findViewById(R.id.submit_button);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //设置Toolbar左边显示一个返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        submitButton.setOnClickListener(this);
+    public void initView() {
+        content_text = findViewById(R.id.content_text);
+        object_text = findViewById(R.id.object_text);
+        dateFrequency_text = findViewById(R.id.dateFrequency_text);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
+        findViewById(R.id.submit_button).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.submit_button:
                 onSave();
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 
@@ -88,10 +81,10 @@ public class SupervisionPlan_Add extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-        if(!content_text.getText().toString().isEmpty()||
-                !object_text.getText().toString().isEmpty()||
+        if (!content_text.getText().toString().isEmpty() ||
+                !object_text.getText().toString().isEmpty() ||
                 !dateFrequency_text.getText().toString().isEmpty()) {
-            AlertDialog.Builder dialog=new AlertDialog.Builder(SupervisionPlan_Add.this);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(SupervisionPlan_Add.this);
             dialog.setTitle("内容尚未保存");
             dialog.setMessage("是否退出？");
             dialog.setCancelable(true);
@@ -107,67 +100,68 @@ public class SupervisionPlan_Add extends AppCompatActivity implements View.OnCli
                 }
             });
             dialog.show();
-        }else
+        } else
             super.onBackPressed();
     }
 
 
-    public void onSave(){
-        if(supervision == null){
-            ToastUtil.showShort(SupervisionPlan_Add.this,"数据传送失败！");
+    public void onSave() {
+        if (supervision == null) {
+            ToastUtil.showShort(SupervisionPlan_Add.this, "数据传送失败");
             return;
         }
 
         //保存前先判断
-        if(content_text.getText().toString().isEmpty()||
-                object_text.getText().toString().isEmpty()||
+        if (content_text.getText().toString().isEmpty() ||
+                object_text.getText().toString().isEmpty() ||
                 dateFrequency_text.getText().toString().isEmpty()) {
-            ToastUtil.showShort(SupervisionPlan_Add.this, "请填写完整！");
+            ToastUtil.showShort(SupervisionPlan_Add.this, "请填写完整");
             return;
         }
         postSave();
     }
 
-    public void postSave(){
-        String address = AddressUtil.SupervisionPlan_addOne();
+    public void postSave() {
+        String address = AddressUtil.getAddress(AddressUtil.SupervisionPlan_addOne);
         RequestBody requestBody = new FormBody.Builder()
-                                        .add("id",""+supervision.getId())
-                                        .add("content",content_text.getText().toString())
-                                        .add("object",object_text.getText().toString())
-                                        .add("dateFrequency",dateFrequency_text.getText().toString())
-                                        .build();
+                .add("id", "" + supervision.getId())
+                .add("content", content_text.getText().toString())
+                .add("object", object_text.getText().toString())
+                .add("dateFrequency", dateFrequency_text.getText().toString())
+                .build();
 
-        HttpUtil.sendOkHttpWithRequestBody(address,requestBody,new okhttp3.Callback(){
+        HttpUtil.sendOkHttpWithRequestBody(address, requestBody, new okhttp3.Callback() {
             @Override
-            public void onResponse(Call call, Response response)throws IOException {
+            public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-                Log.d("StaffLeaving_Add:",responseData);
+                Log.d(TAG, responseData);
                 int code = 0;
                 String msg = "";
                 try {
                     JSONObject object = new JSONObject(responseData);
                     code = object.getInt("code");
                     msg = object.getString("msg");
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if(code == 200 && msg.equals("成功")) {
-                    ToastUtil.showShort(SupervisionPlan_Add.this, "提交成功！");
+                if (code == 200 && msg.equals("成功")) {
+                    ToastUtil.showShort(SupervisionPlan_Add.this, "添加成功");
                     finish();
                 }
             }
+
             @Override
-            public void onFailure(Call call,IOException e){
-                ToastUtil.showShort(SupervisionPlan_Add.this, "提交失败！");
+            public void onFailure(Call call, IOException e) {
+                ToastUtil.showShort(SupervisionPlan_Add.this, "添加失败");
             }
         });
     }
 
-    public void onBackConfirm(){
-        if(!content_text.getText().toString().isEmpty()||
-                !object_text.getText().toString().isEmpty()||
+    public void onBackConfirm() {
+        if (!content_text.getText().toString().isEmpty() ||
+                !object_text.getText().toString().isEmpty() ||
                 !dateFrequency_text.getText().toString().isEmpty()) {
-            AlertDialog.Builder dialog=new AlertDialog.Builder(SupervisionPlan_Add.this);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(SupervisionPlan_Add.this);
             dialog.setTitle("内容尚未保存");
             dialog.setMessage("是否退出？");
             dialog.setCancelable(true);
@@ -183,7 +177,7 @@ public class SupervisionPlan_Add extends AppCompatActivity implements View.OnCli
                 }
             });
             dialog.show();
-        }else
+        } else
             finish();
     }
 }

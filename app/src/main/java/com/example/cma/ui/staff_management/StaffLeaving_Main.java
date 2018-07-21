@@ -1,26 +1,26 @@
 package com.example.cma.ui.staff_management;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.cma.R;
 import com.example.cma.adapter.staff_management.StaffLeavingAdapter;
 import com.example.cma.model.staff_management.StaffLeaving;
 import com.example.cma.utils.HttpUtil;
+import com.example.cma.utils.ToastUtil;
+import com.example.cma.utils.ViewUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -29,59 +29,52 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;
 
 public class StaffLeaving_Main extends AppCompatActivity implements SearchView.OnQueryTextListener,View.OnClickListener,AdapterView.OnItemClickListener{
-
+    private static final String TAG = "StaffLeaving_Main";
     //data
-    private List<StaffLeaving> list= new ArrayList<>();;
+    private List<StaffLeaving> list= new ArrayList<>();
 
     //View
-    private Toolbar toolbar;
     private ListView listView;
-    private SearchView searchView;
-    private Button addButton;
     private StaffLeavingAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.staff_leaving_main);
-
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getDataFromServer();
     }
 
     //初始化所有控件
     public void initView(){
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        listView =(ListView)findViewById(R.id.list_view);
-        searchView =(SearchView)findViewById(R.id.searchview);
-        addButton = (Button)findViewById(R.id.add_button);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        SearchView searchView = findViewById(R.id.searchView);
+        FloatingActionButton addButton = findViewById(R.id.add_button);
 
-        //使用Toolbar对象替换ActionBar
-        setSupportActionBar(toolbar);
-        //设置Toolbar左边显示一个返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        setSupportActionBar(toolbar);
+        listView = findViewById(R.id.list_view);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
 
         //默认不弹出键盘
         searchView.setFocusable(false);
         searchView.setOnQueryTextListener(this);
         searchView.setSubmitButtonEnabled(false);
+        addButton.setOnClickListener(this);
 
         //listView可筛选
         listView.setTextFilterEnabled(true);
         listView.setOnItemClickListener(this);
-
-        addButton.setOnClickListener(this);
     }
 
     //监听searchView中文本的改变
@@ -101,7 +94,6 @@ public class StaffLeaving_Main extends AppCompatActivity implements SearchView.O
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        // TODO Auto-generated method stub
         ListAdapter listAdapter=listView.getAdapter();
         if(listAdapter instanceof Filterable){
             Filter filter=((Filterable)listAdapter).getFilter();
@@ -129,7 +121,6 @@ public class StaffLeaving_Main extends AppCompatActivity implements SearchView.O
     //listView 的Item点击事件,跳转到编辑页面
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //Log.d("onItemClick","onItemClick");
         Intent intent=new Intent(StaffLeaving_Main.this,StaffLeaving_Modify.class);
         StaffLeaving staff = (StaffLeaving)listView.getItemAtPosition(position);
         intent.putExtra("StaffLeaving", staff);
@@ -149,7 +140,6 @@ public class StaffLeaving_Main extends AppCompatActivity implements SearchView.O
 
     //向后端发送请求，返回所有人员档案记录
     public void getDataFromServer(){
-        //String address = "http://10.0.2.2/get_data.json";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -157,7 +147,7 @@ public class StaffLeaving_Main extends AppCompatActivity implements SearchView.O
                     @Override
                     public void onResponse(Call call, Response response)throws IOException {
                         String responseData = response.body().string();
-                        Log.d("responseData:",responseData);
+                        Log.d(TAG,responseData);
                         parseJSONWithGSON(responseData);
                         showResponse();
                     }
@@ -166,7 +156,7 @@ public class StaffLeaving_Main extends AppCompatActivity implements SearchView.O
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(StaffLeaving_Main.this, "请求数据失败！", Toast.LENGTH_SHORT).show();
+                                ToastUtil.showShort(StaffLeaving_Main.this, "请求数据失败");
                             }
                         });
                     }
@@ -175,10 +165,10 @@ public class StaffLeaving_Main extends AppCompatActivity implements SearchView.O
         }).start();
     }
 
-    private void parseJSONWithGSON(String jsondata){
+    private void parseJSONWithGSON(String jsonData){
         JSONArray array = new JSONArray();
         try {
-            JSONObject object = new JSONObject(jsondata);//最外层的JSONObject对象
+            JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
             array = object.getJSONArray("data");
         }catch (Exception e){
             e.printStackTrace();
@@ -193,15 +183,10 @@ public class StaffLeaving_Main extends AppCompatActivity implements SearchView.O
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                Collections.reverse(list);
                 adapter = new StaffLeavingAdapter(StaffLeaving_Main.this,R.layout.staff_leaving_listitem,list);
                 listView.setAdapter(adapter);
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getDataFromServer();
     }
 }

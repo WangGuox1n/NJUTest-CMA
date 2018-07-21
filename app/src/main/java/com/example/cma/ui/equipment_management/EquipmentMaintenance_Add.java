@@ -1,19 +1,15 @@
 package com.example.cma.ui.equipment_management;
 
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,8 +50,6 @@ public class EquipmentMaintenance_Add extends AppCompatActivity implements View.
     private EditText confirmer_text;
     private TextView maintenanceDate_text;
     private Spinner spinner;
-    private Button submitButton;
-    private Toolbar toolbar;
 
     private String equipmentId;
 
@@ -78,15 +72,9 @@ public class EquipmentMaintenance_Add extends AppCompatActivity implements View.
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
-        submitButton = (Button) findViewById(R.id.submit_button);
-        submitButton.setOnClickListener(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //设置Toolbar左边显示一个返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
+        findViewById(R.id.submit_button).setOnClickListener(this);
         maintenanceDate_text.setOnClickListener(this);
     }
 
@@ -129,14 +117,14 @@ public class EquipmentMaintenance_Add extends AppCompatActivity implements View.
                 maintenancePerson_text.getText().toString().isEmpty() ||
                 confirmer_text.getText().toString().isEmpty() ||
                 maintenanceDate_text.getText().toString().isEmpty()) {
-            ToastUtil.showShort(EquipmentMaintenance_Add.this, "请填写完整！");
+            ToastUtil.showShort(EquipmentMaintenance_Add.this, "请填写完整");
             return;
         }
         postSave();
     }
 
     public void postSave() {
-        String address = AddressUtil.EquipmentMaintenance_addOne();
+        String address = AddressUtil.getAddress(AddressUtil.EquipmentMaintenance_addOne);
         RequestBody requestBody = new FormBody.Builder()
                 .add("equipmentId", equipmentId)
                 .add("maintenanceContent", maintenanceContent_text.getText().toString())
@@ -160,14 +148,14 @@ public class EquipmentMaintenance_Add extends AppCompatActivity implements View.
                     e.printStackTrace();
                 }
                 if (code == 200 && msg.equals("成功")) {
-                    ToastUtil.showShort(EquipmentMaintenance_Add.this, "提交成功！");
+                    ToastUtil.showShort(EquipmentMaintenance_Add.this, "添加成功");
                     finish();
                 }
             }
 
             @Override
             public void onFailure(Call call, IOException e) {
-                ToastUtil.showShort(EquipmentMaintenance_Add.this, "提交失败！");
+                ToastUtil.showShort(EquipmentMaintenance_Add.this, "添加失败");
             }
         });
     }
@@ -205,7 +193,7 @@ public class EquipmentMaintenance_Add extends AppCompatActivity implements View.
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String address = AddressUtil.Equipment_getAll();
+                String address = AddressUtil.getAddress(AddressUtil.Equipment_getAll);
                 HttpUtil.sendOkHttpRequest(address, new okhttp3.Callback() {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {

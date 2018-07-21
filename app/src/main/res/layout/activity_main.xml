@@ -18,13 +18,13 @@
         android:theme="@style/AppTheme"/>
 
     <GridView
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnWidth="80dp"
+        android:columnWidth="100dp"
         android:gravity="center"
-        android:numColumns="4"
+        android:numColumns="3"
         android:stretchMode="spacingWidthUniform"
         android:listSelector="@android:color/transparent"
         android:verticalSpacing="10dp"

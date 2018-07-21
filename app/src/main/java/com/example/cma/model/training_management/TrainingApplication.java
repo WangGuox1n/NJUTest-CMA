@@ -1,7 +1,6 @@
 package com.example.cma.model.training_management;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class TrainingApplication implements Serializable {
     private long    id;            //培训项目唯一id

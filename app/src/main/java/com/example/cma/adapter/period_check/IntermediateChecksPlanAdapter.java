@@ -2,7 +2,6 @@ package com.example.cma.adapter.period_check;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,7 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import com.example.cma.R;
-import com.example.cma.adapter.staff_management.StaffAuthorizationAdapter;
 import com.example.cma.model.period_check.IntermediateChecksPlan;
-import com.example.cma.model.staff_management.StaffAuthorization;
 
 import java.util.ArrayList;
 import java.util.List;

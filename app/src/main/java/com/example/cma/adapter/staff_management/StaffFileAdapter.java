@@ -9,11 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.cma.R;
 import com.example.cma.model.staff_management.StaffFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 王国新 on 2018/5/29.

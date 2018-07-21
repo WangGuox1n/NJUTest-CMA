@@ -1,27 +1,25 @@
 package com.example.cma.ui.equipment_management;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 
 import com.example.cma.R;
 import com.example.cma.adapter.equipment_management.EquipmentMaintenanceAdapter;
 import com.example.cma.model.equipment_management.Equipment;
 import com.example.cma.model.equipment_management.EquipmentMaintenance;
-import com.example.cma.model.equipment_management.EquipmentUse;
 import com.example.cma.utils.AddressUtil;
 import com.example.cma.utils.HttpUtil;
 import com.example.cma.utils.ToastUtil;
+import com.example.cma.utils.ViewUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -36,18 +34,20 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 
+/*
+* 设备维修保养记录主页面
+* */
 public class EquipmentMaintenance_Main extends AppCompatActivity implements SearchView.OnQueryTextListener, View.OnClickListener {
 
     //data
-    private List<Equipment> equipmentList= new ArrayList<>();
+    private List<Equipment> equipmentList = new ArrayList<>();
     private List<EquipmentMaintenance> equipmentMaintenanceList = new ArrayList<>();
 
-    //View
-    private Toolbar toolbar;
     private RecyclerView recyclerView;
-    private SearchView searchView;
-    private FloatingActionButton addButton;
     private EquipmentMaintenanceAdapter adapter;
+
+    private boolean thread1_done = false;
+    private boolean thread2_done = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,34 +69,27 @@ public class EquipmentMaintenance_Main extends AppCompatActivity implements Sear
     @Override
     protected void onResume() {
         super.onResume();
-/*        String equipment_getAll = AddressUtil.Equipment_getAll();
-        String equipmentMaintenance_getAll = AddressUtil.EquipmentMaintenance_getAll();
-        getDataFromServer(equipment_getAll,false);
-        getDataFromServer(equipmentMaintenance_getAll,true);*/
-        getDataFromServer();
+        String getEquipmentList = AddressUtil.getAddress(AddressUtil.Equipment_getAll);
+        String getEquipmentMaintenanceList = AddressUtil.getAddress(AddressUtil.EquipmentMaintenance_getAll);
+        getDataFromServer(getEquipmentList, false);
+        getDataFromServer(getEquipmentMaintenanceList, true);
     }
 
     //初始化所有控件
     public void initView() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        searchView = (SearchView) findViewById(R.id.searchview);
-        addButton = (FloatingActionButton) findViewById(R.id.add_button);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //增加分割线
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        setSupportActionBar(toolbar);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
         //默认不弹出键盘
+        SearchView searchView = findViewById(R.id.searchview);
         searchView.setFocusable(false);
         searchView.setOnQueryTextListener(this);
         searchView.setSubmitButtonEnabled(false);
-        addButton.setOnClickListener(this);
+        findViewById(R.id.add_button).setOnClickListener(this);
     }
 
     @Override
@@ -123,71 +116,70 @@ public class EquipmentMaintenance_Main extends AppCompatActivity implements Sear
         }
     }
 
-    public void getDataFromServer() {
-        String equipment_getAll = AddressUtil.Equipment_getAll();
-        String maintenance_getAll = AddressUtil.EquipmentMaintenance_getAll();
-
-        Thread getEquipment = getDataThread(equipment_getAll,false);
-        Thread getEquipmentMaintenance = getDataThread(maintenance_getAll,true);
-        getEquipment.start();
-        try {
-            getEquipment.join();   //等待getEquipment线程执行完再执行getEquipmentMaintenance
-        }catch (InterruptedException e){
-            ToastUtil.showShort(EquipmentMaintenance_Main.this,"读取数据错误");
-        }
-        getEquipmentMaintenance.start();
-    }
-
-    public Thread getDataThread(final String address,final boolean getEquipmentMaintenance){
-        return new Thread(new Runnable() {
+    public void getDataFromServer(final String address, final boolean flag) {
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                HttpUtil.sendOkHttpRequest(address,new okhttp3.Callback(){
+                HttpUtil.sendOkHttpRequest(address, new okhttp3.Callback() {
                     @Override
-                    public void onResponse(Call call, Response response)throws IOException {
+                    public void onResponse(Call call, Response response) throws IOException {
                         String responseData = response.body().string();
-                        Log.d("Maintenance_Main",responseData);
-                        parseJSONWithGSON(responseData,getEquipmentMaintenance);
-                        if(getEquipmentMaintenance)  //get EquipmentUse List and show
-                            showResponse();
+                        Log.d("Maintenance_Main", responseData);
+                        parseJSONWithGSON(responseData, flag);
                     }
+
                     @Override
-                    public void onFailure(Call call,IOException e){
-                        ToastUtil.showShort(EquipmentMaintenance_Main.this, "请求数据失败！");
+                    public void onFailure(Call call, IOException e) {
+                        ToastUtil.showShort(EquipmentMaintenance_Main.this, "请求数据失败");
                     }
                 });
             }
-        });
+        }).start();
     }
 
-    private void parseJSONWithGSON(String jsonData,boolean getEquipmentMaintenance) {
+    /**
+     * @param jsonData 服务器返回的数据
+     * @param flag 判断当前解析的是 equipmentMaintenance（设备维修记录） 还是 equipment（设备信息）
+     */
+    private void parseJSONWithGSON(String jsonData, boolean flag) {
         JSONArray array = new JSONArray();
         try {
-            JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
+            JSONObject object = new JSONObject(jsonData);
             array = object.getJSONArray("data");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (array.equals("null")) {
-            ToastUtil.showLong(EquipmentMaintenance_Main.this, "设备列表为空");
+        if (array.length()==0) {
+            ToastUtil.showShort(EquipmentMaintenance_Main.this, "设备维修保养记录为空");
         }
 
-        if(getEquipmentMaintenance){
-            List<EquipmentMaintenance> newList = new Gson().fromJson(array.toString(),new TypeToken<List<EquipmentMaintenance>>(){}.getType());
+        if (flag) {
+            List<EquipmentMaintenance> newList = new Gson().fromJson(array.toString(), new TypeToken<List<EquipmentMaintenance>>() {
+            }.getType());
             equipmentMaintenanceList.clear();
             equipmentMaintenanceList.addAll(newList);
-        }else{
-            List<Equipment> newList = new Gson().fromJson(array.toString(),new TypeToken<List<Equipment>>(){}.getType());
+            thread1_done = true;
+        } else {
+            List<Equipment> newList = new Gson().fromJson(array.toString(), new TypeToken<List<Equipment>>() {
+            }.getType());
             equipmentList.clear();
             equipmentList.addAll(newList);
+            thread2_done = true;
+        }
+
+        //等两个线程都结束了才showResponse，主要是为了解决线程随机的问题
+        if (thread1_done && thread2_done) {
+            showResponse();
+            thread1_done = false;
+            thread2_done = false;
         }
     }
 
     private void showResponse() {
-        for(Equipment equipment:equipmentList){
-            for(EquipmentMaintenance maintenance:equipmentMaintenanceList){ //在使用记录中添加设备的 名字、编号等信息
-                Log.d(equipment.getId()+" ",maintenance.getEquipmentId()+" ");
-                if(equipment.getId().equals(maintenance.getEquipmentId())){
+        for (Equipment equipment : equipmentList) {
+            for (EquipmentMaintenance maintenance : equipmentMaintenanceList) { //在使用记录中添加设备的 名字、编号等信息
+                Log.d(equipment.getId() + " ", maintenance.getEquipmentId() + " ");
+                if (equipment.getId().equals(maintenance.getEquipmentId())) {
                     maintenance.setName(equipment.getName());
                     maintenance.setModel(equipment.getModel());
                     maintenance.setEquipmentNumber(equipment.getEquipmentNumber());

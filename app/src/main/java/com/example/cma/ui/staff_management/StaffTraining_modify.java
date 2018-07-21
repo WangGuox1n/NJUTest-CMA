@@ -15,12 +15,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cma.model.staff_management.StaffTraining;
 import com.google.gson.Gson;
 
+import org.feezu.liuli.timeselector.TimeSelector;
+
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -58,7 +64,7 @@ public class StaffTraining_modify extends AppCompatActivity {
         final EditText editText1=(EditText) findViewById(R.id.edit_text3_1);
         editText1.setText(staff.getProgram());
 
-        final EditText editText2=(EditText)findViewById(R.id.edit_text3_2);
+        final TextView editText2=(TextView)findViewById(R.id.edit_text3_2);
         editText2.setText(staff.getTrainingDate());
 
         final EditText editText3=(EditText)findViewById(R.id.edit_text3_3);
@@ -74,57 +80,33 @@ public class StaffTraining_modify extends AppCompatActivity {
         editText6.setText(staff.getNote());
 
         ShowCursor(editText1);
-        ShowCursor(editText2);
         ShowCursor(editText3);
         ShowCursor(editText4);
         ShowCursor(editText5);
         ShowCursor(editText6);
 
-        Button button=(Button)findViewById(R.id.delete_button);
-        button.setOnClickListener(new View.OnClickListener() {
+
+        editText2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder dialog=new AlertDialog.Builder(StaffTraining_modify.this);
-                dialog.setTitle("确定删除此人的档案吗？");
-                dialog.setCancelable(false);
-                dialog.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                final String now=simpleDateFormat.format(new Date());
+                //editText.setText();
+                TimeSelector timeSelector = new TimeSelector(StaffTraining_modify.this,new TimeSelector.ResultHandler() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //将信息提交到数据库
+                    public void handle(String time) {
+                        // Toast.makeText(StaffTraining_Add.this, time, Toast.LENGTH_SHORT).show();
+                        editText2.setText(time.split(" ")[0]);
                     }
-                });
-                dialog.setNegativeButton("删除", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //从数据库删除这个人的档案 TODO
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                postDelete(staff);
-                            }
-                        }).start();
-
-
-                        finish();
-                    }
-                });
-                dialog.show();
+                }, "2000-01-01 00:00", now);
+                timeSelector.setIsLoop(false);//设置不循环,true循环
+                timeSelector.setTitle("请选择日期");
+                //        timeSelector.setMode(TimeSelector.MODE.YMDHM);//显示 年月日时分（默认）
+                timeSelector.setMode(TimeSelector.MODE.YMD);//只显示 年月日
+                timeSelector.show();
             }
         });
-        Button button2=(Button)findViewById(R.id.check_button);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent intent=new Intent(StaffTraining_modify.this,StaffTraining_staff_main.class);
-                String d=String.valueOf(staff.getTrainingId());
-                Log.d("选中的ID",d);
-                intent.putExtra("chuandi",d);
-                intent.putExtra("programName",staff);
-                startActivity(intent);
-
-            }
-        });
         toolbar.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -217,44 +199,7 @@ public class StaffTraining_modify extends AppCompatActivity {
         });
     }
 
-    private void postDelete(StaffTraining temp){
-        Gson gson=new Gson();
-        OkHttpClient okHttpClient=new OkHttpClient();
 
-
-        //或者传一个name
-        RequestBody requestBody1=new FormBody.Builder().add("trainingId",String.valueOf(temp.getTrainingId())).build();
-
-        Request request = new Request.Builder()
-                .url("http://119.23.38.100:8080/cma/StaffTraining/deleteOne")//url的地址
-                .post(requestBody1)
-                .build();
-
-        //同步上传
-        //异步post
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(StaffTraining_modify.this, "删除失败！", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(StaffTraining_modify.this, "删除成功！", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        });
-    }
 
     private void ShowCursor(final EditText editText){
         editText.setOnClickListener(new View.OnClickListener() {

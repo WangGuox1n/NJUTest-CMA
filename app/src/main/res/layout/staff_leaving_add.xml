@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.cma.ui.staff_management.StaffLeaving_Add">
 
     <android.support.v7.widget.Toolbar
@@ -13,36 +14,29 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:title="离任人员管理·添加"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"/>
 
-    </android.support.v7.widget.Toolbar>
-
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="false"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/line" />
 
             <LinearLayout
-                android:id="@+id/layout1"
-                android:orientation="horizontal"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
@@ -51,8 +45,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:textSize="20sp"
-                    android:textColor="#000"
+                    android:textSize="@dimen/tv_text_size"
+                    android:textColor="@color/black"
                     android:text="选择离休人员"
                     />
 
@@ -65,17 +59,13 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/line2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/line" />
 
             <LinearLayout
-                android:id="@+id/layout2"
-                android:orientation="horizontal"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/line2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -83,8 +73,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:textSize="20sp"
-                    android:textColor="#000"
+                    android:textSize="@dimen/tv_text_size"
+                    android:textColor="@color/black"
                     android:text="姓名"
                     />
 
@@ -93,24 +83,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:textSize="18sp"
-                    android:textColor="#000"
+                    android:textSize="@dimen/et_text_size"
+                    android:textColor="@color/black"
                     />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/line3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/line" />
 
             <LinearLayout
-                android:id="@+id/layout3"
-                android:orientation="horizontal"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:layout_below="@+id/line3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -118,8 +104,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:textSize="20sp"
-                    android:textColor="#000"
+                    android:textSize="@dimen/tv_text_size"
+                    android:textColor="@color/black"
                     android:text="部门"
                     />
 
@@ -128,22 +114,18 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:textSize="18sp"
-                    android:textColor="#000"
+                    android:textSize="@dimen/et_text_size"
+                    android:textColor="@color/black"
                     />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/line4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/line" />
 
             <LinearLayout
-                android:id="@+id/layout4"
-                android:orientation="horizontal"
-                android:layout_below="@id/line4"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
@@ -153,8 +135,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:textSize="20sp"
-                    android:textColor="#000"
+                    android:textSize="@dimen/tv_text_size"
+                    android:textColor="@color/black"
                     android:text="职位"
                     />
 
@@ -163,22 +145,18 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:textSize="18sp"
-                    android:textColor="#000"
+                    android:textSize="@dimen/et_text_size"
+                    android:textColor="@color/black"
                     />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/line5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/line" />
 
             <LinearLayout
-                android:id="@+id/layout5"
-                android:orientation="horizontal"
-                android:layout_below="@id/line5"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
@@ -188,8 +166,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:textSize="20sp"
-                    android:textColor="#000"
+                    android:textSize="@dimen/tv_text_size"
+                    android:textColor="@color/black"
                     android:text="离任日期"
                     />
 
@@ -198,7 +176,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/et_text_size"
                     android:hint="请选择离任日期"
                     android:maxLines="1"
                     />
@@ -206,31 +184,29 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/line6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/line" />
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_below="@+id/line6"
+                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/bottom_btn_layout_marginBottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
                     android:id="@+id/submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/bottom_btn_marginBottom"
+                    android:layout_marginLeft="@dimen/bottom_btn_marginHorizontal"
+                    android:layout_marginRight="@dimen/bottom_btn_marginHorizontal"
                     android:background="@drawable/selector_btm"
-                    android:layout_marginBottom="16.0dip"
-                    android:layout_marginLeft="20.0dip"
-                    android:layout_marginRight="20.0dip"
-                    android:text="提交"
-                    android:textSize="24sp"
-                    />
+                    android:textSize="@dimen/bottom_btn_textSize"
+                    android:text="保存" />
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

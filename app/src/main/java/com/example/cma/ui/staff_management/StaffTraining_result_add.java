@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,18 +31,20 @@ import okhttp3.Response;
 
 public class StaffTraining_result_add extends AppCompatActivity {
     String id;
+    String trainingId;
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.staff_training_result_add);
         Intent intent=getIntent();
-        id=(String) intent.getSerializableExtra("chuandi");
+        id=(String) intent.getSerializableExtra("id");
          Log.d("传递的ID是！！！！！！！！！",id);
+         trainingId=(String)intent.getStringExtra("trainingId");
         //在Activity代码中使用Toolbar对象替换ActionBar
         toolbar = (Toolbar) findViewById(R.id.mToolbar4);
         setSupportActionBar(toolbar);
-
+        ShowCursor((EditText)findViewById(R.id.edit_text1));
         //设置Toolbar左边显示一个返回按钮
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -57,12 +60,7 @@ public class StaffTraining_result_add extends AppCompatActivity {
                 Boolean isfull=true;
                 EditText editText1=(EditText)findViewById(R.id.edit_text1);
                 final String s1=editText1.getText().toString();
-
-                EditText editText2=(EditText)findViewById(R.id.edit_text2);
-                final String s2=editText2.getText().toString();
-
-
-                if((s1==null||s1.equals("")) ||(s2==null||s2.equals("")) )
+                if((s1==null||s1.equals("")) )
                     isfull=false;
                 if(isfull==true){
                     AlertDialog.Builder dialog=new AlertDialog.Builder(StaffTraining_result_add.this);
@@ -77,8 +75,8 @@ public class StaffTraining_result_add extends AppCompatActivity {
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    String aa="jjj";
-                                    postJson(s1,s2);
+
+                                    postJson(s1);
                                 }
                             }).start();
 
@@ -106,8 +104,23 @@ public class StaffTraining_result_add extends AppCompatActivity {
         });
 
     }
+    private void ShowCursor(final EditText editText){
+        editText.setOnTouchListener(new View.OnTouchListener() {
+            int touch_flag=0;
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                touch_flag++;
+                if(touch_flag==2){
+                    touch_flag=0;
+                    editText.setCursorVisible(true);
+                }
+                return false;
+            }
+        });
 
-    private void postJson(String s1,String s2){
+    }
+
+    private void postJson(String s1){
         // String name,String department,String position,String id,String location
         Log.i("StaffFile_Add"," Here here11111");
 
@@ -117,8 +130,8 @@ public class StaffTraining_result_add extends AppCompatActivity {
         MediaType JSON=MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody1= new FormBody.Builder()
                 .add("id",id)
-                .add("trainingId",s1)
-                .add("result",s2)
+                .add("trainingId",trainingId)
+                .add("result",s1)
 
                 .build();
         Request request = new Request.Builder()
@@ -155,12 +168,6 @@ public class StaffTraining_result_add extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
-
     //监听返回按钮的点击事件，比如可以返回上级Activity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

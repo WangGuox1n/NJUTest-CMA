@@ -55,7 +55,7 @@
                     android:layout_weight="5"
                     android:textSize="20sp"
                     android:textColor="#000"
-                    android:text="选择已存在人员"
+                    android:text="选择人员"
                     />
 
                 <Spinner
@@ -95,7 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#000"
                     />
 
@@ -131,7 +131,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#000"
                     />
 
@@ -170,7 +170,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#000"
                     />
             </LinearLayout>
@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:text="（资质证明编号由系统生成）"
 
                     />
@@ -245,7 +245,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:hint="请输入资质名称"
                     android:maxLines="1"
                     />

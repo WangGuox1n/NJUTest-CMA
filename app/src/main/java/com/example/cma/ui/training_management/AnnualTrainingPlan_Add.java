@@ -21,14 +21,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.example.cma.R;
 import com.google.gson.Gson;
 
+import org.feezu.liuli.timeselector.TimeSelector;
+
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -61,6 +67,50 @@ public class AnnualTrainingPlan_Add extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        final TextView editText6=(TextView) findViewById(R.id.edit_text6);
+        editText6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                final String now=simpleDateFormat.format(new Date());
+                //editText.setText();
+                TimeSelector timeSelector = new TimeSelector(AnnualTrainingPlan_Add.this,new TimeSelector.ResultHandler() {
+                    @Override
+                    public void handle(String time) {
+                        // Toast.makeText(StaffTraining_Add.this, time, Toast.LENGTH_SHORT).show();
+                        editText6.setText(time.split(" ")[0]);
+                    }
+                }, "2000-01-01 00:00", now);
+                timeSelector.setIsLoop(false);//设置不循环,true循环
+                timeSelector.setTitle("请选择日期");
+                //        timeSelector.setMode(TimeSelector.MODE.YMDHM);//显示 年月日时分（默认）
+                timeSelector.setMode(TimeSelector.MODE.YMD);//只显示 年月日
+                timeSelector.show();
+            }
+        });
+
+        final TextView editText7=(TextView) findViewById(R.id.edit_text7);
+        editText7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                final String now=simpleDateFormat.format(new Date());
+                //editText.setText();
+                TimeSelector timeSelector = new TimeSelector(AnnualTrainingPlan_Add.this,new TimeSelector.ResultHandler() {
+                    @Override
+                    public void handle(String time) {
+                        // Toast.makeText(StaffTraining_Add.this, time, Toast.LENGTH_SHORT).show();
+                        editText7.setText(time.split(" ")[0]);
+                    }
+                }, "2000-01-01 00:00", now);
+                timeSelector.setIsLoop(false);//设置不循环,true循环
+                timeSelector.setTitle("请选择日期");
+                //        timeSelector.setMode(TimeSelector.MODE.YMDHM);//显示 年月日时分（默认）
+                timeSelector.setMode(TimeSelector.MODE.YMD);//只显示 年月日
+                timeSelector.show();
+            }
+        });
+
 
 
 
@@ -84,10 +134,7 @@ public class AnnualTrainingPlan_Add extends AppCompatActivity {
                 EditText editText5=(EditText)findViewById(R.id.edit_text5);
                 final String s5=editText5.getText().toString();
 
-                EditText editText6=(EditText)findViewById(R.id.edit_text6);
                 final String s6=editText6.getText().toString();
-
-                EditText editText7=(EditText)findViewById(R.id.edit_text7);
                 final String s7=editText7.getText().toString();
 
                 EditText editText8=(EditText)findViewById(R.id.edit_text8);

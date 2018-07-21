@@ -1,51 +1,37 @@
 package com.example.cma.ui.staff_management;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cma.R;
 import com.example.cma.model.staff_management.StaffFile;
 import com.example.cma.model.staff_management.StaffLeaving;
-import com.example.cma.model.staff_management.StaffManagement;
 import com.example.cma.utils.HttpUtil;
 import com.example.cma.utils.ToastUtil;
+import com.example.cma.utils.ViewUtil;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.Call;
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class StaffLeaving_Modify extends AppCompatActivity implements View.OnClickListener{
-
+    private static final String TAG = "StaffLeaving_Modify";
     private StaffLeaving staffLeaving;
     private TextView name_text;
     private TextView department_text;
     private TextView position_text;
     private TextView date_text;
-    private TextView file_text;
-    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,22 +43,12 @@ public class StaffLeaving_Modify extends AppCompatActivity implements View.OnCli
     }
 
     public void initView(){
-        name_text = (TextView)findViewById(R.id.name_text);
-        department_text = (TextView)findViewById(R.id.department_text);
-        position_text = (TextView)findViewById(R.id.position_text);
-        date_text = (TextView)findViewById(R.id.date_text);
-        file_text = (TextView)findViewById(R.id.file_text);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        file_text.setOnClickListener(this);
-        file_text.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-
-        //使用Toolbar对象替换ActionBar,并在Toolbar左边显示一个返回按钮
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        name_text = findViewById(R.id.name_text);
+        department_text = findViewById(R.id.department_text);
+        position_text = findViewById(R.id.position_text);
+        date_text = findViewById(R.id.date_text);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this,toolbar);
     }
 
     public void setText(){
@@ -85,13 +61,13 @@ public class StaffLeaving_Modify extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.file_text:
-                toStaffFile();
-                break;
             default:break;
         }
     }
 
+    /*
+    * unused
+    * */
     public void toStaffFile(){
         String address = "http://119.23.38.100:8080/cma/StaffFile/getOne?id=" + staffLeaving.getId();
         HttpUtil.sendOkHttpRequest(address,new okhttp3.Callback(){
@@ -112,14 +88,15 @@ public class StaffLeaving_Modify extends AppCompatActivity implements View.OnCli
         });
     }
 
-    private void parseJSONWithGSON(String jsondata){
+    private void parseJSONWithGSON(String jsonData){
         String staffData = "";
         try {
-            JSONObject object = new JSONObject(jsondata);//最外层的JSONObject对象
+            JSONObject object = new JSONObject(jsonData);//最外层的JSONObject对象
             staffData = object.getString("data");
         }catch (Exception e){
             e.printStackTrace();
         }
+        Log.d(TAG,staffData);
         if(staffData.equals("null")){
             runOnUiThread(new Runnable() {
                 @Override

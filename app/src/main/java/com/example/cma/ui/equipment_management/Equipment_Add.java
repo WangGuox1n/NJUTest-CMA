@@ -1,21 +1,20 @@
 package com.example.cma.ui.equipment_management;
 
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cma.R;
 import com.example.cma.utils.AddressUtil;
 import com.example.cma.utils.HttpUtil;
 import com.example.cma.utils.ToastUtil;
+import com.example.cma.utils.ViewUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +35,6 @@ public class Equipment_Add extends AppCompatActivity implements View.OnClickList
     private EditText hardDisk_text;
     private EditText equipmentNumber_text;
     private EditText application_text;
-    private Button submitButton;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +44,17 @@ public class Equipment_Add extends AppCompatActivity implements View.OnClickList
     }
 
     public void initView(){
-        name_text = (EditText)findViewById(R.id.name_text);
-        model_text = (EditText)findViewById(R.id.model_text);
-        cpu_text = (EditText)findViewById(R.id.cpu_text);
-        memory_text = (EditText)findViewById(R.id.memory_text);
-        hardDisk_text = (EditText)findViewById(R.id.hardDisk_text);
-        equipmentNumber_text = (EditText)findViewById(R.id.equipmentNumber_text);
-        application_text = (EditText)findViewById(R.id.application_text);
+        name_text = findViewById(R.id.name_text);
+        model_text = findViewById(R.id.model_text);
+        cpu_text = findViewById(R.id.cpu_text);
+        memory_text = findViewById(R.id.memory_text);
+        hardDisk_text = findViewById(R.id.hardDisk_text);
+        equipmentNumber_text = findViewById(R.id.equipmentNumber_text);
+        application_text = findViewById(R.id.application_text);
 
-        submitButton = (Button)findViewById(R.id.submit_button);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //设置Toolbar左边显示一个返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        submitButton.setOnClickListener(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ViewUtil.getInstance().setSupportActionBar(this, toolbar);
+        findViewById(R.id.submit_button).setOnClickListener(this);
     }
 
     @Override
@@ -100,14 +91,14 @@ public class Equipment_Add extends AppCompatActivity implements View.OnClickList
                 hardDisk_text.getText().toString().isEmpty()||
                 equipmentNumber_text.getText().toString().isEmpty()||
                 application_text.getText().toString().isEmpty()){
-            ToastUtil.showShort(Equipment_Add.this, "请填写完整！");
+            ToastUtil.showShort(Equipment_Add.this, "请填写完整");
             return;
         }
         postSave();
     }
 
     public void postSave(){
-        String address = AddressUtil.Equipment_addOne();
+        String address = AddressUtil.getAddress(AddressUtil.Equipment_addOne);
         RequestBody requestBody = new FormBody.Builder()
                 .add("name",name_text.getText().toString())
                 .add("model",model_text.getText().toString())
@@ -131,16 +122,17 @@ public class Equipment_Add extends AppCompatActivity implements View.OnClickList
                     code = object.getInt("code");
                     msg = object.getString("msg");
                 }catch (JSONException e){
+                    ToastUtil.showShort(Equipment_Add.this,"设备编号重复，无法添加");
                     e.printStackTrace();
                 }
                 if(code == 200 && msg.equals("成功")) {
-                    ToastUtil.showShort(Equipment_Add.this, "提交成功！");
+                    ToastUtil.showShort(Equipment_Add.this, "添加成功");
                     finish();
                 }
             }
             @Override
             public void onFailure(Call call,IOException e){
-                ToastUtil.showShort(Equipment_Add.this, "提交失败！");
+                ToastUtil.showShort(Equipment_Add.this, "添加失败");
             }
         });
     }
